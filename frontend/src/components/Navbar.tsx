@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect} from "react";
 import { Dialog, Popover, Transition } from "@headlessui/react";
 import {
   MenuIcon,
@@ -6,6 +6,8 @@ import {
   ShoppingBagIcon,
   XIcon,
 } from "@heroicons/react/outline";
+import { container } from "../GlobalContainer";
+import { VerifyUser } from "../backend/auth";
 
 const navigation = {
   pages: [
@@ -16,6 +18,21 @@ const navigation = {
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+
+  const con = container.useContainer();
+
+  useEffect(() => {
+    if (!con.user.id) {
+      VerifyUser()
+        .then((user) => {
+          con.setUser(user);
+        })
+        .catch((err) => {
+          console.log(err)
+          //redirect
+        });
+    }
+  }, []);
 
   return (
     <div className="bg-black">
@@ -141,19 +158,42 @@ export default function Navbar() {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  <a
-                    href="/login"
-                    className="text-sm font-medium text-white hover:text-white"
-                  >
-                    Log in
-                  </a>
-                  <span className="h-6 w-px bg-white" aria-hidden="true" />
-                  <a
-                    href="/signup"
-                    className="text-sm font-medium text-white hover:text-white"
-                  >
-                    Sign up
-                  </a>
+                {con.user.id ? (
+                    <div>
+                      {/* <button className="text-sm font-medium text-white hover:text-white" onClick={logoutUser}>
+                        Log out
+                      </button> */}
+                      <a
+                        href="/login"
+                        className="text-sm font-medium text-white hover:text-white"
+                      >
+                        Log out
+                      </a>
+                      <span className="h-6 w-px bg-white" aria-hidden="true" />
+                      <a
+                        href="/orders"
+                        className="text-sm font-medium text-white hover:text-white"
+                      >
+                        Orders
+                      </a>
+                    </div>
+                  ) : (
+                    <div>
+                      <a
+                        href="/login"
+                        className="text-sm font-medium text-white hover:text-white"
+                      >
+                        Log in
+                      </a>
+                      <span className="h-6 w-px bg-white" aria-hidden="true" />
+                      <a
+                        href="/signup"
+                        className="text-sm font-medium text-white hover:text-white"
+                      >
+                        Sign up
+                      </a>
+                    </div>
+                  )}
                 </div>
 
                 <div className="hidden lg:ml-8 lg:flex">

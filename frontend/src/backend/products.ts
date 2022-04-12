@@ -98,10 +98,10 @@ export const GetShoppingCart = () => {
     });
 };
 
-export const AdminLogin = () => {
-  let data = JSON.stringify({
-    username: "2",
-    password: "2",
+export const AdminLogin = (email: string, password: string) => {
+  var data = JSON.stringify({
+    email: email,
+    password: password,
   });
 
   return axios({
@@ -116,10 +116,6 @@ export const AdminLogin = () => {
     .then((response) => {
       console.log("logged in");
       return true;
-    })
-    .catch((error) => {
-      console.log(error);
-      return false;
     });
 };
 
@@ -176,7 +172,6 @@ export const DeleteItemFromCart = (id: number) => {
   });
   
 };
-
 
 export const verify = () => {
 
