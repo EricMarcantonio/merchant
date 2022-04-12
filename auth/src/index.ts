@@ -16,6 +16,11 @@ app.use(cookieParser())
 app.use(express.json())
 app.use(passport.initialize())
 
+app.use((req, res, next) => {
+    console.log(req.headers, req.method, req.cookies, req.url)
+    next()
+})
+
 app.post("/register", HandleCreateUser)
 app.post('/login', HandleLogin);
 app.post("/verify", passport.authenticate('jwt', {session: false}), HandleVerify)
