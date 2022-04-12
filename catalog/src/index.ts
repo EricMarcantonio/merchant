@@ -20,6 +20,11 @@ app.use(cookieParser())
 app.use(express.json())
 app.use(passport.initialize())
 
+app.use((req, res, next) => {
+    console.log(req)
+    next()
+})
+
 app.get("/", HandleGetAllItems);
 app.get("/:id", MiddleGetItemById, HandleGetItemById)
 

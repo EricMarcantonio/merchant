@@ -1,0 +1,85 @@
+version: '3.9'
+
+services:
+  db:
+    image: mariadb:10.3.32
+    command: --default-authentication-plugin=mysql_native_password
+    hostname: db
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: MERCHANT
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+  nginx:
+    restart: always
+    build:
+      context: nginx
+      dockerfile: nginx.Dockerfile
+    ports:
+      - "80:80"
+  auth:
+    restart: always
+    build:
+      context: auth/
+      dockerfile: auth.Dockerfile
+    expose:
+      - 80
+    environment:
+      HOST: 'db'
+      PORT: '3306'
+      USER: 'user'
+      PASSWORD: 'password'
+      DB: 'MERCHANT'
+      EXPRESS_PORT: '80'
+      CORS_ORIGIN: 'http://127.0.0.1:8080'
+  catalog:
+    restart: always
+
+    build:
+      context: catalog/
+      dockerfile: catalog.Dockerfile
+    expose:
+      - 80
+    environment:
+      HOST: 'db'
+      PORT: '3306'
+      USER: 'user'
+      PASSWORD: 'password'
+      DB: 'MERCHANT'
+      EXPRESS_PORT: '80'
+      CORS_ORIGIN: 'http://127.0.0.1:8080'
+  orders:
+    restart: always
+
+    build:
+      context: orders
+      dockerfile: orders.Dockerfile
+    expose:
+      - 80
+    environment:
+      HOST: 'db'
+      PORT: '3306'
+      USER: 'user'
+      PASSWORD: 'password'
+      DB: 'MERCHANT'
+      EXPRESS_PORT: '80'
+      CORS_ORIGIN: 'http://127.0.0.1:8080'
+  shopping-cart:
+    restart: always
+
+    build:
+      context: shopping-cart
+      dockerfile: shopping-cart.Dockerfile
+    expose:
+      - 80
+    environment:
+      HOST: 'db'
+      PORT: '3306'
+      USER: 'user'
+      PASSWORD: 'password'
+      DB: 'MERCHANT'
+      EXPRESS_PORT: '80'
+      CORS_ORIGIN: 'http://127.0.0.1:8080'
