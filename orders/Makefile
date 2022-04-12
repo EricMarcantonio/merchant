@@ -6,7 +6,7 @@ install:
 	npm install nodemon
 
 start:
-	HOST='localhost' PORT='3306' USER='user' PASSWORD='password' DB='MERCHANT' EXPRESS_PORT=${PORT} CORS_ORIGIN='http://127.0.0.1:8080' npm start
+	HOST='localhost' PORT='3306' USER='user' PASSWORD='password' DB='MERCHANT' EXPRESS_PORT=${PORT} CORS_ORIGIN='http://127.0.0.1:8080' nodemon
 
 docker-local:
 	docker build -f orders.Dockerfile -t merchant/orders:latest .

@@ -1,6 +1,6 @@
 FROM node:14
 
-WORKDIR /orders
+WORKDIR /auth
 
 COPY src/ src/
 COPY package.json package-lock.json tsconfig.json ./
@@ -10,7 +10,7 @@ ENV PORT='3306'
 ENV USER='user'
 ENV PASSWORD='password'
 ENV DB='MERCHANT'
-ENV EXPRESS_PORT='3001'
+ENV EXPRESS_PORT='3002'
 ENV CORS_ORIGIN='http://127.0.0.1:8080'
 
 RUN npm ci
