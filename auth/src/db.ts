@@ -25,7 +25,7 @@ export const User = {
     },
     create: async (user_input: UserInput, password: PasswordInput) => {
         return await db.transaction().then(async (t) => {
-            return await UserModel.create(user_input).then(async (u) => {
+            const user = await UserModel.create(user_input).then(async (u) => {
                 const user = u as MUser
                 password.password = hash(password.password)
                 password.userId = user.id
@@ -33,6 +33,8 @@ export const User = {
                     return user
                 })
             })
+            await t.commit();
+            return user;
         }) as MUser;
     },
     updateById: async (user: MUser) => {

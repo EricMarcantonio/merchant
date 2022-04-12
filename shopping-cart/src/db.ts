@@ -12,7 +12,7 @@ export const ShoppingCart = {
     },
     setAll: async (user: MUser, cart: Array<ShoppingCartInput>) => {
         return await db.transaction().then(async (t) => {
-            return ShoppingCartModel.destroy({
+            const carts = await ShoppingCartModel.destroy({
                 where: {
                     [Op.and]: [
                         { userId: user.id},
@@ -27,6 +27,8 @@ export const ShoppingCart = {
                     }
                 }))
             })
+            await t.commit()
+            return carts;
         }) as Array<MShoppingCart>
     },
     removeAll: async (user: MUser, cart: Array<number>) => {

@@ -7,10 +7,12 @@ const db = new Sequelize(
     process.env.DB || "",
     process.env.USER || "",
     process.env.PASSWORD || "",
+
     {
         host: process.env.HOST || "",
         dialect: 'mariadb',
         port: (process.env.PORT && parseInt(process.env.PORT)) || 0,
+        timezone: 'utc'
     });
 
 /**
