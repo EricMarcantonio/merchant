@@ -5,7 +5,7 @@ export interface CustomRequest<T> extends Request {
 }
 
 export interface IReview {
-    userId: number,
+    userId?: number,
     itemId: number,
     data: string,
     rating: number
