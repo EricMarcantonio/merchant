@@ -6,17 +6,17 @@ import { container } from "./GlobalContainer";
 const PaymentPage = () => {
   const navigate = useNavigate();
   const con = container.useContainer();
-  if (con.address.firstname) {
+  
     return (
       <>
-        <Navbar />
-        <PaymentForm />
+      if (con.address.firstname) {
+        <><Navbar /><PaymentForm /></>
+      }
+      else  {
+        navigate(`/address`)
+      }
       </>
     );
-  }
-  else {
-    navigate(`/address`)
-  }
 };
 
 export default PaymentPage;
