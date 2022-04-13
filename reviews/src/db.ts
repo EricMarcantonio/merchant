@@ -1,4 +1,3 @@
-import { ItemModel } from "./util"
 import {IReview} from "./types";
 import {ReviewsModel} from "./util/models";
 
