@@ -433,25 +433,13 @@ const VisitEventModel = db.define("VisitEvent", {
 })
 
 
-const ReviewsModel = db.define("VisitEvent", {
-    ipAddress: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notNull: {
-                msg: ERRORS.IP_ADDRESS_NULL.toString()
-            },
-        }
-    },
-    time: {
-        type: DataTypes.TIME,
-        allowNull: false,
-        validate: {
-            notNull: {
-                msg: ERRORS.TIME_NULL.toString()
-            },
-        }
-    },
+const ReviewsModel = db.define("Review", {
+    // id: {
+    //     primaryKey: true,
+    //     autoIncrement: true,
+    //     type: DataTypes.INTEGER
+    // },
+
     itemId: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -465,20 +453,44 @@ const ReviewsModel = db.define("VisitEvent", {
             },
         }
     },
-    eventType: {
-        type: DataTypes.STRING,
+    userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: UserModel,
+            key: "id"
+        },
+        validate: {
+            notNull: {
+                msg: ERRORS.USER_ID_NULL.toString()
+            },
+        }
+    },
+    data: {
+        type: DataTypes.TEXT,
         allowNull: false,
         validate: {
             notNull: {
-                msg: ERRORS.EVENT_TYPE_NULL.toString()
+                msg: ERRORS.DESCRIPTION_NULL.toString()
+            },
+        }
+    },
+    rating: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+            notNull: {
+                msg: ERRORS.DESCRIPTION_NULL.toString()
             },
         }
     }
+
 }, {
     deletedAt: true,
     timestamps: true,
     paranoid: true
 })
+
 
 
 
@@ -492,5 +504,6 @@ export {
     UserModel,
     PasswordModel,
     VisitEventModel,
-    ShoppingCartModel
+    ShoppingCartModel,
+    ReviewsModel
 }

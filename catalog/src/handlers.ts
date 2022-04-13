@@ -3,7 +3,6 @@ import { Item } from './db';
 import { RESPONSES } from './util/responses';
 
 export const HandleGetAllItems = (req: Request, res: Response) => {
-    console.log("Called")
     Item.get().then((items) => {
         res.json(items)
     }).catch(() => {

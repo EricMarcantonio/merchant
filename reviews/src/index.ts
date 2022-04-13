@@ -1,6 +1,6 @@
 import express from 'express'
 
-import {connectToDb, passport} from "./util";
+import {connectToDb, ItemModel, passport, UserModel} from "./util";
 
 import cookieParser from 'cookie-parser'
 import cors, {CorsOptions} from 'cors'
@@ -31,6 +31,7 @@ app.get("/:id", MiddleGetItemById, HandleGetItemById)
 
 connectToDb().then(() => {
     const port = parseInt(process.env.EXPRESS_PORT || "0")
+
     app.listen(port, () => {
         console.log(`Catalog is on ${port}`)
     })
