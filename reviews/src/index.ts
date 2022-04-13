@@ -4,8 +4,9 @@ import {connectToDb, ItemModel, passport, UserModel} from "./util";
 
 import cookieParser from 'cookie-parser'
 import cors, {CorsOptions} from 'cors'
-import { HandleGetAllItems, HandleGetItemById } from './handlers';
-import { MiddleGetItemById } from './middleware';
+import {HandleCreateReview, HandleGetReviewsByItemId} from './handlers';
+import {MiddleCreateReview, MiddleGetReviewById} from "./middleware";
+
 
 const app = express();
 const corsOptions = {
@@ -25,15 +26,13 @@ app.use((req, res, next) => {
     next()
 })
 
-app.get("/", HandleGetAllItems);
-app.get("/:id", MiddleGetItemById, HandleGetItemById)
-
+app.get("/:itemId", MiddleGetReviewById, HandleGetReviewsByItemId)
+app.post("/", MiddleCreateReview, HandleCreateReview)
 
 connectToDb().then(() => {
     const port = parseInt(process.env.EXPRESS_PORT || "0")
-
     app.listen(port, () => {
-        console.log(`Catalog is on ${port}`)
+        console.log(`Reviews is on ${port}`)
     })
 }).catch((err) => {
     console.error(err)

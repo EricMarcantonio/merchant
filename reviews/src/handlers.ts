@@ -1,19 +1,21 @@
 import {Request, Response} from 'express';
-import { Item } from './db';
-import { RESPONSES } from './util/responses';
 
-export const HandleGetAllItems = (req: Request, res: Response) => {
-    Item.get().then((items) => {
+import {RESPONSES} from './util/responses';
+import {Review} from "./db";
+import {CustomRequest, IReview} from "./types";
+
+export const HandleGetReviewsByItemId = (req: CustomRequest<IReview>, res: Response) => {
+    Review.getById(req.body.userId).then((items) => {
         res.json(items)
     }).catch(() => {
         RESPONSES.SendNotFound(req, res)
     })
 }
 
-export const HandleGetItemById = (req: Request, res: Response) => {
-    Item.getById(+req.params.id).then((item) => {
-        res.json(item)
-    }).catch((err) => {
-        RESPONSES.SendNotFound(req, res)
+export const HandleCreateReview = (req: CustomRequest<IReview>, res: Response) => {
+    Review.create(req.body).then((review) => {
+        res.json(review)
+    }).catch(() => {
+        RESPONSES.SendError(req, res)
     })
 }
