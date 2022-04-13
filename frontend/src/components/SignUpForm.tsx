@@ -4,7 +4,6 @@ import { UserRegister } from "../backend";
 import Loading from "./Loading";
 import { useNavigate } from "react-router-dom";
 import { container } from "../GlobalContainer";
-import validator from "validator";
 
 const SignUpForm = () => {
   const navigate = useNavigate();
@@ -17,21 +16,6 @@ const SignUpForm = () => {
   const [password, setPassword] = useState("");
 
   const con = container.useContainer();
-
-  const validateInputs = (
-    firstname: string,
-    lastname: string,
-    email: string,
-    username: string,
-    password: string
-  ) => {
-    if (validator.isEmail(email)) {
-      handleRegister(firstname, lastname, email, username, password);
-    }
-    else {
-      console.log("Email is wrong")
-    }
-  };
 
   const handleRegister = (
     firstname: string,
@@ -178,7 +162,7 @@ const SignUpForm = () => {
                   type="submit"
                   className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   onClick={() => {
-                    validateInputs(
+                    handleRegister(
                       firstname,
                       lastname,
                       email,
