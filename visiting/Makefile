@@ -1,5 +1,5 @@
 .PHONY: install start docker-local docker-run
-PORT=3004
+PORT=3005
 
 install:
 	npm install
