@@ -6,3 +6,4 @@ Orders: 3001
 Auth: 3002
 ShoppingCart: 3003
 Catalog: 3004
+Visiting: 3005
