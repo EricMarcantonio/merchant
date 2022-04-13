@@ -94,6 +94,18 @@ const ItemInfo = () => {
         </div>
       </div>
       <div className="pt-6 grid grid-cols-2 h-full">
+        <div className="lg:grid lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8">
+          kevin
+          <form
+            className="mt-8 space-y-6"
+            action="#"
+            method="POST"
+            onSubmit={(e) => {
+              e.preventDefault();
+              //handleAdminLogin(email, password);
+            }}
+          ></form>
+        </div>
         {review &&
           review.map((rev, index) => {
             return (
