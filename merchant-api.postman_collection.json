@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3aa19c64-824a-4065-a068-4856e4f8a22c",
+		"_postman_id": "77faced2-49cb-4a88-9ce1-74dad54637ac",
 		"name": "merchant-api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -214,7 +214,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1/auth/register/",
+							"raw": "http://127.0.0.1/auth/register",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -224,8 +224,7 @@
 							],
 							"path": [
 								"auth",
-								"register",
-								""
+								"register"
 							]
 						}
 					},
@@ -344,6 +343,109 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "visiting",
+			"item": [
+				{
+					"name": "GET",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1/visiting",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"visiting"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SET",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"time\": \"{{$timestamp}}\",\n    \"eventType\": \"{{event_type}}\",\n    \"ipAddress\": \"{{ip}}\",\n    \"itemId\": \"1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/visiting",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"visiting"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "username",
+			"value": "axel",
+			"type": "string"
+		},
+		{
+			"key": "email",
+			"value": "axel@gmail.com",
+			"type": "string"
+		},
+		{
+			"key": "fname",
+			"value": "axel",
+			"type": "string"
+		},
+		{
+			"key": "lname",
+			"value": "axel",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "1234",
+			"type": "string"
 		}
 	]
 }

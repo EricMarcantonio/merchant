@@ -25,6 +25,7 @@ export const User = {
     },
     create: async (user_input: UserInput, password: PasswordInput) => {
         return await db.transaction().then(async (t) => {
+            user_input.type = undefined
             const user = await UserModel.create(user_input).then(async (u) => {
                 const user = u as MUser
                 password.password = hash(password.password)
