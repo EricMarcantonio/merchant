@@ -1,16 +1,17 @@
-import { ItemModel } from "./util"
+import {IReview} from "./types";
+import {ReviewsModel} from "./util/models";
 
 
-export const Item = {
-    get: () => {
-        return ItemModel.findAll()
-    },
+export const Review = {
     getById: (id: number) => {
-        return ItemModel.findOne({
+        return ReviewsModel.findAll({
             where: {
-                id
+                itemId: id
             }
         })
+    },
+    create: (review: IReview) => {
+        return ReviewsModel.create(review)
     }
 }
 

@@ -1,6 +1,6 @@
 FROM node:14
 
-WORKDIR /orders
+WORKDIR /reviews
 
 COPY src/ src/
 COPY package.json package-lock.json tsconfig.json ./

@@ -64,6 +64,8 @@ create or replace table CreditCards
         foreign key (userId) references Users (id)
 );
 
+
+
 create or replace index userId
     on CreditCards (userId);
 
@@ -173,7 +175,28 @@ create or replace table VisitEvents
 create or replace index itemId
     on VisitEvents (itemId);
 
+create or replace table Reviews
+(
+    id        int auto_increment
+        primary key,
+    itemId    int      not null,
+    userId    int      not null,
+    data      text     not null,
+    rating    int      not null,
+    createdAt datetime not null,
+    updatedAt datetime not null,
+    deletedAt datetime null,
+    constraint Reviews_ibfk_1
+        foreign key (itemId) references Items (id),
+    constraint Reviews_ibfk_2
+        foreign key (userId) references Users (id)
+);
 
+create or replace index itemId
+    on Reviews (itemId);
+
+create or replace index userId
+    on Reviews (userId);
 
 # INSERT INTO Addresses (STREET, PROVINCE, COUNTRY, ZIP, PHONE, CREATEDAT, UPDATEDAT)
 # VALUES ('1234 Fun Times', 'Ontario', 'Canada', 'M5C 1H9', '416 543 9999', NOW(), NOW());
@@ -253,7 +276,7 @@ BEGIN
     IF (@ITEMSINCART = @NUMBEROFGOODITEMS and @ITEMSINCART > 0 and @NUMBEROFGOODITEMS > 0) THEN
 
         INSERT INTO Orders (USERID, ADDRESSID, FNAME, LNAME, CREATEDAT, UPDATEDAT, CREDITCARDID)
-        VALUES (USER_ID, ADDRESS_ID, FNAME_ARG, LNAME_ARG, NOW(), NOW(), CCID);
+        VALUES (USER_ID, ADDRESS_ID, FNAME_ARG, LNAME_ARG, UTC_TIMESTAMP(), UTC_TIMESTAMP(), CCID);
 
         SET @LASTID = (SELECT LAST_INSERT_ID() FROM Orders limit 1);
         UPDATE Items JOIN ShoppingCarts ON Items.ID = ShoppingCarts.ITEMID
@@ -261,16 +284,17 @@ BEGIN
 
 
         INSERT INTO OrderData (ORDERID, ITEMID, UNITS, CREATEDAT, UPDATEDAT)
-        SELECT @LASTID, ITEMID, UNITS, NOW(), NOW()
+        SELECT @LASTID, ITEMID, UNITS, UTC_TIMESTAMP(), UTC_TIMESTAMP()
         FROM ShoppingCarts
         WHERE USER_ID = USERID and ShoppingCarts.deletedAt is null;
 
         SELECT * FROM Orders WHERE USER_ID = USERID and id = @LASTID;
-        UPDATE ShoppingCarts SET deletedAt = NOW() where userId = USER_ID and deletedAt is null;
+        UPDATE ShoppingCarts SET deletedAt = UTC_TIMESTAMP() where userId = USER_ID and deletedAt is null;
     ELSE
         SELECT * from Orders where 1 = 0;
     END IF;
 END $$;
 DELIMITER ;
+
 
 # CALL CREATE_ORDER(1, 1, 'eric', 'marc', 1)

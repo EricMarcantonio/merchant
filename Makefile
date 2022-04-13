@@ -5,3 +5,8 @@ docker-compose:
 
 docker-build:
 	docker compose build --no-cache
+
+clean:
+	docker system prune -a -f
+
+start: docker-build docker-compose
