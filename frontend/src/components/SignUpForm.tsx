@@ -14,6 +14,7 @@ const SignUpForm = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [buttonText, setButtonText] = useState("Sign up");
 
   const con = container.useContainer();
 
@@ -24,13 +25,13 @@ const SignUpForm = () => {
     username: string,
     password: string
   ) => {
-    setRender(false);
+    setButtonText("Loading");
     UserRegister(firstname, lastname, email, username, password)
       .then((result) => {
         if (!result) {
           console.log("There was an error registering user");
         } else {
-          setRender(true);
+          setButtonText("Sign up");
           console.log(result);
           con.setUser(result);
           navigate(`/products`, { state: { user: result } });
@@ -62,7 +63,15 @@ const SignUpForm = () => {
                 </a>
               </p>
             </div>
-            <form className="mt-8 space-y-6" action="#" method="POST">
+            <form
+              className="mt-8 space-y-6"
+              action="#"
+              method="POST"
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleRegister(firstname, lastname, email, username, password);
+              }}
+            >
               <input type="hidden" name="remember" defaultValue="true" />
               <div className="rounded-md shadow-sm -space-y-px">
                 <div>
@@ -161,15 +170,6 @@ const SignUpForm = () => {
                 <button
                   type="submit"
                   className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  onClick={() => {
-                    handleRegister(
-                      firstname,
-                      lastname,
-                      email,
-                      username,
-                      password
-                    );
-                  }}
                 >
                   <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                     <LockClosedIcon
@@ -177,7 +177,7 @@ const SignUpForm = () => {
                       aria-hidden="true"
                     />
                   </span>
-                  Sign up
+                  {buttonText}
                 </button>
               </div>
             </form>
