@@ -103,7 +103,9 @@ const ItemInfo = () => {
                   key={rev.id}
                 >
                   <p>
-                    <b>User{rev.userId}</b>
+                    <b>
+                      User{rev.userId} Rating:{rev.rating}/5
+                    </b>
                   </p>
                   <p>{rev.data}</p>
                   <p className="absolute bottom-0 right-0 m-5 mb-3 text-gray-400">
