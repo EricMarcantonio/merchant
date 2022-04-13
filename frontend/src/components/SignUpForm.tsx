@@ -3,6 +3,7 @@ import { useState } from "react";
 import { UserRegister } from "../backend";
 import Loading from "./Loading";
 import { useNavigate } from "react-router-dom";
+import { container } from "../GlobalContainer";
 
 const SignUpForm = () => {
   const navigate = useNavigate();
@@ -14,6 +15,9 @@ const SignUpForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const con = container.useContainer();
+
+
   const handleRegister = (firstname: string, lastname: string, email: string, username: string, password: string) => {
     setRender(false);
     UserRegister(firstname, lastname, email, username, password).then((result) => {
@@ -22,7 +26,8 @@ const SignUpForm = () => {
       } else {
         setRender(true);
         console.log(result);
-        navigate(`/products`);
+        con.setUser(result);
+        navigate(`/products`, {state: {user: result}});
       }
     }).catch((err) => {
       console.log("Registration failed");

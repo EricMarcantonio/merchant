@@ -91,16 +91,6 @@ const ShoppingCart = () => {
     });
   };
 
-  const handleAdminLogin = () => {
-    AdminLogin().then((result) => {
-      if (!result) {
-        console.log("There was an error logging in");
-      } else {
-        console.log(result);
-      }
-    });
-  };
-
   const handleGetCart = () => {
     GetShoppingCart().then((result) => {
       if (!result) {
