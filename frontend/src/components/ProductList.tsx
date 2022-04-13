@@ -7,10 +7,12 @@ import {container} from "../GlobalContainer";
 import {GetReviewsByItemId} from "../backend/products";
 
 export interface IReview {
+    id?: number
     userId: number,
     itemId: number,
     data: string,
-    rating: number
+    rating: number,
+    createdAt?: string
 }
 
 interface IProductWithReview {
@@ -28,25 +30,18 @@ const ProductList = () => {
     useEffect(() => {
         GetAllProductsFromBackend().then((result) => {
             const reviewIds = result.map((res) => GetReviewsByItemId(res.id || 0))
-            let temp = [] as IProductWithReview[]
             Promise.all(reviewIds).then((data) => {
-                for (let x of data) {
-                    if (x[0].itemId[0]) {
-                        temp.push({
-                            product: result.filter((results) => results.id === x[0].itemId)[0],
-                            review: x
-                        })
-                    } else {
-                        temp.push({
-                            product: result.filter((results) => results.id === x[0].itemId)[0],
-                            review: x
-                        })
+                setAllItems(result && result.map((res) => {
+                    return {
+                        product: res,
+                        review: data.filter((da) => {
+                            if (da[0] && da[0].itemId && res.id === da[0].itemId) {
+                                return da
+                            }
+                        })[0]
                     }
-
-                }
-                setAllItems(temp)
+                }))
             })
-
 
             if (!result) {
                 console.log("There was an error getting the products");
@@ -64,6 +59,7 @@ const ProductList = () => {
                     className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
                     {allItems &&
                         allItems.map((item) => {
+                            const rating = item.review && (item.review.map((i) => i.rating).reduce((a, b) => (a + b)) / item.review.length) || 0;
                                 return <div
                                     onClick={() => {
                                         navigate(`/products/${item.product.id}`);
@@ -83,12 +79,9 @@ const ProductList = () => {
                                             {item.product.price}
                                         </p>
                                     </a>
-                                    {/*{item.review.map((rev) => {*/}
-                                    {/*    return <div>*/}
-                                    {/*        {rev.rating}, {rev.data}*/}
-                                    {/*    </div>*/}
-                                    {/*})*/}
-                                    {/*}*/}
+                                    <div>
+                                        Rating: {rating}
+                                    </div>
                                 </div>
                             }
                         )}
