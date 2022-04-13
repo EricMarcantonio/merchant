@@ -7,10 +7,23 @@ import {
   LoadingOutlined,
   CheckCircleFilled,
 } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { container } from "../GlobalContainer";
 
 const { Step } = Steps;
 
 const AddressForm = () => {
+  const [firstname, setFirst] = useState("");
+  const [lastname, setLast] = useState("");
+  const [street, setStreet] = useState("");
+  const [province, setProvince] = useState("");
+  const [zip, setZip] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [country, setCountry] = useState("");
+  const con = container.useContainer();
+
+  const navigate = useNavigate();
   return (
     <div>
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -38,6 +51,10 @@ const AddressForm = () => {
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="First Name"
+                  onChange={(e) => {
+                    setFirst(e.target.value);
+                  }}
+                  value={firstname}
                 />
               </div>
               <div>
@@ -52,6 +69,10 @@ const AddressForm = () => {
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Last Name"
+                  onChange={(e) => {
+                    setLast(e.target.value);
+                  }}
+                  value={lastname}
                 />
               </div>
               <div>
@@ -66,6 +87,10 @@ const AddressForm = () => {
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Street"
+                  onChange={(e) => {
+                    setStreet(e.target.value);
+                  }}
+                  value={street}
                 />
               </div>
               <div>
@@ -80,6 +105,10 @@ const AddressForm = () => {
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Provice"
+                  onChange={(e) => {
+                    setProvince(e.target.value);
+                  }}
+                  value={province}
                 />
               </div>
               <div>
@@ -94,6 +123,10 @@ const AddressForm = () => {
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Zip Code"
+                  onChange={(e) => {
+                    setZip(e.target.value);
+                  }}
+                  value={zip}
                 />
               </div>
               <div>
@@ -108,6 +141,10 @@ const AddressForm = () => {
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Phone Number"
+                  onChange={(e) => {
+                    setPhoneNumber(e.target.value);
+                  }}
+                  value={phoneNumber}
                 />
               </div>
               <div>
@@ -122,6 +159,10 @@ const AddressForm = () => {
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Country"
+                  onChange={(e) => {
+                    setCountry(e.target.value);
+                  }}
+                  value={country}
                 />
               </div>
             </div>
@@ -130,6 +171,18 @@ const AddressForm = () => {
               <button
                 type="submit"
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                onClick={() => {
+                  con.setAddress({
+                    firstname: firstname,
+                    lastname: lastname,
+                    street: street,
+                    province: province,
+                    zip: zip,
+                    phone: phoneNumber,
+                    country: country,
+                  });
+                  navigate(`/payment`);
+                }}
               >
                 Proceed To Payment
               </button>

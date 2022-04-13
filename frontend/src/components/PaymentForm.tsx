@@ -7,9 +7,18 @@ import {
   LoadingOutlined,
   CheckCircleFilled,
 } from "@ant-design/icons";
+import { container } from "../GlobalContainer";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const { Step } = Steps;
 const PaymentForm = () => {
+  const [cardNumber, setCardNumber] = useState("");
+  const [expiration, setExpiration] = useState("");
+  const [cvv, setCVV] = useState("");
+  const con = container.useContainer();
+  const navigate = useNavigate();
+
   return (
     <div>
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -37,6 +46,10 @@ const PaymentForm = () => {
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Card Number"
+                  onChange={(e) => {
+                    setCardNumber(e.target.value);
+                  }}
+                  value={cardNumber}
                 />
               </div>
               <div>
@@ -51,6 +64,10 @@ const PaymentForm = () => {
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Expiration MM/YY"
+                  onChange={(e) => {
+                    setExpiration(e.target.value);
+                  }}
+                  value={expiration}
                 />
               </div>
               <div>
@@ -65,6 +82,10 @@ const PaymentForm = () => {
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="CVV"
+                  onChange={(e) => {
+                    setCVV(e.target.value);
+                  }}
+                  value={cvv}
                 />
               </div>
             </div>
@@ -73,6 +94,14 @@ const PaymentForm = () => {
               <button
                 type="submit"
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                onClick={() => {
+                  con.setPayment({
+                    cardNumber: cardNumber,
+                    expiration: expiration,
+                    cvv: cvv,
+                  });
+                  navigate(`/#`);
+                }}
               >
                 View Order Confirmation
               </button>

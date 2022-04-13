@@ -1,8 +1,8 @@
 import {Model, Optional} from "sequelize";
 
 // Interfaces
-interface AddressAttributes {
-    id: number,
+export interface AddressAttributes {
+    id?: number,
     updatedAt?: Date,
     createdAt?: Date,
     deletedAt?: Date,
@@ -13,7 +13,7 @@ interface AddressAttributes {
     phone: string,
 }
 
-interface CreditCardAttributes {
+export interface CreditCardAttributes {
     id: number,
     updatedAt?: Date,
     createdAt?: Date,

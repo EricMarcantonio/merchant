@@ -19,12 +19,14 @@ import Counter from "./Counter";
 import { ICart, IProduct, ICartUpdate } from "../types";
 import Loading from "./Loading";
 import EmptyCart from "./EmptyCart";
+import { useNavigate } from "react-router-dom";
 
 const ShoppingCart = () => {
   const con = container.useContainer();
   const [render, setRender] = useState(false);
   const [total, setTotal] = useState(0);
   var itemTotal = 0;
+  const navigate = useNavigate();
 
   useEffect(() => {
     let cartArray: Promise<IProduct>[] = [];
@@ -34,10 +36,9 @@ const ShoppingCart = () => {
         if (!result) {
           console.log("There was an error getting the products");
         } else {
-          
           for (let eachItem of result) {
             // console.log("eachitem:", eachItem);
-            console.log(eachItem)
+            console.log(eachItem);
             cartArray.push(GetAProductByIdFromBackend(eachItem.itemId));
             //console.log(result[eachItem].ITEM_ID);
           }
@@ -45,7 +46,6 @@ const ShoppingCart = () => {
         return result;
       })
       .then((itemsWithoutDesc) => {
-        
         if (cartArray) {
           Promise.all<IProduct>(cartArray).then((data) => {
             for (let eachItem of data) {
@@ -173,6 +173,19 @@ const ShoppingCart = () => {
           )}
         </div>
       )}
+      <div className="w-screen flex pb-10">
+        <div className="mx-auto">
+          <button
+            type="submit"
+            onClick={() => {
+              navigate(`/address`);
+            }}
+            className="mt-10 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Place Order
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

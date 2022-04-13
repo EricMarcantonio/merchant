@@ -11,23 +11,24 @@ const LogInForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-
   useEffect(() => {
     verify();
   }, []);
   const handleAdminLogin = (email: string, password: string) => {
     setRender(false);
-    AdminLogin(email, password).then((result) => {
-      if (!result) {
-        console.log("There was an error logging in");
-      } else {
-        setRender(true);
-        console.log(result);
-        navigate(`/products`);
-      }
-    }).catch((err) => {
-      console.log("Log in failed");
-    });
+    AdminLogin(email, password)
+      .then((result) => {
+        if (!result) {
+          console.log("There was an error logging in");
+        } else {
+          setRender(true);
+          console.log(result);
+          navigate(`/products`);
+        }
+      })
+      .catch((err) => {
+        console.log("Log in failed");
+      });
   };
 
   return (
@@ -67,7 +68,7 @@ const LogInForm = () => {
                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                     placeholder="Email address"
                     onChange={(e) => {
-                      setEmail(e.target.value)
+                      setEmail(e.target.value);
                     }}
                     value={email}
                   />
@@ -85,7 +86,7 @@ const LogInForm = () => {
                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                     placeholder="Password"
                     onChange={(e) => {
-                      setPassword(e.target.value)
+                      setPassword(e.target.value);
                     }}
                     value={password}
                   />
