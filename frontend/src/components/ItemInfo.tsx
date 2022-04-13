@@ -1,34 +1,36 @@
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import {useParams} from "react-router-dom";
+import {useEffect, useState} from "react";
 import {
-  GetAProductByIdFromBackend,
-  GetReviewsByItemId,
-  UpdateShoppingCart,
+    GetAProductByIdFromBackend,
+    GetReviewsByItemId,
+    UpdateShoppingCart,
 } from "../backend/products";
-import { IProduct } from "../types";
-import { IReview } from "./ProductList";
+import {IProduct} from "../types";
+import {IReview} from "./ProductList";
 import moment from "moment";
+import {container} from "../GlobalContainer";
 
 const ItemInfo = () => {
-  const { id } = useParams();
+    const {id} = useParams();
+    const con = container.useContainer();
 
-  const [product, setProduct] = useState<IProduct>();
-  const [review, setReview] = useState<IReview[]>();
+    const [product, setProduct] = useState<IProduct>();
+    const [review, setReview] = useState<IReview[]>();
 
-  const handleAddToCart = (item: number, val: number) => {
-    UpdateShoppingCart([
-      {
-        itemId: item,
-        units: val,
-      },
-    ]).then((result) => {
-      if (!result) {
-        console.log("There was an error adding the product to cart");
-      } else {
-        console.log(result);
-      }
-    });
-  };
+    const handleAddToCart = (item: number, val: number) => {
+        UpdateShoppingCart([
+            {
+                itemId: item,
+                units: val,
+            },
+        ]).then((result) => {
+            if (result){
+                con.setCart(result)
+            } else {
+                console.log("There was an error adding the product to cart");
+            }
+        });
+    };
 
     useEffect(() => {
         if (id) {
@@ -68,63 +70,64 @@ const ItemInfo = () => {
                     </div>
 
 
-          <div className="mt-4 lg:mt-0 lg:row-span-3">
-            <h2 className="sr-only">Product information</h2>
-            <p className="text-3xl text-gray-900">{product?.price}</p>
+                    <div className="mt-4 lg:mt-0 lg:row-span-3">
+                        <h2 className="sr-only">Product information</h2>
+                        <p className="text-3xl text-gray-900">{product?.price}</p>
 
-            <div className="mt-6">
-              <button
-                type="submit"
-                onClick={() => {
-                  if (product?.id) {
-                    handleAddToCart(product?.id, 1);
-                  }
-                }}
-                className="mt-10 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                Add to bag
-              </button>
-            </div>
-          </div>
+                        <div className="mt-6">
+                            <button
+                                type="submit"
+                                onClick={() => {
+                                    if (product?.id) {
+                                        handleAddToCart(product?.id, 1);
+                                    }
+                                }}
+                                className="mt-10 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            >
+                                Add to bag
+                            </button>
+                        </div>
+                    </div>
 
-          <div className="py-10 lg:pt-6 lg:pb-16 lg:col-start-1 lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-            <div>
-              <h3 className="sr-only">Description</h3>
+                    <div
+                        className="py-10 lg:pt-6 lg:pb-16 lg:col-start-1 lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
+                        <div>
+                            <h3 className="sr-only">Description</h3>
 
-              <div className="space-y-6">
-                <p className="text-base text-gray-900">
-                  {product?.description}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="pt-6 grid grid-cols-2 h-full">
-        {review &&
-          review.map((rev, index) => {
-            return (
-              review.length - index < 5 && (
-                <div
-                  className="relative my-5 mx-20 p-5 lg:col-start-1 lg:col-span-1 flex flex-col bg-white rounded-md shadow-xl bg-gray-100"
-                  key={rev.id}
-                >
-                  <p>
-                    <b>
-                      User{rev.userId} Rating:{rev.rating}/5
-                    </b>
-                  </p>
-                  <p>{rev.data}</p>
-                  <p className="absolute bottom-0 right-0 m-5 mb-3 text-gray-400">
-                    {moment(rev.createdAt).utc().local().format("MMMM Do YYYY")}
-                  </p>
+                            <div className="space-y-6">
+                                <p className="text-base text-gray-900">
+                                    {product?.description}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              )
-            );
-          })}
-      </div>
-    </div>
-  );
+            </div>
+            <div className="pt-6 grid grid-cols-2 h-full">
+                {review &&
+                    review.map((rev, index) => {
+                        return (
+                            review.length - index < 5 && (
+                                <div
+                                    className="relative my-5 mx-20 p-5 lg:col-start-1 lg:col-span-1 flex flex-col bg-white rounded-md shadow-xl bg-gray-100"
+                                    key={rev.id}
+                                >
+                                    <p>
+                                        <b>
+                                            User{rev.userId} Rating:{rev.rating}/5
+                                        </b>
+                                    </p>
+                                    <p>{rev.data}</p>
+                                    <p className="absolute bottom-0 right-0 m-5 mb-3 text-gray-400">
+                                        {moment(rev.createdAt).utc().local().format("MMMM Do YYYY")}
+                                    </p>
+                                </div>
+                            )
+                        );
+                    })}
+            </div>
+        </div>
+    );
 };
 
 export default ItemInfo;
