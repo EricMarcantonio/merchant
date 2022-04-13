@@ -30,36 +30,43 @@ const ItemInfo = () => {
     });
   };
 
-  useEffect(() => {
-    if (id) {
-      Promise.all([
-        GetAProductByIdFromBackend(parseInt(id)),
-        GetReviewsByItemId(parseInt(id)),
-      ]).then((data) => {
-        setProduct(data[0]);
-        setReview(data[1]);
-      });
-    } else {
-      console.log("No Id was passed, probably 404");
-    }
-  }, []);
-  return (
-    <div className="bg-white">
-      <div className="pt-6 grid grid-cols-2 h-full">
-        <div>
-          <div className="mt-6 w-72 h-72 rounded-lg aspect-4 mx-auto">
-            <img
-              src={product?.pictureUrl}
-              className="w-full h-full object-center object-cover rounded-lg my-auto"
-            />
-          </div>
-        </div>
-        <div className="max-w-2xl mx-auto pt-10 pb-5 px-4 sm:px-6 lg:max-w-7xl lg:pt-16 lg:pb-10 lg:px-8 lg:grid lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8">
-          <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-            <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">
-              {product?.name}
-            </h1>
-          </div>
+    useEffect(() => {
+        if (id) {
+            Promise.all([GetAProductByIdFromBackend(parseInt(id)), GetReviewsByItemId(parseInt(id))]).then((data) => {
+                setProduct(data[0]);
+                setReview(data[1])
+            })
+        } else {
+            console.log("No Id was passed, probably 404");
+        }
+    }, []);
+    return (
+        <div className="bg-white">
+            <div className="pt-6 grid grid-cols-2 h-full">
+                <div>
+                    <div className="mt-6 w-72 h-72 rounded-lg aspect-4 mx-auto">
+                        <img
+                            src={product?.pictureUrl}
+                            className="w-full h-full object-center object-cover rounded-lg my-auto"
+                        />
+                    </div>
+                    {review && review.map((rev, index) => {
+                        return review.length - index < 5 && <div key={rev.id}>
+                            <p>userId: user{rev.userId}</p>
+                            <p>msg: {rev.data}</p>
+                            <p>created: {moment(rev.createdAt).utc().local().format("MMMM Do YYYY")}</p>
+                        </div>
+                    })}
+
+                </div>
+                <div
+                    className="max-w-2xl mx-auto pt-10 pb-16 px-4 sm:px-6 lg:max-w-7xl lg:pt-16 lg:pb-24 lg:px-8 lg:grid lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8">
+                    <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
+                        <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">
+                            {product?.name}
+                        </h1>
+                    </div>
+
 
           <div className="mt-4 lg:mt-0 lg:row-span-3">
             <h2 className="sr-only">Product information</h2>
