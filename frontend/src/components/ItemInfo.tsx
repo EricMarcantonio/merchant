@@ -52,13 +52,6 @@ const ItemInfo = () => {
                             className="w-full h-full object-center object-cover rounded-lg my-auto"
                         />
                     </div>
-                    {review && review.map((rev, index) => {
-                        return review.length - index < 5 && <div key={rev.id}>
-                            <p>userId: user{rev.userId}</p>
-                            <p>msg: {rev.data}</p>
-                            <p>created: {moment(rev.createdAt).utc().local().format("MMMM Do YYYY")}</p>
-                        </div>
-                    })}
 
                 </div>
                 <div
@@ -103,34 +96,8 @@ const ItemInfo = () => {
                     </div>
                 </div>
             </div>
-            <div className="pt-6 grid grid-cols-2 h-full">
-                {review &&
-                    review.map((rev, index) => {
-                        return (
-                            review.length - index < 5 && (
-                                <div
-                                    className="relative my-5 mx-20 p-5 lg:col-start-1 lg:col-span-1 flex flex-col bg-white rounded-md shadow-xl bg-gray-100"
-                                    key={rev.id}
-                                >
-                                    <p>
-                                        <b>
-                                            User{rev.userId} Rating:{rev.rating}/5
-                                        </b>
-                                    </p>
-                                    <p>{rev.data}</p>
-                                    <p className="absolute bottom-0 right-0 m-5 mb-3 text-gray-400">
-                                        {moment(rev.createdAt).utc().local().format("MMMM Do YYYY")}
-                                    </p>
-                                </div>
-                            )
-                        );
-                    })}
-            </div>
-        </div>
-      </div>
       <div className="pt-6 grid grid-cols-2 h-full">
         <div className="lg:grid lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8">
-          kevin
           <form
             className="mt-8 space-y-6"
             action="#"
