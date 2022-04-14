@@ -8,8 +8,11 @@ import {
   CheckCircleFilled,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { container } from "../GlobalContainer";
+import {VerifyUser} from "../backend/auth";
+import Loading from "./Loading";
+import {ToastFactory} from "../types/toasts";
 
 const { Step } = Steps;
 
@@ -22,8 +25,26 @@ const AddressForm = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [country, setCountry] = useState("");
   const con = container.useContainer();
-
   const navigate = useNavigate();
+
+  const factory = new ToastFactory();
+  const err = factory.createToast("ERROR", "You must be logged in to place an order!")
+  useEffect(() => {
+    if (!con.user.id){
+      VerifyUser().then((user) => {
+        con.setUser(user)
+      }).catch(() => {
+        err.run(1200).then(() => {
+          navigate("/login")
+        })
+      })
+    }
+  }, [])
+
+  if (!con.user.id){
+    return <Loading/>
+  }
+
   return (
     <div>
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">

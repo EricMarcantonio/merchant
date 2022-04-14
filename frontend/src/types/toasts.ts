@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 interface IToast {
-  run: () => void;
+  run: (timout?: number) => void;
 }
 
 export class ErrorToast implements IToast {
@@ -10,13 +10,13 @@ export class ErrorToast implements IToast {
     this.msg = msg;
   }
 
-  public run() {
+  public run(timout?: number) {
     return new Promise<void>((res, rej) => {
-        console.log("lol");
       toast.error(this.msg, {
         onClose: () => res(),
         position: toast.POSITION.BOTTOM_RIGHT,
         theme: "dark",
+        autoClose: timout || 1000
       });
     });
   }
@@ -29,13 +29,13 @@ export class SuccessToast implements IToast {
     this.msg = msg;
   }
 
-  public run() {
+  public run(timeout?: number) {
     return new Promise<void>((res, rej) => {
       toast.success(this.msg, {
         onClose: () => res(),
         position: toast.POSITION.BOTTOM_RIGHT,
         theme: "dark",
-        autoClose: 1000,
+        autoClose: timeout || 1000,
       });
     });
   }

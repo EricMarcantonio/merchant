@@ -5,6 +5,8 @@ import {
     SearchIcon,
     ShoppingBagIcon,
     XIcon,
+    LogoutIcon,
+    LoginIcon
 } from "@heroicons/react/outline";
 import {container} from "../GlobalContainer";
 import {VerifyUser} from "../backend/auth";
@@ -31,28 +33,24 @@ export default function Navbar() {
                 }
             )
         } else {
-            console.log("jesus", con.cart)
-            if (Object.keys(con.cart).length === 0){
+            if (Object.keys(con.cart).length === 0) {
                 Promise.all([GetShoppingCart()]).then((data) => {
                         setCartNum(data[0] && data[0].length)
                     }
                 )
             } else {
-                console.log("called")
                 setCartNum(Object.keys(con.cart).length)
             }
         }
     }, []);
 
     useEffect(() => {
-        console.log("jesus2", Object.keys(con.cart));
-        if (Object.keys(con.cart).length === 0){
+        if (Object.keys(con.cart).length === 0) {
             Promise.all([GetShoppingCart()]).then((data) => {
                     setCartNum(data[0] && data[0].length)
                 }
             )
         } else {
-            console.log("called")
             setCartNum(Object.keys(con.cart).length)
         }
     }, [Object.keys(con.cart).length])
@@ -184,38 +182,28 @@ export default function Navbar() {
                                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
                                     {con.user.id ? (
                                         <>
-                                            {/* <button className="text-sm font-medium text-white hover:text-white" onClick={logoutUser}>
-                        Log out
-                      </button> */}
-                                            <a
-                                                href="/login"
+                                            <div
+
                                                 className="text-sm font-medium text-white hover:text-white"
                                             >
-                                                Log out
-                                            </a>
-                                            <span className="h-6 w-px bg-white" aria-hidden="true"/>
+                                                Welcome back, <span className={" ml-1 font-bold"}>{con.user.fname}!</span>
+                                            </div>
+                                            <div
+
+                                                className="text-sm font-medium text-white hover:text-white"
+                                            >
+                                                |
+                                            </div>
+
                                             <a
                                                 href="/orders"
                                                 className="text-sm font-medium text-white hover:text-white"
                                             >
-                                                Orders
+                                                My Orders
                                             </a>
                                         </>
                                     ) : (
                                         <>
-                                            <a
-                                                href="/login"
-                                                className="text-sm font-medium text-white hover:text-white"
-                                            >
-                                                Log in
-                                            </a>
-                                            <span className="h-6 w-px bg-white" aria-hidden="true"/>
-                                            <a
-                                                href="/signup"
-                                                className="text-sm font-medium text-white hover:text-white"
-                                            >
-                                                Sign up
-                                            </a>
                                         </>
                                     )}
                                 </div>
@@ -230,16 +218,9 @@ export default function Navbar() {
                                             alt=""
                                             className="w-5 h-auto block flex-shrink-0"
                                         />
-                                        <span className="ml-3 block text-sm font-medium">CAD</span>
                                     </a>
                                 </div>
 
-                                <div className="flex lg:ml-6">
-                                    <a href="#" className="p-2 text-white hover:text-white">
-                                        <span className="sr-only">Search</span>
-                                        <SearchIcon className="w-6 h-6" aria-hidden="true"/>
-                                    </a>
-                                </div>
 
                                 <div className="ml-4 flow-root lg:ml-6">
                                     <a href="/cart" className="group -m-2 p-2 flex items-center">
@@ -248,11 +229,31 @@ export default function Navbar() {
                                             aria-hidden="true"
                                         />
                                         <span className="ml-2 text-sm font-medium text-white group-hover:text-white">
-                      {cartNum}
-                    </span>
+                                            {cartNum}
+                                        </span>
                                         <span className="sr-only">items in cart, view bag</span>
                                     </a>
                                 </div>
+                                {
+                                    con.user.id ? <div className="ml-4 flow-root lg:ml-6">
+                                            <a href="/products" className="group -m-2 p-2 flex items-center">
+                                                <LogoutIcon
+                                                    className="flex-shrink-0 h-6 w-6 text-white group-hover:text-white"
+                                                    aria-hidden="true"
+                                                />
+                                            </a>
+                                        </div>
+                                        :
+                                        <div className="ml-4 flow-root lg:ml-6">
+                                            <a href="/login" className="group -m-2 p-2 flex items-center">
+                                                <LoginIcon
+                                                    className="flex-shrink-0 h-6 w-6 text-white group-hover:text-white"
+                                                    aria-hidden="true"
+                                                />
+                                            </a>
+                                        </div>
+                                }
+
                             </div>
                         </div>
                     </div>

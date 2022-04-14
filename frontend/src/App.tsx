@@ -11,6 +11,7 @@ import OrdersPage from "./OrdersPage";
 import AddressPage from "./AddressPage";
 import PaymentPage from "./PaymentPage";
 import AnalyticsPage from "./AnalyticsPage";
+import ConfirmPage from "./ConfirmPage";
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/analytics" element={<AnalyticsPage />} />
+        <Route path="/confirm" element={<ConfirmPage />} />
       </Routes>
     </>
   );
