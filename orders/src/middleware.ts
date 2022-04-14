@@ -1,6 +1,7 @@
-import {NextFunction, Response} from 'express'
+import {NextFunction, Request, Response} from 'express'
 import {CustomRequest} from "./types";
 import {RESPONSES} from "./util/responses";
+import axios from "axios";
 
 export interface IOrderRequestBody {
     address: {
@@ -27,6 +28,13 @@ export const MiddleOrder = (req: CustomRequest<IOrderRequestBody>, res: Response
     }
 }
 
-export const MiddleGetAllOrdersOfUser = (req: CustomRequest<IOrderRequestBody>, res: Response, next: NextFunction) => {
-
+export const MiddleCheckPayment = (req: Request, res: Response, next: NextFunction) => {
+    axios.request({
+        method: "post",
+        url: process.env.PAYMENT_SERVICE
+    }).then(() => {
+        next()
+    }).catch(() => {
+        res.sendStatus(500)
+    })
 }
