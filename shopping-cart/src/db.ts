@@ -1,6 +1,28 @@
-import {db, MUser, ShoppingCartModel} from "./util";
+import {db, ItemModel, MItem, MUser, ShoppingCartModel} from "./util";
 import {ShoppingCartInput, MShoppingCart} from "./util/types";
-import {Op} from "sequelize";
+import {ERRORS, ItemUnitError} from './util/responses'
+import {Op, Sequelize} from "sequelize";
+
+export const Item = {
+    get: async (cart: Array<ShoppingCartInput>) => {
+        return await ItemModel.findAll({
+            where: {
+                [Op.or]: cart.map(item => [{
+                    [Op.and]: [
+                        {id: item.itemId}, {units: {[Op.lt]: item.units}}
+                    ]
+                }]),
+            }
+        }) as Array<MItem>
+    },
+    getById: (id: number) => {
+        return ItemModel.findOne({
+            where: {
+                id
+            }
+        })
+    }
+}
 
 export const ShoppingCart = {
     getAll: async (user: MUser) => {
@@ -20,12 +42,16 @@ export const ShoppingCart = {
                     ]
                 }
             }).then(async () => {
-                return ShoppingCartModel.bulkCreate(cart.map((sc) => {
-                    return {
-                        ...sc,
-                        userId: user.id
-                    }
-                }))
+                return await Item.get(cart).then((items) => {
+                    if (items.length != 0)
+                        throw new ItemUnitError(ERRORS.INVALID_UNITS.toString(), items, cart)
+                    return ShoppingCartModel.bulkCreate(cart.map((sc) => {
+                        return {
+                            ...sc,
+                            userId: user.id
+                        }
+                    }))
+                })
             })
             await t.commit()
             return carts;

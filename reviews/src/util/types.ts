@@ -31,6 +31,7 @@ interface UserAttributes  {
     email: string,
     fname: string,
     lname: string,
+    type: number
 }
 
 interface ItemAttributes {
@@ -41,7 +42,7 @@ interface ItemAttributes {
     name: string,
     price: number,
     isActive: string,
-    units: string,
+    units: number,
     description: string,
     type: string,
     brand: string,
@@ -94,9 +95,9 @@ interface VisitEventAttributes {
     createdAt?: Date,
     updatedAt?: Date,
     deletedAt?: Date,
-    time: string,
-    eventType: string,
-    ipAddress: string
+    eventType: number,
+    ipAddress: string,
+    itemId: number
 }
 
 // Classes
@@ -130,6 +131,7 @@ export class MUser extends Model<UserAttributes, UserInput> implements UserAttri
     public email!: string
     public fname!: string
     public lname!: string
+    public type !: number
 }
 
 export class MItem extends Model<ItemAttributes, ItemInput> implements ItemAttributes {
@@ -140,7 +142,7 @@ export class MItem extends Model<ItemAttributes, ItemInput> implements ItemAttri
     public name!: string
     public price!: number
     public isActive!: string
-    public units!: string
+    public units!: number
     public description!: string
     public type!: string
     public brand!: string
@@ -183,9 +185,9 @@ export class MVisitingEvent extends Model<VisitEventAttributes, VisitingEventInp
     public createdAt!: Date
     public updatedAt!: Date
     public deletedAt!: Date
-    public time!: string
-    public eventType!: string
+    public eventType!: number
     public ipAddress!: string
+    public itemId!: number
 }
 
 export class MShoppingCart extends Model<ShoppingCartAttributes, ShoppingCartInput> implements ShoppingCartAttributes {
@@ -203,7 +205,7 @@ export interface AddressInput extends Optional<AddressAttributes, 'id'> {}
 export interface AddressOutput extends Required<AddressAttributes> {}
 export interface CreditCardInput extends Optional<CreditCardAttributes, 'id'> {}
 export interface CreditCardOutput extends Required<CreditCardAttributes> {}
-export interface UserInput extends Optional<UserAttributes, 'id'> {}
+export interface UserInput extends Optional<UserAttributes, 'id' | 'type'> {}
 export interface UserOutput extends Required<UserAttributes> {}
 export interface ItemInput extends Optional<ItemAttributes, 'id'> {}
 export interface ItemOutput extends Required<ItemAttributes> {}

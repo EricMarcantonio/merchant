@@ -1,16 +1,16 @@
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import {passport, connectToDb} from "./util";
-import {HandleCreateUser, HandleLogin, HandleLogout, HandleVerify} from "./handlers";
-import cors, {CorsOptions} from 'cors'
-
+import {GetEvents, SetEvent} from "./handlers";
+import cors from 'cors'
 const app = express();
 
-const corsOptions = {
-    origin: process.env.CORS_ORIGIN, credentials: true,
+app.use(cors({
+    origin: "http://127.0.0.1:8080",
+    credentials: true,
     optionsSuccessStatus: 200,
-} as CorsOptions
-app.use(cors(corsOptions))
+    methods: ["GET", "POST", "OPTIONS", "DELETE"]
+}))
 
 app.use(cookieParser())
 app.use(express.json())
@@ -21,16 +21,14 @@ app.use((req, res, next) => {
     next()
 })
 
-app.post("/register", HandleCreateUser)
-app.post('/login', HandleLogin);
-app.post('/logout', HandleLogout);
-app.post("/verify", passport.authenticate('jwt', {session: false}), HandleVerify)
+app.get("*", passport.authenticate('jwt', { session: false }),  GetEvents)
+app.post("*", passport.authenticate('jwt', { session: false }),  SetEvent)
 
 
 connectToDb().then(() => {
     const port = parseInt(process.env.EXPRESS_PORT || "0")
     app.listen(port, () => {
-        console.log(`Auth is on ${port}`)
+        console.log(`Visiting is on ${port}`)
     })
 }).catch((err) => {
     console.error(err)
