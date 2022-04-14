@@ -13,7 +13,6 @@ import {GetShoppingCart} from "../backend";
 const navigation = {
     pages: [
         {name: "Products", href: "/products"},
-        {name: "Orders", href: "/orders"},
     ],
 };
 
@@ -163,7 +162,7 @@ export default function Navbar() {
                             <div className="ml-4 flex lg:ml-0">
                                 <a href="/">
                                     <span className="sr-only">Workflow</span>
-                                    <p className="text-white font-bold">MERCHANT</p>
+                                    <div className="text-white font-bold">MERCHANT</div>
                                 </a>
                             </div>
 
@@ -184,7 +183,7 @@ export default function Navbar() {
                             <div className="ml-auto flex items-center">
                                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
                                     {con.user.id ? (
-                                        <div>
+                                        <>
                                             {/* <button className="text-sm font-medium text-white hover:text-white" onClick={logoutUser}>
                         Log out
                       </button> */}
@@ -201,9 +200,9 @@ export default function Navbar() {
                                             >
                                                 Orders
                                             </a>
-                                        </div>
+                                        </>
                                     ) : (
-                                        <div>
+                                        <>
                                             <a
                                                 href="/login"
                                                 className="text-sm font-medium text-white hover:text-white"
@@ -217,7 +216,7 @@ export default function Navbar() {
                                             >
                                                 Sign up
                                             </a>
-                                        </div>
+                                        </>
                                     )}
                                 </div>
 
