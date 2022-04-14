@@ -1,5 +1,6 @@
 import {Request, Response} from "express";
 import {ForeignKeyConstraintError, UniqueConstraintError, ValidationError} from "sequelize";
+import {ItemInput, MItem, MShoppingCart, ShoppingCartInput} from "./types";
 
 interface IErrors {
     [index: number]: string;
@@ -47,11 +48,34 @@ export enum ERRORS {
     USERNAME_NOT_UNIQUE,
     USER_ID_NOT_UNIQUE,
     USERNAME_OR_EMAIL,
+    INVALID_IP,
+    INVALID_UNITS,
+    INVALID_PASSWORD_STRENGTH,
     OK = 200,
     BAD_REQUEST = 400,
     UNAUTHORIZED = 401,
     NOT_FOUND = 404,
     INTERNAL_ERROR = 500
+}
+
+interface InvalidItems {
+    id: number,
+    valid_count: number
+}
+export class ItemUnitError implements Error {
+    message: string;
+    name: string;
+    invalid_items: Array<InvalidItems | undefined>;
+
+    constructor(message: string, items: MItem[], cart: ShoppingCartInput[]) {
+        this.message = message
+        this.name = "Item unit error."
+        this.invalid_items = items.map((item) => {
+            let c = cart.find(c => c.id == item.id)
+            if (!c)
+                return {id: item.id, valid_count: item.units}
+        })
+    }
 }
 
 class Responses {
@@ -91,6 +115,9 @@ class Responses {
         32: "Username not unique.",
         33: "User id not unique.",
         34: "No username or email provided.",
+        35: "Invalid IP.",
+        36: "Invalid item units.",
+        37: "Invalid password strength. Password must be at least 8 characters long, contain 1 upper case, 1 lower case, 1 number, and 1 special character.",
         200: "OK.",
         400: "Bad request.",
         401: "Unauthorized.",
@@ -122,6 +149,12 @@ class Responses {
                 }
                 return res
             }
+        } else if (error instanceof ItemUnitError) {
+            // Not enough items
+            let res = {} as IErrorsBlock
+            let sub_res = JSON.stringify(error.invalid_items)
+            res[parseInt(error.message)] = sub_res
+            return res
         }
         try {
             let e_parsed: number = parseInt(error.message)
@@ -140,7 +173,6 @@ class Responses {
         }
 
     }
-
     SendUnauthorized = (req: Request, res: Response, error?: Error) => {
         if (error)
             res.status(401).json(this.buildError(error))
