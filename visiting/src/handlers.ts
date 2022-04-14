@@ -20,7 +20,6 @@ export const GetEvents = async (req: Request, res: Response) => {
 export const SetEvent = async (req: CustomRequest<VisitingEventInput>, res: Response) => {
     const user: MUser | undefined = await req.user as MUser
     if(typeof req.headers['x-forwarded-for'] == "string") {
-        console.log(req.headers['x-forwarded-for'].split(", ")[0])
         req.body.ipAddress = req.headers['x-forwarded-for'].split(", ")[0]
     }
     if (user) {
