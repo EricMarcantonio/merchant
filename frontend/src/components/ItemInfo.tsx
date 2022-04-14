@@ -8,14 +8,14 @@ import {
 import {IProduct} from "../types";
 import {IReview} from "./ProductList";
 import moment from "moment";
-import {AddReview} from "../backend";
 
+import {SuccessToast, ToastFactory } from "../types/toasts";
+import {AddReview} from "../backend";
 import {container} from "../GlobalContainer";
 
 const ItemInfo = () => {
     const {id} = useParams();
     const con = container.useContainer();
-
     const [product, setProduct] = useState<IProduct>();
     const [review, setReview] = useState<IReview[]>();
     const [reviewData, setReviewData] = useState("");
@@ -30,6 +30,11 @@ const ItemInfo = () => {
         ]).then((result) => {
             if (result) {
                 con.setCart(result)
+              const toast = factory.createToast(
+          "SUCCESS",
+          "Added to bag"
+        ) as SuccessToast;
+        await toast.run();
             } else {
                 console.log("There was an error adding the product to cart");
             }

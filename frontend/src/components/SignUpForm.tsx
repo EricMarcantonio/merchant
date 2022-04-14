@@ -4,6 +4,7 @@ import { UserRegister } from "../backend";
 import Loading from "./Loading";
 import { useNavigate } from "react-router-dom";
 import { container } from "../GlobalContainer";
+import { ErrorToast, SuccessToast, ToastFactory } from "../types/toasts";
 
 const SignUpForm = () => {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ const SignUpForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [buttonText, setButtonText] = useState("Sign up");
+  const factory = new ToastFactory();
 
   const con = container.useContainer();
 
@@ -27,17 +29,28 @@ const SignUpForm = () => {
   ) => {
     setButtonText("Loading");
     UserRegister(firstname, lastname, email, username, password)
-      .then((result) => {
+      .then(async (result) => {
         if (!result) {
           console.log("There was an error registering user");
         } else {
           setButtonText("Sign up");
           console.log(result);
           con.setUser(result);
+          const toast = factory.createToast(
+            "SUCCESS",
+            "Successful sign up"
+          ) as SuccessToast;
+          await toast.run();
           navigate(`/products`, { state: { user: result } });
         }
       })
-      .catch((err) => {
+      .catch(async (err) => {
+        setButtonText("Sign up");
+        const toast = factory.createToast(
+          "ERROR",
+          Object.values(err.response.data)[0] as string
+        ) as ErrorToast;
+        await toast.run();
         console.log("Registration failed");
       });
   };
