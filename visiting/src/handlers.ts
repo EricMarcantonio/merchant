@@ -19,7 +19,6 @@ export const GetEvents = async (req: Request, res: Response) => {
 
 export const SetEvent = async (req: CustomRequest<VisitingEventInput>, res: Response) => {
     const user: MUser | undefined = await req.user as MUser
-    console.log(req.body)
     if (user) {
         VisitingService.Set(req.body as VisitingEventInput).then((ve) => {
             RESPONSES.SendOK(req, res, ve)

@@ -42,7 +42,7 @@ interface ItemAttributes {
     name: string,
     price: number,
     isActive: string,
-    units: string,
+    units: number,
     description: string,
     type: string,
     brand: string,
@@ -95,8 +95,7 @@ interface VisitEventAttributes {
     createdAt?: Date,
     updatedAt?: Date,
     deletedAt?: Date,
-    time: string,
-    eventType: string,
+    eventType: number,
     ipAddress: string,
     itemId: number
 }
@@ -143,7 +142,7 @@ export class MItem extends Model<ItemAttributes, ItemInput> implements ItemAttri
     public name!: string
     public price!: number
     public isActive!: string
-    public units!: string
+    public units!: number
     public description!: string
     public type!: string
     public brand!: string
@@ -186,8 +185,7 @@ export class MVisitingEvent extends Model<VisitEventAttributes, VisitingEventInp
     public createdAt!: Date
     public updatedAt!: Date
     public deletedAt!: Date
-    public time!: string
-    public eventType!: string
+    public eventType!: number
     public ipAddress!: string
     public itemId!: number
 }

@@ -32,6 +32,8 @@ export const HandleVerify = async (req: CustomRequest<{ id: string }>, res: Resp
     const user: MUser | undefined = await req.user as MUser
     if (user) {
         RESPONSES.SendOK(req, res, user);
+    } else {
+        RESPONSES.SendUnauthorized(req, res)
     }
 }
 

@@ -28,7 +28,7 @@ app.post("*", passport.authenticate('jwt', { session: false }),  SetEvent)
 connectToDb().then(() => {
     const port = parseInt(process.env.EXPRESS_PORT || "0")
     app.listen(port, () => {
-        console.log(`ShoppingCart is on ${port}`)
+        console.log(`Visiting is on ${port}`)
     })
 }).catch((err) => {
     console.error(err)
