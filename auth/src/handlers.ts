@@ -1,4 +1,4 @@
-import {Response} from "express";
+import {Response, Request} from "express";
 import {Password, User} from "./db";
 import {MUser} from "./util"
 import {CustomRequest, ILogin, IRegister} from "./types.local";
@@ -8,16 +8,23 @@ import {RESPONSES, ERRORS} from "./util/responses";
 import {PasswordInput, UserInput} from "./util/types";
 
 const EXPIRY_TIME: number = 60 * 60 * 24 * 1000
+const TOKEN_NAME: string = "auth-token"
 
 export const HandleCreateUser = async (req: CustomRequest<IRegister>, res: Response) => {
     User.create(req.body.user as UserInput, req.body.password as PasswordInput).then((user) => {
         let payload = {id: user.id};
         let token = jwt.sign(payload, jwtOptions.secretOrKey as string, {expiresIn: EXPIRY_TIME});
-        res.cookie("auth-token", token, {httpOnly: true})
+        res.cookie(TOKEN_NAME, token, {httpOnly: true})
         RESPONSES.SendOK(req, res, user);
     }).catch((error: Error) => {
+        console.log(error)
         RESPONSES.SendBadRequest(req, res, error)
     })
+}
+
+export const HandleLogout = async (req: Request, res: Response) => {
+    res.clearCookie(TOKEN_NAME)
+    RESPONSES.SendOK(req, res);
 }
 
 
@@ -25,6 +32,8 @@ export const HandleVerify = async (req: CustomRequest<{ id: string }>, res: Resp
     const user: MUser | undefined = await req.user as MUser
     if (user) {
         RESPONSES.SendOK(req, res, user);
+    } else {
+        RESPONSES.SendUnauthorized(req, res)
     }
 }
 
@@ -52,7 +61,7 @@ const LoginHelper = async (req: CustomRequest<ILogin>, res: Response, user?: MUs
             if (is_valid) {
                 let payload = {id: user.id};
                 let token = jwt.sign(payload, jwtOptions.secretOrKey as string, {expiresIn: EXPIRY_TIME});
-                res.cookie("auth-token", token, {httpOnly: true})
+                res.cookie(TOKEN_NAME, token, {httpOnly: true})
                 RESPONSES.SendOK(req, res, user);
             } else {
                 RESPONSES.SendBadRequest(req, res, new Error(ERRORS.PASSWORD_INVALID.toString()))
