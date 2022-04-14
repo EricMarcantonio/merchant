@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3aa19c64-824a-4065-a068-4856e4f8a22c",
+		"_postman_id": "77faced2-49cb-4a88-9ce1-74dad54637ac",
 		"name": "merchant-api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -126,7 +126,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "[{\n    \"itemId\": 1,\n    \"units\": 1\n}]\n",
+							"raw": "[{\n    \"itemId\": 1,\n    \"units\": 2\n},\n{\n    \"itemId\": 2,\n    \"units\": 12\n}]\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -134,7 +134,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1/cart/",
+							"raw": "http://127.0.0.1/cart",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -143,15 +143,14 @@
 								"1"
 							],
 							"path": [
-								"cart",
-								""
+								"cart"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "DELETE",
+					"name": "DELETE - Specific",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -165,7 +164,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:3000/cart",
+							"raw": "http://127.0.0.1/cart",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -173,7 +172,36 @@
 								"0",
 								"1"
 							],
-							"port": "3000",
+							"path": [
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE - All",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/cart",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
 							"path": [
 								"cart"
 							]
@@ -214,7 +242,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1/auth/register/",
+							"raw": "http://127.0.0.1/auth/register",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -224,8 +252,7 @@
 							],
 							"path": [
 								"auth",
-								"register",
-								""
+								"register"
 							]
 						}
 					},
@@ -344,6 +371,156 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "visiting",
+			"item": [
+				{
+					"name": "GET",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1/visiting",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"visiting"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SET - (Default) Event Type 0",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ipAddress\": \"{{ip}}\",\n    \"itemId\": \"{{item_id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/visiting/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"visiting",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SET - Event Type 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"eventType\": \"1\",\n    \"ipAddress\": \"{{ip}}\",\n    \"itemId\": \"{{item_id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/visiting/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"visiting",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "username",
+			"value": "axel1",
+			"type": "string"
+		},
+		{
+			"key": "email",
+			"value": "axel@gmail.com",
+			"type": "string"
+		},
+		{
+			"key": "fname",
+			"value": "axel",
+			"type": "string"
+		},
+		{
+			"key": "lname",
+			"value": "axel",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "1234@Axel1234asdfvdsfvd",
+			"type": "string"
+		},
+		{
+			"key": "ip",
+			"value": "192.168.119.240",
+			"type": "string"
+		},
+		{
+			"key": "event_type",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "item_id",
+			"value": "1",
+			"type": "string"
 		}
 	]
 }

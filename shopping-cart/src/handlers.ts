@@ -26,6 +26,7 @@ export const SetCart = async (req: CustomRequest<Array<ShoppingCartInput>>, res:
         ShoppingCart.setAll(user, req.body).then((cart) => {
             RESPONSES.SendOK(req, res, cart);
         }).catch((error: Error) => {
+            console.log(error)
             RESPONSES.SendBadRequest(req, res, error)
         })
     } else {
