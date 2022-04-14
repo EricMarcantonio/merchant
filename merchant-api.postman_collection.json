@@ -126,7 +126,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "[{\n    \"itemId\": 1,\n    \"units\": 1\n}]\n",
+							"raw": "[{\n    \"itemId\": 1,\n    \"units\": 2\n},\n{\n    \"itemId\": 2,\n    \"units\": 12\n}]\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -134,7 +134,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1/cart/",
+							"raw": "http://127.0.0.1/cart",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -143,15 +143,14 @@
 								"1"
 							],
 							"path": [
-								"cart",
-								""
+								"cart"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "DELETE",
+					"name": "DELETE - Specific",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -165,7 +164,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:3000/cart",
+							"raw": "http://127.0.0.1/cart",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -173,7 +172,36 @@
 								"0",
 								"1"
 							],
-							"port": "3000",
+							"path": [
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE - All",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/cart",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
 							"path": [
 								"cart"
 							]
@@ -369,13 +397,13 @@
 					"response": []
 				},
 				{
-					"name": "SET",
+					"name": "SET - (Default) Event Type 0",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"time\": \"{{$timestamp}}\",\n    \"eventType\": \"{{event_type}}\",\n    \"ipAddress\": \"{{ip}}\",\n    \"itemId\": \"1\"\n}",
+							"raw": "{\n    \"ipAddress\": \"{{ip}}\",\n    \"itemId\": \"{{item_id}}\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -383,7 +411,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1/visiting",
+							"raw": "http://127.0.0.1/visiting/",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -392,7 +420,39 @@
 								"1"
 							],
 							"path": [
-								"visiting"
+								"visiting",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SET - Event Type 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"eventType\": \"1\",\n    \"ipAddress\": \"{{ip}}\",\n    \"itemId\": \"{{item_id}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/visiting/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"visiting",
+								""
 							]
 						}
 					},
@@ -424,7 +484,7 @@
 	"variable": [
 		{
 			"key": "username",
-			"value": "axel",
+			"value": "axel1",
 			"type": "string"
 		},
 		{
@@ -444,7 +504,22 @@
 		},
 		{
 			"key": "password",
-			"value": "1234",
+			"value": "1234@Axel1234asdfvdsfvd",
+			"type": "string"
+		},
+		{
+			"key": "ip",
+			"value": "192.168.119.240",
+			"type": "string"
+		},
+		{
+			"key": "event_type",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "item_id",
+			"value": "1",
 			"type": "string"
 		}
 	]
