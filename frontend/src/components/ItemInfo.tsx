@@ -19,7 +19,7 @@ const ItemInfo = () => {
     const [product, setProduct] = useState<IProduct>();
     const [review, setReview] = useState<IReview[]>();
     const [reviewData, setReviewData] = useState("");
-
+    const factory = new ToastFactory();
 
     const handleAddToCart = (item: number, val: number) => {
         UpdateShoppingCart([
@@ -27,7 +27,7 @@ const ItemInfo = () => {
                 itemId: item,
                 units: val,
             },
-        ]).then((result) => {
+        ]).then(async (result) => {
             if (result) {
                 con.setCart(result)
               const toast = factory.createToast(
