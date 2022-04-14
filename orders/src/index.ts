@@ -3,11 +3,12 @@ import express from 'express'
 import {connectToDb, passport} from "./util";
 
 import cookieParser from 'cookie-parser'
-import {MiddleOrder} from "./middleware";
+import {MiddleCheckPayment, MiddleOrder} from "./middleware";
 import {HandleCreateOrder, HandleGetAllOrders} from "./handlers";
 import cors, {CorsOptions} from 'cors'
 
 const app = express();
+
 const corsOptions = {
     origin: process.env.CORS_ORIGIN, credentials: true,
     optionsSuccessStatus: 200,
@@ -29,7 +30,7 @@ app.get("/", (req, res) => {
     res.sendStatus(200)
 })
 
-app.post("/create", [passport.authenticate("jwt", {session: false}), MiddleOrder], HandleCreateOrder)
+app.post("/create", [passport.authenticate("jwt", {session: false}), MiddleOrder, MiddleCheckPayment], HandleCreateOrder)
 app.get("/all", [passport.authenticate("jwt", {session: false})], HandleGetAllOrders)
 
 
