@@ -163,7 +163,7 @@ create or replace table VisitEvents
         primary key,
     ipAddress varchar(255) not null,
     itemId    int          not null,
-    eventType int default 0 not null,
+    eventType varchar(255) default '' not null,
     createdAt datetime     not null,
     updatedAt datetime     not null,
     deletedAt datetime     null,

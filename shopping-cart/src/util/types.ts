@@ -217,5 +217,5 @@ export interface PasswordInput extends Optional<PasswordAttributes, 'userId'> {}
 export interface PasswordOutput extends Required<PasswordAttributes> {}
 export interface ShoppingCartInput extends Optional<ShoppingCartAttributes, 'id' | 'userId'> {}
 export interface ShoppingCartOutput extends Required<ShoppingCartAttributes> {}
-export interface VisitingEventInput extends Optional<VisitEventAttributes, 'id'> {}
+export interface VisitingEventInput extends Optional<VisitEventAttributes, 'id' | 'ipAddress'> {}
 export interface VisitingEventOutput extends Required<VisitEventAttributes> {}

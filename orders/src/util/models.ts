@@ -411,11 +411,7 @@ const VisitEventModel = db.define("VisitEvent", {
     eventType: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-            notNull: {
-                msg: ERRORS.EVENT_TYPE_NULL.toString()
-            },
-        }
+        defaultValue: ""
     }
 }, {
     deletedAt: true,
