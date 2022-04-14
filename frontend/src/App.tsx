@@ -6,14 +6,11 @@ import ProductsPage from "./ProductsPage";
 import ItemPage from "./ItemPage";
 import LogInPage from "./LogInPage";
 import SignUpPage from "./SignUpPage";
-
 import CartPage from "./CartPage";
-
 import OrdersPage from "./OrdersPage";
-import OrderPage from "./AddressPage";
 import AddressPage from "./AddressPage";
 import PaymentPage from "./PaymentPage";
-
+import AnalyticsPage from "./AnalyticsPage";
 
 export default function App() {
   return (
@@ -28,6 +25,7 @@ export default function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/analytics" element={<AnalyticsPage />} />
       </Routes>
     </>
   );
