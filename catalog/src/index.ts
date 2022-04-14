@@ -9,10 +9,11 @@ import { MiddleGetItemById } from './middleware';
 
 const app = express();
 const corsOptions = {
-    origin: process.env.CORS_ORIGIN, credentials: true,
+    origin: '*',
     optionsSuccessStatus: 200,
-    methods: ["GET", "POST", "OPTIONS"]
+    methods: ["GET","OPTIONS"]
 } as CorsOptions
+
 app.use(cors(corsOptions))
 
 app.use(cookieParser())
