@@ -139,9 +139,8 @@ const ItemInfo = () => {
                     </div>
                 </div>
             </div>
-          </div>
-        </div>
-      </div>
+
+
       <div className="pt-6 grid grid-cols-2 h-full justify-center items-center">
         <div className="text-2xl font-extrabold mx-20 px-5 text-center">
           Recent Reviews
