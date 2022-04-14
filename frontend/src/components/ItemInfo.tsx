@@ -8,12 +8,14 @@ import {
 import { IProduct } from "../types";
 import { IReview } from "./ProductList";
 import moment from "moment";
+import { AddReview } from "../backend";
 
 const ItemInfo = () => {
   const { id } = useParams();
 
   const [product, setProduct] = useState<IProduct>();
   const [review, setReview] = useState<IReview[]>();
+  const [reviewData, setReviewData] = useState("");
 
   const handleAddToCart = (item: number, val: number) => {
     UpdateShoppingCart([
@@ -30,6 +32,26 @@ const ItemInfo = () => {
     });
   };
 
+  const handleAddReview = (
+    itemId: string,
+    reviewData: string,
+    rating: string
+  ) => {
+    AddReview(itemId, reviewData, rating)
+      .then((result) => {
+        result.sort((a, b) => {
+          //   @ts-ignore
+          return new Date(b.createdAt || "") - new Date(a.createdAt || "");
+        });
+
+        result = result.slice(0, 5);
+        setReview(result);
+      })
+      .catch(() => {
+        console.log("There was an error adding the review");
+      });
+  };
+
   useEffect(() => {
     if (id) {
       Promise.all([
@@ -37,6 +59,14 @@ const ItemInfo = () => {
         GetReviewsByItemId(parseInt(id)),
       ]).then((data) => {
         setProduct(data[0]);
+
+        data[1].sort((a, b) => {
+          //   @ts-ignore
+          return new Date(b.createdAt || "") - new Date(a.createdAt || "");
+        });
+
+        data[1] = data[1].slice(0, 5);
+
         setReview(data[1]);
       });
     } else {
@@ -93,38 +123,63 @@ const ItemInfo = () => {
           </div>
         </div>
       </div>
-      <div className="pt-6 grid grid-cols-2 h-full">
-        <div className="lg:grid lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8">
-          kevin
+      <div className="pt-6 grid grid-cols-2 h-full justify-center items-center">
+        <div className="text-2xl font-extrabold mx-20 px-5 text-center">
+          Recent Reviews
+        </div>
+        <div className="row-span-auto my-5 mx-20 p-5 lg:col-start-2">
           <form
             className="mt-8 space-y-6"
             action="#"
             method="POST"
             onSubmit={(e) => {
               e.preventDefault();
-              //handleAdminLogin(email, password);
+              if (product && product.id) {
+                handleAddReview(product.id.toString(), reviewData, "3");
+              }
             }}
-          ></form>
+          >
+            <textarea
+              style={{ resize: "none" }}
+              id="reviewData"
+              name="reviewData"
+              rows={6}
+              required
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Add a review..."
+              onChange={(e) => {
+                setReviewData(e.target.value);
+              }}
+              value={reviewData}
+            ></textarea>
+            <button
+              type="submit"
+              className="mt-10 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Send Review
+            </button>
+          </form>
         </div>
         {review &&
-          review.map((rev, index) => {
+          review.map((rev) => {
             return (
-              review.length - index < 5 && (
-                <div
-                  className="relative my-5 mx-20 p-5 lg:col-start-1 lg:col-span-1 flex flex-col bg-white rounded-md shadow-xl bg-gray-100"
-                  key={rev.id}
-                >
-                  <p>
-                    <b>
-                      User{rev.userId} Rating:{rev.rating}/5
-                    </b>
-                  </p>
-                  <p>{rev.data}</p>
-                  <p className="absolute bottom-0 right-0 m-5 mb-3 text-gray-400">
-                    {moment(rev.createdAt).utc().local().format("MMMM Do YYYY")}
-                  </p>
-                </div>
-              )
+              <div
+                className="relative my-5 mx-20 p-5 lg:col-start-1 lg:col-span-1 flex flex-col bg-white rounded-md shadow-xl bg-gray-100"
+                key={rev.id}
+              >
+                <p>
+                  <b>
+                    User{rev.userId} Rating:{rev.rating}/5
+                  </b>
+                </p>
+                <p>{rev.data}</p>
+                <p className="absolute bottom-0 right-0 m-5 mb-3 text-gray-400">
+                  {moment(rev.createdAt)
+                    .utc()
+                    .local()
+                    .format("MMMM Do YYYY, h:mm:ss a")}
+                </p>
+              </div>
             );
           })}
       </div>
