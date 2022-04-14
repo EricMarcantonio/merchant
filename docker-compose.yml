@@ -116,7 +116,7 @@ services:
     restart: always
     build:
       context: payment/
-      dockerfile: payment.Dockerfile.Dockerfile
+      dockerfile: payment.Dockerfile
     expose:
       - 80
     environment:
