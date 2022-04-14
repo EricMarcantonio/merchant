@@ -8,12 +8,14 @@ import {
 import { IProduct } from "../types";
 import { IReview } from "./ProductList";
 import moment from "moment";
+import {SuccessToast, ToastFactory } from "../types/toasts";
 
 const ItemInfo = () => {
   const { id } = useParams();
 
   const [product, setProduct] = useState<IProduct>();
   const [review, setReview] = useState<IReview[]>();
+  const factory = new ToastFactory();
 
   const handleAddToCart = (item: number, val: number) => {
     UpdateShoppingCart([
@@ -21,11 +23,16 @@ const ItemInfo = () => {
         itemId: item,
         units: val,
       },
-    ]).then((result) => {
+    ]).then(async (result) => {
       if (!result) {
         console.log("There was an error adding the product to cart");
       } else {
         console.log(result);
+        const toast = factory.createToast(
+          "SUCCESS",
+          "Added to bag"
+        ) as SuccessToast;
+        await toast.run();
       }
     });
   };

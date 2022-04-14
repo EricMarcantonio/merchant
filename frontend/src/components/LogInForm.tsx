@@ -3,7 +3,14 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AdminLogin } from "../backend";
 import { verify } from "../backend/products";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Loading from "./Loading";
+import { ErrorToast, SuccessToast, ToastFactory } from "../types/toasts";
+
+const toastError = (text: string) => {
+  toast.error(text);
+};
 
 const LogInForm = () => {
   const [render, setRender] = useState(true);
@@ -11,23 +18,34 @@ const LogInForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [buttonText, setButtonText] = useState("Log in");
-
+  const factory = new ToastFactory();
   useEffect(() => {
     verify();
   }, []);
   const handleAdminLogin = (email: string, password: string) => {
     setButtonText("Loading");
     AdminLogin(email, password)
-      .then((result) => {
+      .then(async (result) => {
         if (!result) {
           console.log("There was an error logging in");
         } else {
           setButtonText("Log in");
           console.log(result);
+          const toast = factory.createToast(
+            "SUCCESS",
+            "Successful log in"
+          ) as SuccessToast;
+          await toast.run();
           navigate(`/products`);
         }
       })
-      .catch((err) => {
+      .catch(async (err) => {
+        setButtonText("Log in");
+        const toast = factory.createToast(
+          "ERROR",
+          Object.values(err.response.data)[0] as string
+        ) as ErrorToast;
+        await toast.run();
         console.log("Log in failed");
       });
   };
@@ -101,7 +119,6 @@ const LogInForm = () => {
                   />
                 </div>
               </div>
-
               <div>
                 <button
                   type="submit"
