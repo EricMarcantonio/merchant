@@ -395,15 +395,6 @@ const VisitEventModel = db.define("VisitEvent", {
             },
         }
     },
-    time: {
-        type: DataTypes.TIME,
-        allowNull: false,
-        validate: {
-            notNull: {
-                msg: ERRORS.TIME_NULL.toString()
-            },
-        }
-    },
     itemId: {
         type: DataTypes.INTEGER,
         allowNull: false,

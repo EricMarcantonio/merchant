@@ -96,6 +96,95 @@
 			]
 		},
 		{
+			"name": "reviews",
+			"item": [
+				{
+					"name": "GET_BY_ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "auth-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjQ5NDU4ODEyLCJleHAiOjE3MzU4NTg4MTJ9.Q59qRMg1aKbxs8TlqxHuz_u2fBGc4a1hyktn_ddoZh0; Path=/; HttpOnly;",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/reviews/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"reviews",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "auth-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQ5Njg1MzE4LCJleHAiOjE3MzYwODUzMTh9.i5tCc-BNDUma9eI7o6MdlGK9G7LxWEfea0OXnZyCbyY; Path=/; HttpOnly;",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"itemId\": 4,\n    \"data\": \"fuck this product in particular\",\n    \"rating\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/reviews/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"reviews",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "cart",
 			"item": [
 				{
@@ -157,7 +246,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "[\n    \"3\"\n]",
+							"raw": "[\n    \"1\"\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -165,7 +254,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:3000/cart",
+							"raw": "http://127.0.0.1/cart/",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -173,9 +262,9 @@
 								"0",
 								"1"
 							],
-							"port": "3000",
 							"path": [
-								"cart"
+								"cart",
+								""
 							]
 						}
 					},

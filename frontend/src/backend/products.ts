@@ -63,30 +63,7 @@ export const GetShoppingCartByUserToken = async (user_token: string) => {
         });
 };
 
-export const UpdateShoppingCart = (cart: ICartUpdate[]) => {
-    var data = JSON.stringify(cart);
-    console.log(document.cookie);
-    return axios({
-        method: "post",
-        url: "http://127.0.0.1/cart/",
-        withCredentials: true,
-        headers: {
-            "Content-Type": "application/json",
-        },
-        data: data,
-    })
-        .then(function (response) {
-            console.log(response.data);
-            return true;
-        })
-        .catch(function (error) {
-            console.log(error);
-            return false;
-        });
-};
-
 export const GetShoppingCart = () => {
-
     return axios
         .request<IOrderData[]>({
             method: "get",
@@ -98,6 +75,56 @@ export const GetShoppingCart = () => {
             return response.data;
         });
 };
+
+export const UpdateShoppingCart = (cart: ICartUpdate[]) => {
+    var data = JSON.stringify(cart);
+    return axios({
+        method: "post",
+        url: "http://127.0.0.1/cart/",
+        withCredentials: true,
+        headers: {
+            "Content-Type": "application/json",
+        },
+        data: data,
+    })
+        .then(function (response) {
+            let cartArray: Promise<IProduct>[] = [];
+            return GetShoppingCart().then((result) => {
+                if (!result) {
+                    console.log("There was an error getting the products");
+                } else {
+                    for (let eachItem of result) {
+                        cartArray.push(GetAProductByIdFromBackend(eachItem.itemId));
+                    }
+                }
+                return result;
+            })
+                .then((itemsWithoutDesc) => {
+                        if (cartArray) {
+                            return Promise.all<IProduct>(cartArray).then((data) => {
+                                let temp = {} as ICart
+                                for (let eachItem of data) {
+                                    if (eachItem.id) {
+                                        if (temp[eachItem.id?.toString()]) {
+                                            temp[eachItem.id?.toString()].product = eachItem;
+                                        } else {
+                                            temp[eachItem.id?.toString()] = {
+                                                product: eachItem,
+                                                units_requested: itemsWithoutDesc.filter(
+                                                    (orderItem) => orderItem.itemId == eachItem.id
+                                                )[0].units,
+                                            };
+                                        }
+                                    }
+                                }
+                                return temp;
+                            })
+                        }
+                    }
+                )
+        })
+};
+
 
 export const AdminLogin = (email: string, password: string) => {
     var data = JSON.stringify({

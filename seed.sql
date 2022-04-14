@@ -162,9 +162,8 @@ create or replace table VisitEvents
     id        int auto_increment
         primary key,
     ipAddress varchar(255) not null,
-    time      time         not null,
     itemId    int          not null,
-    eventType varchar(255) not null,
+    eventType int default 0 not null,
     createdAt datetime     not null,
     updatedAt datetime     not null,
     deletedAt datetime     null,
