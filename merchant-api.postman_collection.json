@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "77faced2-49cb-4a88-9ce1-74dad54637ac",
+		"_postman_id": "3aa19c64-824a-4065-a068-4856e4f8a22c",
 		"name": "merchant-api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -96,6 +96,95 @@
 			]
 		},
 		{
+			"name": "reviews",
+			"item": [
+				{
+					"name": "GET_BY_ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "auth-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjQ5NDU4ODEyLCJleHAiOjE3MzU4NTg4MTJ9.Q59qRMg1aKbxs8TlqxHuz_u2fBGc4a1hyktn_ddoZh0; Path=/; HttpOnly;",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/reviews/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"reviews",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "auth-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQ5Njg1MzE4LCJleHAiOjE3MzYwODUzMTh9.i5tCc-BNDUma9eI7o6MdlGK9G7LxWEfea0OXnZyCbyY; Path=/; HttpOnly;",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"itemId\": 4,\n    \"data\": \"fuck this product in particular\",\n    \"rating\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1/reviews/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"path": [
+								"reviews",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "cart",
 			"item": [
 				{
@@ -126,7 +215,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "[{\n    \"itemId\": 1,\n    \"units\": 2\n},\n{\n    \"itemId\": 2,\n    \"units\": 12\n}]\n",
+							"raw": "[{\n    \"itemId\": 1,\n    \"units\": 1\n}]\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -134,7 +223,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1/cart",
+							"raw": "http://127.0.0.1/cart/",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -143,20 +232,21 @@
 								"1"
 							],
 							"path": [
-								"cart"
+								"cart",
+								""
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "DELETE - Specific",
+					"name": "DELETE",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "[\n    \"3\"\n]",
+							"raw": "[\n    \"1\"\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -164,7 +254,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1/cart",
+							"raw": "http://127.0.0.1/cart/",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -173,37 +263,8 @@
 								"1"
 							],
 							"path": [
-								"cart"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DELETE - All",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1/cart",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"path": [
-								"cart"
+								"cart",
+								""
 							]
 						}
 					},
@@ -242,7 +303,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1/auth/register",
+							"raw": "http://127.0.0.1/auth/register/",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -252,7 +313,8 @@
 							],
 							"path": [
 								"auth",
-								"register"
+								"register",
+								""
 							]
 						}
 					},
@@ -371,156 +433,6 @@
 					"response": []
 				}
 			]
-		},
-		{
-			"name": "visiting",
-			"item": [
-				{
-					"name": "GET",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1/visiting",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"path": [
-								"visiting"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "SET - (Default) Event Type 0",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"ipAddress\": \"{{ip}}\",\n    \"itemId\": \"{{item_id}}\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1/visiting/",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"path": [
-								"visiting",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "SET - Event Type 1",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"eventType\": \"1\",\n    \"ipAddress\": \"{{ip}}\",\n    \"itemId\": \"{{item_id}}\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1/visiting/",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"path": [
-								"visiting",
-								""
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		}
-	],
-	"variable": [
-		{
-			"key": "username",
-			"value": "axel1",
-			"type": "string"
-		},
-		{
-			"key": "email",
-			"value": "axel@gmail.com",
-			"type": "string"
-		},
-		{
-			"key": "fname",
-			"value": "axel",
-			"type": "string"
-		},
-		{
-			"key": "lname",
-			"value": "axel",
-			"type": "string"
-		},
-		{
-			"key": "password",
-			"value": "1234@Axel1234asdfvdsfvd",
-			"type": "string"
-		},
-		{
-			"key": "ip",
-			"value": "192.168.119.240",
-			"type": "string"
-		},
-		{
-			"key": "event_type",
-			"value": "1",
-			"type": "string"
-		},
-		{
-			"key": "item_id",
-			"value": "1",
-			"type": "string"
 		}
 	]
 }
