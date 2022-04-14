@@ -409,15 +409,82 @@ const VisitEventModel = db.define("VisitEvent", {
         }
     },
     eventType: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: 0
+        validate: {
+            notNull: {
+                msg: ERRORS.EVENT_TYPE_NULL.toString()
+            },
+        }
     }
 }, {
     deletedAt: true,
     timestamps: true,
     paranoid: true
 })
+
+
+const ReviewsModel = db.define("Review", {
+    // id: {
+    //     primaryKey: true,
+    //     autoIncrement: true,
+    //     type: DataTypes.INTEGER
+    // },
+
+    itemId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: ItemModel,
+            key: "id"
+        },
+        validate: {
+            notNull: {
+                msg: ERRORS.ITEM_ID_NULL.toString()
+            },
+        }
+    },
+    userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: UserModel,
+            key: "id"
+        },
+        validate: {
+            notNull: {
+                msg: ERRORS.USER_ID_NULL.toString()
+            },
+        }
+    },
+    data: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+        validate: {
+            notNull: {
+                msg: ERRORS.DESCRIPTION_NULL.toString()
+            },
+        }
+    },
+    rating: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+            notNull: {
+                msg: ERRORS.DESCRIPTION_NULL.toString()
+            },
+        }
+    }
+
+}, {
+    deletedAt: true,
+    timestamps: true,
+    paranoid: true
+})
+
+
+
+
 
 export {
     AddressModel,
@@ -428,5 +495,6 @@ export {
     UserModel,
     PasswordModel,
     VisitEventModel,
-    ShoppingCartModel
+    ShoppingCartModel,
+    ReviewsModel
 }
