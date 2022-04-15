@@ -8,7 +8,7 @@ interface IGetOrders {
 
 export const GetAllOrders = () => {
     return a.request<IGetOrders>({
-        method: 'get', url: '/orders/all', withCredentials: true,
+        method: 'get', url: '/orders/all/', withCredentials: true,
     })
         .then((response) => {
             console.log(response.data);

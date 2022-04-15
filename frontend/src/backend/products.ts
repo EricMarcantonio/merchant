@@ -2,11 +2,6 @@ import {ICart, ICartUpdate, IOrderData, IProduct} from "../types";
 import {a, UserAttributes} from "./types";
 import {IReview} from "../components/ProductList";
 
-interface AxiosGetAllProductsInterface {
-    data: {
-        items: IProduct[];
-    };
-}
 
 export const GetAllProductsFromBackend = () => {
 
@@ -31,14 +26,6 @@ export const GetAProductByIdFromBackend = (id: number) => {
         })
 };
 
-interface IShoppingCart {
-    cart: ICartItem[];
-}
-
-interface ICartItem {
-    item_id: number;
-    unit_req: number;
-}
 
 export const tempCart: ICart = {};
 
@@ -94,7 +81,7 @@ export const UpdateShoppingCart = (cart: ICartUpdate[]) => {
         },
         data: data,
     })
-        .then(function (response) {
+        .then(function () {
             return GetShoppingCart().then((cart) => {
                 return cart
             })
@@ -117,7 +104,7 @@ export const AdminLogin = (email: string, password: string) => {
         },
         data: data,
     })
-        .then((response) => {
+        .then(() => {
             console.log("logged in");
             return true;
         });
@@ -196,7 +183,7 @@ export const GetReviewsByItemId = (id: number) => {
 
     return a.request<IReview[]>({
         method: 'get',
-        url: `/reviews/${id}`,
+        url: `/reviews/${id}/`,
     })
         .then((response) => {
             console.log(response.data);

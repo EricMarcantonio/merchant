@@ -6,7 +6,7 @@ export const GetReviewsByItemId = (id: number) => {
 
     return a.request<IReview[]>({
         method: 'get',
-        url: `/reviews/${id}`,
+        url: `/reviews/${id}/`,
     })
         .then((response) => {
             console.log(response.data);
