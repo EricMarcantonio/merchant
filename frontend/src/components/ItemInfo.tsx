@@ -1,15 +1,11 @@
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {
-    GetAProductByIdFromBackend,
-    GetReviewsByItemId,
-    UpdateShoppingCart,
-} from "../backend/products";
+import {GetAProductByIdFromBackend, GetReviewsByItemId, UpdateShoppingCart,} from "../backend/products";
 import {IProduct} from "../types";
 import {IReview} from "./ProductList";
 import moment from "moment";
 
-import {SuccessToast, ToastFactory } from "../types/toasts";
+import {SuccessToast, ToastFactory} from "../types/toasts";
 import {AddReview} from "../backend";
 import {container} from "../GlobalContainer";
 
@@ -29,12 +25,12 @@ const ItemInfo = () => {
             },
         ]).then(async (result) => {
             if (result) {
-                con.setCart(result)
-              const toast = factory.createToast(
-          "SUCCESS",
-          "Added to bag"
-        ) as SuccessToast;
-        await toast.run();
+                con.setCart(result);
+                const toast = factory.createToast(
+                    "SUCCESS",
+                    "Added to bag"
+                ) as SuccessToast;
+                await toast.run();
             } else {
                 console.log("There was an error adding the product to cart");
             }

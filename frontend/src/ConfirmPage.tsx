@@ -1,11 +1,11 @@
 import Navbar from "./components/Navbar";
-import AddressForm from "./components/AddressForm";
+import {Confirm} from "./components/Confirm";
 
 const AddressPage = () => {
     return (
         <>
             <Navbar/>
-            <AddressForm/>
+            <Confirm/>
         </>
     );
 };

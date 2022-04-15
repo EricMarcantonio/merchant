@@ -1,8 +1,8 @@
 import {db, ItemModel, MVisitingEvent, VisitEventModel} from "./util";
-import { VisitingEventInput} from "./util/types";
+import {VisitingEventInput} from "./util/types";
 import {ERRORS} from "./util/responses";
 
-const net = require('net')
+const net = require('net');
 
 export const Item = {
     get: () => {
@@ -15,7 +15,7 @@ export const Item = {
             }
         })
     }
-}
+};
 export const VisitingService = {
     getAll: async () => {
         let date = new Date();
@@ -25,9 +25,9 @@ export const VisitingService = {
     },
     Set: async (visiting_event: VisitingEventInput) => {
         if (!net.isIPv4(visiting_event.ipAddress))
-            throw new Error(ERRORS.INVALID_IP.toString())
+            throw new Error(ERRORS.INVALID_IP.toString());
         return await Item.getById(visiting_event.itemId).then(async () => {
             return await VisitEventModel.create(visiting_event) as MVisitingEvent
         }) as MVisitingEvent
     }
-}
+};

@@ -1,4 +1,4 @@
-import {Request, Response} from 'express';
+import {Response} from 'express';
 
 import {RESPONSES} from './util/responses';
 import {Review} from "./db";
@@ -11,11 +11,11 @@ export const HandleGetReviewsByItemId = (req: CustomRequest<IReview>, res: Respo
     }).catch(() => {
         RESPONSES.SendNotFound(req, res)
     })
-}
+};
 
 export const HandleCreateReview = (req: CustomRequest<IReview>, res: Response) => {
-    const user: MUser | undefined = req.user as MUser
-    if (user){
+    const user: MUser | undefined = req.user as MUser;
+    if (user) {
         Review.create({
             userId: user.id,
             itemId: req.body.itemId,
@@ -30,4 +30,4 @@ export const HandleCreateReview = (req: CustomRequest<IReview>, res: Response) =
         RESPONSES.SendError(req, res)
     }
 
-}
+};

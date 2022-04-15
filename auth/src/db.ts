@@ -25,19 +25,19 @@ export const User = {
         }) as MUser
     },
     create: async (user_input: UserInput, password: PasswordInput) => {
-        const t = await db.transaction()
-        user_input.type = undefined
+        const t = await db.transaction();
+        user_input.type = undefined;
         return await UserModel.create(user_input, {transaction: t}).then(async (u) => {
-            const user = u as MUser
+            const user = u as MUser;
             if (!validatePassword(password.password)) {
-                await t.rollback()
-                throw new Error(ERRORS.INVALID_PASSWORD_STRENGTH.toString())
+                await t.rollback();
+                throw new Error(ERRORS.INVALID_PASSWORD_STRENGTH.toString());
                 return user as MUser
             } else {
-                password.password = hash(password.password)
-                password.userId = user.id
+                password.password = hash(password.password);
+                password.userId = user.id;
                 return await PasswordModel.create(password, {transaction: t}).then(async () => {
-                    await t.commit()
+                    await t.commit();
                     return user as MUser;
                 })
             }
@@ -50,20 +50,20 @@ export const User = {
             }
         })
     }
-}
+};
 
 export const Password = {
     validate: async (user: UserInput, password: PasswordInput) => {
-        const p = await PasswordModel.findOne({where: { userId: user.id }}) as MPassword
+        const p = await PasswordModel.findOne({where: {userId: user.id}}) as MPassword;
         return p.password === hash(password.password);
     }
-}
+};
 
 const validatePassword = (password: string) => {
     return new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})').test(password)
-}
+};
 
-const hash = (password: string):string => {
-    const salt = "094y7o9qno22=="
+const hash = (password: string): string => {
+    const salt = "094y7o9qno22==";
     return crypto.createHash('sha256', salt).update(password).digest('hex');
-}
+};

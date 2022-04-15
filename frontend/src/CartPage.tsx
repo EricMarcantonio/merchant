@@ -3,11 +3,11 @@ import Navbar from "./components/Navbar";
 
 const CartPage = () => {
     return (
-      <>
-        <Navbar />
-        <ShoppingCart />
-      </>
+        <>
+            <Navbar/>
+            <ShoppingCart/>
+        </>
     );
-  };
-  
-  export default CartPage;
+};
+
+export default CartPage;

@@ -3,11 +3,11 @@ import PaymentForm from "./components/PaymentForm";
 
 const PaymentPage = () => {
     return (
-      <>
-        <Navbar />
-        <PaymentForm />
-      </>
+        <>
+            <Navbar/>
+            <PaymentForm/>
+        </>
     );
-  };
+};
 
 export default PaymentPage;

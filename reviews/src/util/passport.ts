@@ -11,13 +11,13 @@ const CookieExtractor: JwtFromRequestFunction = (req => {
     let token = null;
     if (req && req.cookies && req.cookies['auth-token']) token = req.cookies['auth-token'];
     return token;
-})
+});
 
 const jwtOptions: StrategyOptions = {
     jwtFromRequest: ExtractJWT.fromExtractors([CookieExtractor]),
     secretOrKey: `Ho5tIaFZRQEULisJZjlywA==`,
     ignoreExpiration: false,
-}
+};
 
 
 let strategy = new JwtStrategy(jwtOptions, function (jwt_payload, next) {

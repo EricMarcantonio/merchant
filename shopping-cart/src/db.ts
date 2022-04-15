@@ -1,7 +1,7 @@
 import {db, ItemModel, MItem, MUser, ShoppingCartModel} from "./util";
-import {ShoppingCartInput, MShoppingCart} from "./util/types";
+import {MShoppingCart, ShoppingCartInput} from "./util/types";
 import {ERRORS, ItemUnitError} from './util/responses'
-import {Op, Sequelize} from "sequelize";
+import {Op} from "sequelize";
 
 export const Item = {
     get: async (cart: Array<ShoppingCartInput>) => {
@@ -22,7 +22,7 @@ export const Item = {
             }
         })
     }
-}
+};
 
 export const ShoppingCart = {
     getAll: async (user: MUser) => {
@@ -37,14 +37,14 @@ export const ShoppingCart = {
             const carts = await ShoppingCartModel.destroy({
                 where: {
                     [Op.and]: [
-                        { userId: user.id},
-                        { itemId: { [Op.or]: cart.map(item => item.itemId)}}
+                        {userId: user.id},
+                        {itemId: {[Op.or]: cart.map(item => item.itemId)}}
                     ]
                 }
             }).then(async () => {
                 return await Item.get(cart).then((items) => {
                     if (items.length != 0)
-                        throw new ItemUnitError(ERRORS.INVALID_UNITS.toString(), items, cart)
+                        throw new ItemUnitError(ERRORS.INVALID_UNITS.toString(), items, cart);
                     return ShoppingCartModel.bulkCreate(cart.map((sc) => {
                         return {
                             ...sc,
@@ -52,8 +52,8 @@ export const ShoppingCart = {
                         }
                     }))
                 })
-            })
-            await t.commit()
+            });
+            await t.commit();
             return carts;
         }) as Array<MShoppingCart>
     },
@@ -67,4 +67,4 @@ export const ShoppingCart = {
             }
         }) as number
     },
-}
+};
