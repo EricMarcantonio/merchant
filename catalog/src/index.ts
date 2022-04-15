@@ -26,6 +26,7 @@ app.use((req, res, next) => {
 	next();
 });
 
+
 app.get("/", HandleGetAllItems);
 app.get("/:id", MiddleGetItemById, HandleGetItemById);
 

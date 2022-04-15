@@ -22,6 +22,7 @@ app.use((req, res, next) => {
 	next();
 });
 
+
 app.get("*", passport.authenticate("jwt", { session: false }), GetCart);
 app.post("*", passport.authenticate("jwt", { session: false }), SetCart);
 app.delete("*", passport.authenticate("jwt", { session: false }), RemoveCart);

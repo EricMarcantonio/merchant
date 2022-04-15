@@ -21,6 +21,10 @@ app.use((req, res, next) => {
 	next();
 });
 
+app.get("/", (req, res) => {
+	res.sendStatus(200)
+});
+
 app.post("/register", HandleCreateUser);
 app.post("/login", HandleLogin);
 app.post("/logout", HandleLogout);
