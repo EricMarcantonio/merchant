@@ -62,7 +62,7 @@ export const GetShoppingCart = () => {
             }
             if (cartArray.length > 0) {
                 return Promise.all<IProduct>(cartArray).then((data) => {
-                    let temp = {} as ICart
+                    let temp = {} as ICart;
                     for (let eachItem of data) {
                         if (eachItem.id) {
                             if (temp[eachItem.id?.toString()]) {
@@ -190,7 +190,7 @@ export const verify = () => {
         .catch(function (error) {
             console.log(error);
         });
-}
+};
 
 export const GetReviewsByItemId = (id: number) => {
 
@@ -199,7 +199,7 @@ export const GetReviewsByItemId = (id: number) => {
         url: `/reviews/${id}`,
     })
         .then((response) => {
-            console.log(response.data)
+            console.log(response.data);
             return response.data;
         })
-}
+};

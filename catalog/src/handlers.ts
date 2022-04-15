@@ -8,7 +8,7 @@ export const HandleGetAllItems = (req: Request, res: Response) => {
     }).catch(() => {
         RESPONSES.SendNotFound(req, res)
     })
-}
+};
 
 export const HandleGetItemById = (req: Request, res: Response) => {
     Item.getById(+req.params.id).then((item) => {
@@ -16,4 +16,4 @@ export const HandleGetItemById = (req: Request, res: Response) => {
     }).catch((err) => {
         RESPONSES.SendNotFound(req, res)
     })
-}
+};

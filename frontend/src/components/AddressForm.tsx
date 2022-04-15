@@ -24,13 +24,13 @@ const AddressForm = () => {
     const navigate = useNavigate();
 
     const factory = new ToastFactory();
-    const err = factory.createToast("ERROR", "You must be logged in to place an order!")
-    const errNoCart = factory.createToast("ERROR", "You don't have anything in your cart")
+    const err = factory.createToast("ERROR", "You must be logged in to place an order!");
+    const errNoCart = factory.createToast("ERROR", "You don't have anything in your cart");
 
     useEffect(() => {
         if (!con.user.id) {
             VerifyUser().then((user) => {
-                con.setUser(user)
+                con.setUser(user);
                 if (Object.keys(con.cart).length === 0) {
                     GetShoppingCart().then((cart) => {
                         if (Object.keys(con.cart).length === 0) {
@@ -56,7 +56,7 @@ const AddressForm = () => {
                 })
             }
         }
-    }, [])
+    }, []);
 
     if (!con.user.id) {
         return <Loading/>

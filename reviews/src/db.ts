@@ -13,5 +13,5 @@ export const Review = {
     create: (review: IReview) => {
         return ReviewsModel.create(review)
     }
-}
+};
 

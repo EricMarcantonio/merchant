@@ -5,7 +5,7 @@ import {RESPONSES} from "./util/responses";
 import {VisitingService} from "./db";
 
 export const GetEvents = async (req: Request, res: Response) => {
-    const user: MUser | undefined = await req.user as MUser
+    const user: MUser | undefined = await req.user as MUser;
     if (user && user.type == 1) {
         VisitingService.getAll().then((ve) => {
             RESPONSES.SendOK(req, res, ve)
@@ -15,10 +15,10 @@ export const GetEvents = async (req: Request, res: Response) => {
     } else {
         RESPONSES.SendUnauthorized(req, res)
     }
-}
+};
 
 export const SetEvent = async (req: CustomRequest<VisitingEventInput>, res: Response) => {
-    const user: MUser | undefined = await req.user as MUser
+    const user: MUser | undefined = await req.user as MUser;
     if (typeof req.headers['x-forwarded-for'] == "string") {
         req.body.ipAddress = req.headers['x-forwarded-for'].split(", ")[0]
     }
@@ -31,4 +31,4 @@ export const SetEvent = async (req: CustomRequest<VisitingEventInput>, res: Resp
     } else {
         RESPONSES.SendUnauthorized(req, res)
     }
-}
+};

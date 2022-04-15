@@ -39,7 +39,7 @@ export const User = {
             }
         })
     }
-}
+};
 
 export const Order = {
     get: async (order: MOrder) => {
@@ -48,7 +48,7 @@ export const Order = {
                 where: order as any
             }) as MOrder
         } catch (err) {
-            console.error(err)
+            console.error(err);
             return {} as MOrder
         }
     },
@@ -56,13 +56,13 @@ export const Order = {
         try {
             return await OrderModel.create(order) as MOrder
         } catch (err) {
-            console.error(err)
+            console.error(err);
             return {} as MOrder
         }
     },
     createWithPro: async (order: OrderInput) => {
         try {
-            await db.query("LOCK TABLES Orders write, OrderData write, ShoppingCarts write, Items write")
+            await db.query("LOCK TABLES Orders write, OrderData write, ShoppingCarts write, Items write");
             const results = await db.query(
                 'CALL CREATE_ORDER(?, ?, ?, ?, ?)',
                 {
@@ -71,14 +71,14 @@ export const Order = {
                     model: OrderModel
                 }
             );
-            await db.query("unlock tables")
+            await db.query("unlock tables");
             return results[0] as MOrder
         } catch (err) {
-            console.error(err)
+            console.error(err);
             return {} as MOrder
         }
     },
-}
+};
 
 export const Address = {
     get: async (address: MAddress) => {
@@ -87,7 +87,7 @@ export const Address = {
                 where: address as any
             }) as MAddress
         } catch (err) {
-            console.error(err)
+            console.error(err);
             return {} as MAddress
         }
     },
@@ -95,12 +95,12 @@ export const Address = {
         try {
             return await AddressModel.create(address) as MAddress
         } catch (err) {
-            console.error(err)
+            console.error(err);
             return {} as MAddress
         }
 
     }
-}
+};
 
 export const OrderData = {
     get: async (orderData: MOrderData) => {
@@ -109,11 +109,11 @@ export const OrderData = {
                 where: orderData as any
             }) as MOrderData[]
         } catch (err) {
-            console.error(err)
+            console.error(err);
             return {} as MOrderData
         }
     }
-}
+};
 
 export const CreditCard = {
     get: async (creditCard: MCreditCard) => {
@@ -122,7 +122,7 @@ export const CreditCard = {
                 where: creditCard as any
             }) as MCreditCard
         } catch (err) {
-            console.error(err)
+            console.error(err);
             return {} as MCreditCard
         }
 
@@ -131,9 +131,9 @@ export const CreditCard = {
         try {
             return await CreditCardModel.create(creditCard) as MCreditCard
         } catch (err) {
-            console.error(err)
+            console.error(err);
             return {} as MCreditCard
         }
     }
-}
+};
 

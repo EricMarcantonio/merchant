@@ -22,14 +22,14 @@ export default function Navbar() {
         if (!con.user.id) {
             Promise.all([VerifyUser(), GetShoppingCart()]).then((data) => {
                     con.setUser(data[0]);
-                    setCartNum(data[1] && Object.keys(data[1]).length || 0)
+                    setCartNum(data[1] && Object.keys(data[1]).length || 0);
                     con.setCart(data[1] || {})
                 }
             )
         } else {
             if (Object.keys(con.cart).length === 0) {
                 Promise.all([GetShoppingCart()]).then((data) => {
-                        setCartNum(data[0] && Object.keys(data[0]).length || 0)
+                        setCartNum(data[0] && Object.keys(data[0]).length || 0);
                         con.setCart(data[0] || {})
                     }
                 )
@@ -48,7 +48,7 @@ export default function Navbar() {
         } else {
             setCartNum(Object.keys(con.cart).length)
         }
-    }, [Object.keys(con.cart).length])
+    }, [Object.keys(con.cart).length]);
 
     return (
         <div className="bg-black">

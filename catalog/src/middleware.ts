@@ -7,4 +7,4 @@ export const MiddleGetItemById = (req: Request, res: Response, next: NextFunctio
     } else {
         RESPONSES.SendBadRequest(req, res, new Error("Not a number"))
     }
-}
+};

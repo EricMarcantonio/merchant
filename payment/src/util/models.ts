@@ -52,7 +52,7 @@ const AddressModel = db.define("Address", {
     deletedAt: true,
     timestamps: true,
     paranoid: true
-})
+});
 
 
 const UserModel = db.define("User", {
@@ -116,7 +116,7 @@ const UserModel = db.define("User", {
     deletedAt: true,
     timestamps: true,
     paranoid: true
-})
+});
 
 const CreditCardModel = db.define("CreditCard", {
     number: {
@@ -139,7 +139,7 @@ const CreditCardModel = db.define("CreditCard", {
     deletedAt: true,
     timestamps: true,
     paranoid: true
-})
+});
 
 const OrderModel = db.define("Order", {
     userId: {
@@ -207,7 +207,7 @@ const OrderModel = db.define("Order", {
     deletedAt: true,
     timestamps: true,
     paranoid: true
-})
+});
 
 
 const ItemModel = db.define("Item", {
@@ -278,7 +278,7 @@ const ItemModel = db.define("Item", {
     deletedAt: true,
     timestamps: true,
     paranoid: true
-})
+});
 
 
 const OrderDataModel = db.define("OrderData", {
@@ -309,7 +309,7 @@ const OrderDataModel = db.define("OrderData", {
     deletedAt: true,
     timestamps: true,
     paranoid: true
-})
+});
 
 const PasswordModel = db.define("Password", {
     password: {
@@ -338,7 +338,7 @@ const PasswordModel = db.define("Password", {
     deletedAt: true,
     timestamps: true,
     paranoid: true
-})
+});
 
 const ShoppingCartModel = db.define("ShoppingCart", {
     userId: {
@@ -380,7 +380,7 @@ const ShoppingCartModel = db.define("ShoppingCart", {
     deletedAt: true,
     timestamps: true,
     paranoid: true
-})
+});
 
 const VisitEventModel = db.define("VisitEvent", {
     ipAddress: {
@@ -414,7 +414,7 @@ const VisitEventModel = db.define("VisitEvent", {
     deletedAt: true,
     timestamps: true,
     paranoid: true
-})
+});
 
 
 const ReviewsModel = db.define("Review", {
@@ -473,7 +473,7 @@ const ReviewsModel = db.define("Review", {
     deletedAt: true,
     timestamps: true,
     paranoid: true
-})
+});
 
 
 export {

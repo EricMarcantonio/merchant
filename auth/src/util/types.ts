@@ -102,101 +102,101 @@ interface VisitEventAttributes {
 
 // Classes
 export class MAddress extends Model<AddressAttributes, AddressInput> implements AddressAttributes {
-    public id!: number
-    public updatedAt!: Date
-    public createdAt!: Date
-    public deletedAt!: Date
-    public street!: string
-    public province!: string
-    public country!: string
-    public zip!: string
+    public id!: number;
+    public updatedAt!: Date;
+    public createdAt!: Date;
+    public deletedAt!: Date;
+    public street!: string;
+    public province!: string;
+    public country!: string;
+    public zip!: string;
     public phone!: string
 }
 
 export class MCreditCard extends Model<CreditCardAttributes, CreditCardInput> implements CreditCardAttributes {
-    public id!: number
-    public updatedAt!: Date
-    public createdAt!: Date
-    public deletedAt!: Date
-    public number!: string
+    public id!: number;
+    public updatedAt!: Date;
+    public createdAt!: Date;
+    public deletedAt!: Date;
+    public number!: string;
     public userId!: number
 }
 
 export class MUser extends Model<UserAttributes, UserInput> implements UserAttributes {
-    public id!: number
-    public createdAt!: Date
-    public updatedAt!: Date
-    public deletedAt!: Date
-    public username!: string
-    public email!: string
-    public fname!: string
-    public lname!: string
+    public id!: number;
+    public createdAt!: Date;
+    public updatedAt!: Date;
+    public deletedAt!: Date;
+    public username!: string;
+    public email!: string;
+    public fname!: string;
+    public lname!: string;
     public type !: number
 }
 
 export class MItem extends Model<ItemAttributes, ItemInput> implements ItemAttributes {
-    public id!: number
-    public createdAt!: Date
-    public updatedAt!: Date
-    public deletedAt!: Date
-    public name!: string
-    public price!: number
-    public isActive!: string
-    public units!: number
-    public description!: string
-    public type!: string
-    public brand!: string
+    public id!: number;
+    public createdAt!: Date;
+    public updatedAt!: Date;
+    public deletedAt!: Date;
+    public name!: string;
+    public price!: number;
+    public isActive!: string;
+    public units!: number;
+    public description!: string;
+    public type!: string;
+    public brand!: string;
     public pictureUrl!: string
 }
 
 export class MOrder extends Model<OrderAttributes, OrderInput> implements OrderAttributes {
-    public id!: number
-    public deletedAt!: Date
-    public modifiedAt!: Date
-    public createdAt!: Date
-    public addressId!: number
-    public fname!: string
-    public lname!: string
-    public creditCardId!: number
-    public status!: string
+    public id!: number;
+    public deletedAt!: Date;
+    public modifiedAt!: Date;
+    public createdAt!: Date;
+    public addressId!: number;
+    public fname!: string;
+    public lname!: string;
+    public creditCardId!: number;
+    public status!: string;
     public userId!: number
 }
 
 export class MOrderData extends Model<OrderDataAttributes, OrderDataInput> implements OrderDataAttributes {
-    public id!: number
-    public createdAt!: Date
-    public updatedAt!: Date
-    public deletedAt!: Date
-    public orderId!: number
-    public itemId!: number
+    public id!: number;
+    public createdAt!: Date;
+    public updatedAt!: Date;
+    public deletedAt!: Date;
+    public orderId!: number;
+    public itemId!: number;
     public units!: number
 }
 
 export class MPassword extends Model<PasswordAttributes, PasswordInput> implements PasswordAttributes {
-    public userId!: number
-    public createdAt!: Date
-    public updatedAt!: Date
-    public deletedAt!: Date
+    public userId!: number;
+    public createdAt!: Date;
+    public updatedAt!: Date;
+    public deletedAt!: Date;
     public password!: string
 }
 
 export class MVisitingEvent extends Model<VisitEventAttributes, VisitingEventInput> implements VisitEventAttributes {
-    public id!: number
-    public createdAt!: Date
-    public updatedAt!: Date
-    public deletedAt!: Date
-    public eventType!: number
-    public ipAddress!: string
+    public id!: number;
+    public createdAt!: Date;
+    public updatedAt!: Date;
+    public deletedAt!: Date;
+    public eventType!: number;
+    public ipAddress!: string;
     public itemId!: number
 }
 
 export class MShoppingCart extends Model<ShoppingCartAttributes, ShoppingCartInput> implements ShoppingCartAttributes {
-    public id!: number
-    public createdAt!: Date
-    public updatedAt!: Date
-    public deletedAt!: Date
-    public userId!: number
-    public itemId!: number
+    public id!: number;
+    public createdAt!: Date;
+    public updatedAt!: Date;
+    public deletedAt!: Date;
+    public userId!: number;
+    public itemId!: number;
     public units!: number
 }
 

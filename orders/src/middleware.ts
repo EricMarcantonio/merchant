@@ -26,7 +26,7 @@ export const MiddleOrder = (req: CustomRequest<IOrderRequestBody>, res: Response
     } else {
         RESPONSES.SendBadRequest(req, res, new Error("Incorrect Args"))
     }
-}
+};
 
 export const MiddleCheckPayment = (req: Request, res: Response, next: NextFunction) => {
     axios.request({
@@ -37,4 +37,4 @@ export const MiddleCheckPayment = (req: Request, res: Response, next: NextFuncti
     }).catch(() => {
         res.sendStatus(500)
     })
-}
+};

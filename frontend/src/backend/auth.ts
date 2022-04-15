@@ -12,4 +12,4 @@ export const VerifyUser = () => {
         .then((response) => {
             return response.data;
         })
-} 
+};

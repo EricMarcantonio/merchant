@@ -11,10 +11,10 @@ export const HandleGetReviewsByItemId = (req: CustomRequest<IReview>, res: Respo
     }).catch(() => {
         RESPONSES.SendNotFound(req, res)
     })
-}
+};
 
 export const HandleCreateReview = (req: CustomRequest<IReview>, res: Response) => {
-    const user: MUser | undefined = req.user as MUser
+    const user: MUser | undefined = req.user as MUser;
     if (user) {
         Review.create({
             userId: user.id,
@@ -30,4 +30,4 @@ export const HandleCreateReview = (req: CustomRequest<IReview>, res: Response) =
         RESPONSES.SendError(req, res)
     }
 
-}
+};

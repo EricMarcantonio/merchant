@@ -22,7 +22,7 @@ export const Item = {
             }
         })
     }
-}
+};
 
 export const ShoppingCart = {
     getAll: async (user: MUser) => {
@@ -44,7 +44,7 @@ export const ShoppingCart = {
             }).then(async () => {
                 return await Item.get(cart).then((items) => {
                     if (items.length != 0)
-                        throw new ItemUnitError(ERRORS.INVALID_UNITS.toString(), items, cart)
+                        throw new ItemUnitError(ERRORS.INVALID_UNITS.toString(), items, cart);
                     return ShoppingCartModel.bulkCreate(cart.map((sc) => {
                         return {
                             ...sc,
@@ -52,8 +52,8 @@ export const ShoppingCart = {
                         }
                     }))
                 })
-            })
-            await t.commit()
+            });
+            await t.commit();
             return carts;
         }) as Array<MShoppingCart>
     },
@@ -67,4 +67,4 @@ export const ShoppingCart = {
             }
         }) as number
     },
-}
+};

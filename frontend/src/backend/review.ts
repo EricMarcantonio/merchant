@@ -9,10 +9,10 @@ export const GetReviewsByItemId = (id: number) => {
         url: `/reviews/${id}`,
     })
         .then((response) => {
-            console.log(response.data)
+            console.log(response.data);
             return response.data;
         })
-}
+};
 
 export const AddReview = (itemId: string, reviewData: string, rating: string) => {
     var data = JSON.stringify({
@@ -38,4 +38,4 @@ export const AddReview = (itemId: string, reviewData: string, rating: string) =>
                 return reviews;
             })
         })
-}
+};

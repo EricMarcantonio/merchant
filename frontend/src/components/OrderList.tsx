@@ -12,16 +12,16 @@ const CAD = Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'CAD',
 
-})
+});
 
 export const OrderItem = (props: IOrderItemProps) => {
 
-    const [item, setItem] = useState({} as IProduct)
+    const [item, setItem] = useState({} as IProduct);
     useEffect(() => {
         GetAProductByIdFromBackend(props.order.itemId).then((product) => {
             setItem(product)
         })
-    }, [])
+    }, []);
 
     return (
         <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
@@ -38,7 +38,7 @@ export const OrderItem = (props: IOrderItemProps) => {
             </div>
         </li>
     )
-}
+};
 
 interface IOrderComponentProps {
     order: IOrderItem
@@ -61,9 +61,9 @@ export const OrderComponent = (props: IOrderComponentProps) => {
             setPrice(CAD.format(temp));
 
         })
-    }, [])
+    }, []);
 
-    console.log(props.order.order)
+    console.log(props.order.order);
 
     return (
         <div className="bg-white shadow-lg overflow-hidden sm:rounded-lg">
@@ -129,17 +129,17 @@ export const OrderComponent = (props: IOrderComponentProps) => {
             </div>
         </div>
     )
-}
+};
 
 
 const OrderList = () => {
-    const [orders, setOrders] = useState([] as IOrderItem[])
+    const [orders, setOrders] = useState([] as IOrderItem[]);
 
     useEffect(() => {
         GetAllOrders().then((orders) => {
             setOrders(orders)
         })
-    }, [])
+    }, []);
     return (
         <div className="bg-black">
             <div className="w-screen mx-auto container">

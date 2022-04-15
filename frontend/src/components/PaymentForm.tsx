@@ -18,8 +18,8 @@ const PaymentForm = () => {
     const navigate = useNavigate();
 
     const factory = new ToastFactory();
-    const loginErr = factory.createToast("ERROR", "You must be logged in to place an order!")
-    const skipStep = factory.createToast("ERROR", "You must be place an address first!")
+    const loginErr = factory.createToast("ERROR", "You must be logged in to place an order!");
+    const skipStep = factory.createToast("ERROR", "You must be place an address first!");
 
     useEffect(() => {
         if (!con.address.firstname) {
@@ -35,7 +35,7 @@ const PaymentForm = () => {
                 })
             })
         }
-    }, [])
+    }, []);
 
     if (!con.user.id || !con.address.firstname) {
         return <Loading/>

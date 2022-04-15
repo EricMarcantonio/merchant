@@ -23,12 +23,12 @@ const ProductList = () => {
     const navigate = useNavigate();
 
     const [items, setItems] = useState<IProduct[]>();
-    const [allItems, setAllItems] = useState([] as IProductWithReview[])
+    const [allItems, setAllItems] = useState([] as IProductWithReview[]);
     const cart = container.useContainer();
 
     useEffect(() => {
         GetAllProductsFromBackend().then((result) => {
-            const reviewIds = result.map((res) => GetReviewsByItemId(res.id || 0))
+            const reviewIds = result.map((res) => GetReviewsByItemId(res.id || 0));
             Promise.all(reviewIds).then((data) => {
                 setAllItems(result && result.map((res) => {
                     return {
@@ -40,7 +40,7 @@ const ProductList = () => {
                         })[0]
                     }
                 }))
-            })
+            });
 
             if (!result) {
                 console.log("There was an error getting the products");

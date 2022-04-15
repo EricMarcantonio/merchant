@@ -25,7 +25,7 @@ const ItemInfo = () => {
             },
         ]).then(async (result) => {
             if (result) {
-                con.setCart(result)
+                con.setCart(result);
                 const toast = factory.createToast(
                     "SUCCESS",
                     "Added to bag"

@@ -7,7 +7,7 @@ import {ShoppingCartInput} from "./util/types";
 
 
 export const GetCart = async (req: Request, res: Response) => {
-    const user: MUser | undefined = await req.user as MUser
+    const user: MUser | undefined = await req.user as MUser;
     if (user) {
         ShoppingCart.getAll(user).then((cart) => {
             RESPONSES.SendOK(req, res, cart);
@@ -17,25 +17,25 @@ export const GetCart = async (req: Request, res: Response) => {
     } else {
         RESPONSES.SendUnauthorized(req, res);
     }
-}
+};
 
 export const SetCart = async (req: CustomRequest<Array<ShoppingCartInput>>, res: Response) => {
-    const user: MUser | undefined = await req.user as MUser
+    const user: MUser | undefined = await req.user as MUser;
     console.log(req.body);
     if (user) {
         ShoppingCart.setAll(user, req.body).then((cart) => {
             RESPONSES.SendOK(req, res, cart);
         }).catch((error: Error) => {
-            console.log(error)
+            console.log(error);
             RESPONSES.SendBadRequest(req, res, error)
         })
     } else {
         RESPONSES.SendUnauthorized(req, res);
     }
-}
+};
 
 export const RemoveCart = async (req: CustomRequest<Array<number>>, res: Response) => {
-    const user: MUser | undefined = await req.user as MUser
+    const user: MUser | undefined = await req.user as MUser;
     if (user) {
         ShoppingCart.removeAll(user, req.body).then((num_removed) => {
             RESPONSES.SendOK(req, res, {removed: num_removed});
@@ -45,4 +45,4 @@ export const RemoveCart = async (req: CustomRequest<Array<number>>, res: Respons
     } else {
         RESPONSES.SendUnauthorized(req, res);
     }
-}
+};

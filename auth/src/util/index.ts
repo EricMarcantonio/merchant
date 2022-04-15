@@ -23,7 +23,7 @@ export const connectToDb = () => {
     } else {
         throw new Error("Cannot connect to DB")
     }
-}
+};
 
 
 export {

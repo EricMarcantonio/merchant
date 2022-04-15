@@ -18,7 +18,7 @@ const ShoppingCart = () => {
         GetShoppingCart()
             .then((result) => {
                 if (result) {
-                    con.setCart(result)
+                    con.setCart(result);
                     for (let x in result) {
                         const price = result[x].product.price;
                         if (price) {
