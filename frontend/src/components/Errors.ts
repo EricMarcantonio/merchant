@@ -1,5 +1,5 @@
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 
 export const toastError = (text: string) => {
-    toast.error(text);
+	toast.error(text);
 };
