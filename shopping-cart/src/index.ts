@@ -22,6 +22,7 @@ app.use((req, res, next) => {
 	next();
 });
 
+
 // Health Check
 app.get("/", (req, res)=>{res.sendStatus(200)});
 

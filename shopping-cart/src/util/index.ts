@@ -12,6 +12,7 @@ const db = new Sequelize(
 		dialect: "mariadb",
 		port: (process.env.PORT && parseInt(process.env.PORT)) || 0,
 		timezone: "utc",
+
 	});
 
 /**
