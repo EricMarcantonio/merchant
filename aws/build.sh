@@ -1,20 +1,16 @@
 #!/usr/bin/env bash
 ID=$(aws sts get-caller-identity --query "Account" | tr -d \")
 REGION='ca-central-1'
-AWS_SECRET_ACCESS_KEY='DSbuAAh9lfYmglZku/5LSglQgCbX7QMuwjcwdAaN'
-AWS_ACCESS_KEY_ID='AKIARRVFVRZBVAWSTMDY'
-
-
 
 aws ecr get-login-password --region 'ca-central-1' | docker login --username AWS --password-stdin "${ID}.dkr.ecr.${REGION}.amazonaws.com"
 
 cd ../catalog && make docker-build
-cd ./orders && make docker-build
-cd ./payment && make docker-build
-cd ./reviews && make docker-build
-cd ./shopping-cart && make docker-build
-cd ./visiting && make docker-build
-cd ./frontend && make docker-build
+cd ../orders && make docker-build
+cd ../payment && make docker-build
+cd ../reviews && make docker-build
+cd ../shopping-cart && make docker-build
+cd ../visiting && make docker-build
+cd ../nginx && make docker-build
 
 docker tag merchant/catalog "${ID}.dkr.ecr.${REGION}.amazonaws.com/merchant/catalog:latest"
 docker push "${ID}.dkr.ecr.${REGION}.amazonaws.com/merchant/catalog:latest"
@@ -34,6 +30,6 @@ docker push "${ID}.dkr.ecr.${REGION}.amazonaws.com/merchant/shopping-cart:latest
 docker tag merchant/visiting "${ID}.dkr.ecr.${REGION}.amazonaws.com/merchant/visiting:latest"
 docker push "${ID}.dkr.ecr.${REGION}.amazonaws.com/merchant/visiting:latest"
 
-docker tag merchant/frontend "${ID}.dkr.ecr.${REGION}.amazonaws.com/merchant/frontend:latest"
-docker push "${ID}.dkr.ecr.${REGION}.amazonaws.com/merchant/frontend:latest"
+docker tag merchant/nginx "${ID}.dkr.ecr.${REGION}.amazonaws.com/merchant/nginx:latest"
+docker push "${ID}.dkr.ecr.${REGION}.amazonaws.com/merchant/nginx:latest"
 

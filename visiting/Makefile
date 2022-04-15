@@ -9,7 +9,7 @@ start:
 	HOST='localhost' PORT='3306' USER='user' PASSWORD='password' DB='MERCHANT' EXPRESS_PORT=${PORT} CORS_ORIGIN='http://127.0.0.1:8080' npm start
 
 docker-build:
-	docker build -f shopping-cart.Dockerfile -t merchant/visiting:latest .
+	docker build -f visiting.Dockerfile -t merchant/visiting:latest .
 
 docker-run:
 	docker run -p ${PORT}:${PORT} -e HOST='host.docker.internal' -e PORT='3306'  -e USER='user' -e PASSWORD='password' -e DB='MERCHANT' -e EXPRESS_PORT=${PORT} -e CORS_ORIGIN='http://127.0.0.1:8080' --expose ${PORT} -d merchant/visiting:latest
