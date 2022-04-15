@@ -29,84 +29,29 @@ const ShoppingCart = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    let cartArray: Promise<IProduct>[] = [];
 
     GetShoppingCart()
       .then((result) => {
-        if (!result) {
-          console.log("There was an error getting the products");
-        } else {
-          for (let eachItem of result) {
-            // console.log("eachitem:", eachItem);
-            console.log(eachItem);
-            cartArray.push(GetAProductByIdFromBackend(eachItem.itemId));
-            //console.log(result[eachItem].ITEM_ID);
-          }
-        }
-        return result;
-      })
-      .then((itemsWithoutDesc) => {
-        if (cartArray) {
-          Promise.all<IProduct>(cartArray).then((data) => {
-            for (let eachItem of data) {
-              con.setCart((prevState) => {
-                let temp = prevState;
-
-                if (eachItem.id) {
-                  if (temp[eachItem.id?.toString()]) {
-                    temp[eachItem.id?.toString()].product = eachItem;
-                  } else {
-                    temp[eachItem.id?.toString()] = {
-                      product: eachItem,
-                      units_requested: itemsWithoutDesc.filter(
-                        (orderItem) => orderItem.itemId == eachItem.id
-                      )[0].units,
-                    };
-                  }
-                }
-
-                return temp;
-              });
+        if (result){
+          con.setCart(result)
+          for (let x in result) {
+            const price = result[x].product.price;
+            if (price) {
+              itemTotal = itemTotal + price * result[x].units_requested;
             }
-            setRender(true);
-            handleGetTotal();
-          });
-          console.log("con.cart", con.cart);
+          }
+          setTotal(itemTotal);
         }
-      });
+      }).catch(() => {
+        console.log("LOL")
+    }).finally(() => {
+      setRender(true)
+    })
+
   }, []);
 
-  const handleAddToCart = (item: number, val: number) => {
-    UpdateShoppingCart([
-      {
-        itemId: item,
-        units: val,
-      },
-    ]).then((result) => {
-      if (!result) {
-        console.log("There was an error updating the products");
-      } else {
-        console.log(result);
-      }
-    });
-  };
-
-  const handleGetCart = () => {
-    GetShoppingCart().then((result) => {
-      if (!result) {
-        console.log("There was an error getting the products");
-      } else {
-        for (let eachItem of result) {
-          console.log(eachItem.itemId);
-
-          //console.log(result[eachItem].ITEM_ID);
-        }
-      }
-    });
-  };
 
   const handleGetTotal = () => {
-    console.log("ran");
     for (let x in con.cart) {
       const price = con.cart[x].product.price;
       if (price) {

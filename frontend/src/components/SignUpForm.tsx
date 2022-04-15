@@ -50,7 +50,7 @@ const SignUpForm = () => {
           "ERROR",
           Object.values(err.response.data)[0] as string
         ) as ErrorToast;
-        await toast.run();
+        await toast.run(3000);
         console.log("Registration failed");
       });
   };

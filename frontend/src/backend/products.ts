@@ -70,9 +70,36 @@ export const GetShoppingCart = () => {
             url: "http://127.0.0.1/cart/",
             withCredentials: true,
         })
-        .then((response) => {
-            console.log("cart res", response.data)
-            return response.data;
+        .then((result) => {
+
+            let cartArray: Promise<IProduct>[] = [];
+            if (!result) {
+                console.log("There was an error getting the products");
+            } else {
+                for (let eachItem of result.data) {
+                    cartArray.push(GetAProductByIdFromBackend(eachItem.itemId));
+                }
+            }
+            if (cartArray.length > 0) {
+                return Promise.all<IProduct>(cartArray).then((data) => {
+                    let temp = {} as ICart
+                    for (let eachItem of data) {
+                        if (eachItem.id) {
+                            if (temp[eachItem.id?.toString()]) {
+                                temp[eachItem.id?.toString()].product = eachItem;
+                            } else {
+                                temp[eachItem.id?.toString()] = {
+                                    product: eachItem,
+                                    units_requested: result.data.filter(
+                                        (orderItem) => orderItem.itemId == eachItem.id
+                                    )[0].units,
+                                };
+                            }
+                        }
+                    }
+                    return temp;
+                })
+            }
         });
 };
 
@@ -88,40 +115,9 @@ export const UpdateShoppingCart = (cart: ICartUpdate[]) => {
         data: data,
     })
         .then(function (response) {
-            let cartArray: Promise<IProduct>[] = [];
-            return GetShoppingCart().then((result) => {
-                if (!result) {
-                    console.log("There was an error getting the products");
-                } else {
-                    for (let eachItem of result) {
-                        cartArray.push(GetAProductByIdFromBackend(eachItem.itemId));
-                    }
-                }
-                return result;
+            return GetShoppingCart().then((cart) => {
+                return cart
             })
-                .then((itemsWithoutDesc) => {
-                        if (cartArray) {
-                            return Promise.all<IProduct>(cartArray).then((data) => {
-                                let temp = {} as ICart
-                                for (let eachItem of data) {
-                                    if (eachItem.id) {
-                                        if (temp[eachItem.id?.toString()]) {
-                                            temp[eachItem.id?.toString()].product = eachItem;
-                                        } else {
-                                            temp[eachItem.id?.toString()] = {
-                                                product: eachItem,
-                                                units_requested: itemsWithoutDesc.filter(
-                                                    (orderItem) => orderItem.itemId == eachItem.id
-                                                )[0].units,
-                                            };
-                                        }
-                                    }
-                                }
-                                return temp;
-                            })
-                        }
-                    }
-                )
         })
 };
 

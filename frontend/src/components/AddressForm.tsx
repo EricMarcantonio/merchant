@@ -13,6 +13,7 @@ import { container } from "../GlobalContainer";
 import {VerifyUser} from "../backend/auth";
 import Loading from "./Loading";
 import {ToastFactory} from "../types/toasts";
+import {GetShoppingCart} from "../backend";
 
 const { Step } = Steps;
 
@@ -29,15 +30,36 @@ const AddressForm = () => {
 
   const factory = new ToastFactory();
   const err = factory.createToast("ERROR", "You must be logged in to place an order!")
+  const errNoCart = factory.createToast("ERROR", "You don't have anything in your cart")
+
   useEffect(() => {
     if (!con.user.id){
       VerifyUser().then((user) => {
         con.setUser(user)
+        if (Object.keys(con.cart).length === 0){
+          GetShoppingCart().then((cart) => {
+            if (Object.keys(con.cart).length === 0){
+              errNoCart.run().then(() => {
+                navigate('/products')
+              })
+            }
+          })
+        }
       }).catch(() => {
         err.run(1200).then(() => {
           navigate("/login")
         })
       })
+    } else {
+      if (Object.keys(con.cart).length === 0){
+        GetShoppingCart().then((cart) => {
+          if (Object.keys(con.cart).length === 0){
+            errNoCart.run().then(() => {
+              navigate('/products')
+            })
+          }
+        })
+      }
     }
   }, [])
 

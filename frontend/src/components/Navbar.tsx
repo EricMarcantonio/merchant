@@ -29,13 +29,15 @@ export default function Navbar() {
         if (!con.user.id) {
             Promise.all([VerifyUser(), GetShoppingCart()]).then((data) => {
                     con.setUser(data[0]);
-                    setCartNum(data[1] && data[1].length)
+                    setCartNum(data[1] && Object.keys(data[1]).length || 0)
+                    con.setCart(data[1] || {})
                 }
             )
         } else {
             if (Object.keys(con.cart).length === 0) {
                 Promise.all([GetShoppingCart()]).then((data) => {
-                        setCartNum(data[0] && data[0].length)
+                        setCartNum(data[0] && Object.keys(data[0]).length || 0)
+                        con.setCart(data[0] || {})
                     }
                 )
             } else {
@@ -47,7 +49,7 @@ export default function Navbar() {
     useEffect(() => {
         if (Object.keys(con.cart).length === 0) {
             Promise.all([GetShoppingCart()]).then((data) => {
-                    setCartNum(data[0] && data[0].length)
+                setCartNum(data[0] && Object.keys(data[0]).length || 0)
                 }
             )
         } else {
