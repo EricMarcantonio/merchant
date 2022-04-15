@@ -4,14 +4,14 @@ import {connectToDb, passport} from "./util";
 
 import cookieParser from 'cookie-parser'
 import cors, {CorsOptions} from 'cors'
-import { HandleGetAllItems, HandleGetItemById } from './handlers';
-import { MiddleGetItemById } from './middleware';
+import {HandleGetAllItems, HandleGetItemById} from './handlers';
+import {MiddleGetItemById} from './middleware';
 
 const app = express();
 const corsOptions = {
     origin: '*',
     optionsSuccessStatus: 200,
-    methods: ["GET","OPTIONS"]
+    methods: ["GET", "OPTIONS"]
 } as CorsOptions
 
 app.use(cors(corsOptions))

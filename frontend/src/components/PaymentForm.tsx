@@ -1,12 +1,7 @@
 import "antd/dist/antd.css";
 import {Steps} from "antd";
 import "../../src/index.css";
-import {
-    ShoppingFilled,
-    HomeFilled,
-    LoadingOutlined,
-    CheckCircleFilled,
-} from "@ant-design/icons";
+import {CheckCircleFilled, HomeFilled, LoadingOutlined, ShoppingFilled,} from "@ant-design/icons";
 import {container} from "../GlobalContainer";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";

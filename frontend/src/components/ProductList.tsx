@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {IProduct} from "../types";
-import axios from "axios";
 import {GetAllProductsFromBackend} from "../backend";
 import {container} from "../GlobalContainer";
 import {GetReviewsByItemId} from "../backend/products";

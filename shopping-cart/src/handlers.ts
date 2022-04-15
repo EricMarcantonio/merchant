@@ -1,9 +1,9 @@
 import {Request, Response} from "express";
-import { ShoppingCart } from "./db";
-import { MUser } from "./util"
-import { CustomRequest } from "./types.local";
-import { RESPONSES } from "./util/responses";
-import { ShoppingCartInput } from "./util/types";
+import {ShoppingCart} from "./db";
+import {MUser} from "./util"
+import {CustomRequest} from "./types.local";
+import {RESPONSES} from "./util/responses";
+import {ShoppingCartInput} from "./util/types";
 
 
 export const GetCart = async (req: Request, res: Response) => {

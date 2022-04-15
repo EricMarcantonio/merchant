@@ -1,13 +1,6 @@
-import {Fragment, useState, useEffect} from "react";
+import {Fragment, useEffect, useState} from "react";
 import {Dialog, Popover, Transition} from "@headlessui/react";
-import {
-    MenuIcon,
-    SearchIcon,
-    ShoppingBagIcon,
-    XIcon,
-    LogoutIcon,
-    LoginIcon
-} from "@heroicons/react/outline";
+import {LoginIcon, LogoutIcon, MenuIcon, ShoppingBagIcon, XIcon} from "@heroicons/react/outline";
 import {container} from "../GlobalContainer";
 import {VerifyUser} from "../backend/auth";
 import {GetShoppingCart} from "../backend";
@@ -49,7 +42,7 @@ export default function Navbar() {
     useEffect(() => {
         if (Object.keys(con.cart).length === 0) {
             Promise.all([GetShoppingCart()]).then((data) => {
-                setCartNum(data[0] && Object.keys(data[0]).length || 0)
+                    setCartNum(data[0] && Object.keys(data[0]).length || 0)
                 }
             )
         } else {
@@ -188,7 +181,8 @@ export default function Navbar() {
 
                                                 className="text-sm font-medium text-white hover:text-white"
                                             >
-                                                Welcome back, <span className={" ml-1 font-bold"}>{con.user.fname}!</span>
+                                                Welcome back, <span
+                                                className={" ml-1 font-bold"}>{con.user.fname}!</span>
                                             </div>
                                             <div
 

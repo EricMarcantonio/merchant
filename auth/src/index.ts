@@ -1,6 +1,6 @@
 import express from 'express'
 import cookieParser from 'cookie-parser'
-import {passport, connectToDb} from "./util";
+import {connectToDb, passport} from "./util";
 import {HandleCreateUser, HandleLogin, HandleLogout, HandleVerify} from "./handlers";
 import cors, {CorsOptions} from 'cors'
 

@@ -1,6 +1,10 @@
 {
-    "watch": ["src"],
-    "ext": "ts,json",
-    "ignore": ["src/**/*.spec.ts"],
-    "exec": "env-cmd --silent ts-node src/index.ts"
+  "watch": [
+    "src"
+  ],
+  "ext": "ts,json",
+  "ignore": [
+    "src/**/*.spec.ts"
+  ],
+  "exec": "env-cmd --silent ts-node src/index.ts"
 }

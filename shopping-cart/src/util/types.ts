@@ -22,7 +22,7 @@ interface CreditCardAttributes {
     userId: number,
 }
 
-interface UserAttributes  {
+interface UserAttributes {
     id: number
     createdAt?: Date,
     updatedAt?: Date,
@@ -201,21 +201,56 @@ export class MShoppingCart extends Model<ShoppingCartAttributes, ShoppingCartInp
 }
 
 // Input Output Interfaces
-export interface AddressInput extends Optional<AddressAttributes, 'id'> {}
-export interface AddressOutput extends Required<AddressAttributes> {}
-export interface CreditCardInput extends Optional<CreditCardAttributes, 'id'> {}
-export interface CreditCardOutput extends Required<CreditCardAttributes> {}
-export interface UserInput extends Optional<UserAttributes, 'id' | 'type'> {}
-export interface UserOutput extends Required<UserAttributes> {}
-export interface ItemInput extends Optional<ItemAttributes, 'id'> {}
-export interface ItemOutput extends Required<ItemAttributes> {}
-export interface OrderInput extends Optional<OrderAttributes, 'id'> {}
-export interface OrderOuput extends Required<OrderAttributes> {}
-export interface OrderDataInput extends Optional<OrderDataAttributes, 'id'> {}
-export interface OrderDataOuput extends Required<OrderDataAttributes> {}
-export interface PasswordInput extends Optional<PasswordAttributes, 'userId'> {}
-export interface PasswordOutput extends Required<PasswordAttributes> {}
-export interface ShoppingCartInput extends Optional<ShoppingCartAttributes, 'id' | 'userId'> {}
-export interface ShoppingCartOutput extends Required<ShoppingCartAttributes> {}
-export interface VisitingEventInput extends Optional<VisitEventAttributes, 'id' | 'ipAddress'> {}
-export interface VisitingEventOutput extends Required<VisitEventAttributes> {}
+export interface AddressInput extends Optional<AddressAttributes, 'id'> {
+}
+
+export interface AddressOutput extends Required<AddressAttributes> {
+}
+
+export interface CreditCardInput extends Optional<CreditCardAttributes, 'id'> {
+}
+
+export interface CreditCardOutput extends Required<CreditCardAttributes> {
+}
+
+export interface UserInput extends Optional<UserAttributes, 'id' | 'type'> {
+}
+
+export interface UserOutput extends Required<UserAttributes> {
+}
+
+export interface ItemInput extends Optional<ItemAttributes, 'id'> {
+}
+
+export interface ItemOutput extends Required<ItemAttributes> {
+}
+
+export interface OrderInput extends Optional<OrderAttributes, 'id'> {
+}
+
+export interface OrderOuput extends Required<OrderAttributes> {
+}
+
+export interface OrderDataInput extends Optional<OrderDataAttributes, 'id'> {
+}
+
+export interface OrderDataOuput extends Required<OrderDataAttributes> {
+}
+
+export interface PasswordInput extends Optional<PasswordAttributes, 'userId'> {
+}
+
+export interface PasswordOutput extends Required<PasswordAttributes> {
+}
+
+export interface ShoppingCartInput extends Optional<ShoppingCartAttributes, 'id' | 'userId'> {
+}
+
+export interface ShoppingCartOutput extends Required<ShoppingCartAttributes> {
+}
+
+export interface VisitingEventInput extends Optional<VisitEventAttributes, 'id' | 'ipAddress'> {
+}
+
+export interface VisitingEventOutput extends Required<VisitEventAttributes> {
+}

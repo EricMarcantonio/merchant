@@ -1,6 +1,6 @@
 import {Request, Response} from 'express';
-import { Item } from './db';
-import { RESPONSES } from './util/responses';
+import {Item} from './db';
+import {RESPONSES} from './util/responses';
 
 export const HandleGetAllItems = (req: Request, res: Response) => {
     Item.get().then((items) => {

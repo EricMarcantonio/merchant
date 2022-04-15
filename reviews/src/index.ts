@@ -1,6 +1,6 @@
 import express from 'express'
 
-import {connectToDb, ItemModel, passport, UserModel} from "./util";
+import {connectToDb, passport} from "./util";
 
 import cookieParser from 'cookie-parser'
 import cors, {CorsOptions} from 'cors'
@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 })
 
 app.get("/:itemId", MiddleGetReviewById, HandleGetReviewsByItemId)
-app.post("/", [passport.authenticate('jwt', { session: false }), MiddleCreateReview], HandleCreateReview)
+app.post("/", [passport.authenticate('jwt', {session: false}), MiddleCreateReview], HandleCreateReview)
 
 connectToDb().then(() => {
     const port = parseInt(process.env.EXPRESS_PORT || "0")

@@ -1,5 +1,5 @@
 import {db, ItemModel, MVisitingEvent, VisitEventModel} from "./util";
-import { VisitingEventInput} from "./util/types";
+import {VisitingEventInput} from "./util/types";
 import {ERRORS} from "./util/responses";
 
 const net = require('net')

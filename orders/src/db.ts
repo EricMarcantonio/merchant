@@ -14,7 +14,6 @@ import {
 import {AddressInput, CreditCardInput, OrderInput, UserInput} from "./util/types";
 
 
-
 export const User = {
     getOne: async (user: UserInput) => {
         try {
@@ -56,7 +55,7 @@ export const Order = {
     create: async (order: OrderInput) => {
         try {
             return await OrderModel.create(order) as MOrder
-        } catch (err){
+        } catch (err) {
             console.error(err)
             return {} as MOrder
         }
@@ -74,7 +73,7 @@ export const Order = {
             );
             await db.query("unlock tables")
             return results[0] as MOrder
-        } catch (err){
+        } catch (err) {
             console.error(err)
             return {} as MOrder
         }
@@ -95,7 +94,7 @@ export const Address = {
     create: async (address: AddressInput) => {
         try {
             return await AddressModel.create(address) as MAddress
-        } catch (err){
+        } catch (err) {
             console.error(err)
             return {} as MAddress
         }
@@ -109,8 +108,7 @@ export const OrderData = {
             return await OrderDataModel.findAll({
                 where: orderData as any
             }) as MOrderData[]
-        }
-        catch (err){
+        } catch (err) {
             console.error(err)
             return {} as MOrderData
         }
@@ -123,7 +121,7 @@ export const CreditCard = {
             return await CreditCardModel.findOne({
                 where: creditCard as any
             }) as MCreditCard
-        } catch (err){
+        } catch (err) {
             console.error(err)
             return {} as MCreditCard
         }
@@ -132,7 +130,7 @@ export const CreditCard = {
     create: async (creditCard: CreditCardInput) => {
         try {
             return await CreditCardModel.create(creditCard) as MCreditCard
-        } catch (err){
+        } catch (err) {
             console.error(err)
             return {} as MCreditCard
         }

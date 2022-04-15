@@ -1,4 +1,4 @@
-import { ItemModel } from "./util"
+import {ItemModel} from "./util"
 
 
 export const Item = {

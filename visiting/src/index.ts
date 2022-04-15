@@ -1,8 +1,9 @@
 import express from 'express'
 import cookieParser from 'cookie-parser'
-import {passport, connectToDb} from "./util";
+import {connectToDb, passport} from "./util";
 import {GetEvents, SetEvent} from "./handlers";
 import cors from 'cors'
+
 const app = express();
 
 app.use(cors({
@@ -21,8 +22,8 @@ app.use((req, res, next) => {
     next()
 })
 
-app.get("*", passport.authenticate('jwt', { session: false }),  GetEvents)
-app.post("*", passport.authenticate('jwt', { session: false }),  SetEvent)
+app.get("*", passport.authenticate('jwt', {session: false}), GetEvents)
+app.post("*", passport.authenticate('jwt', {session: false}), SetEvent)
 
 
 connectToDb().then(() => {

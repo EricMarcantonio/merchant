@@ -1,7 +1,7 @@
 import {db, ItemModel, MItem, MUser, ShoppingCartModel} from "./util";
-import {ShoppingCartInput, MShoppingCart} from "./util/types";
+import {MShoppingCart, ShoppingCartInput} from "./util/types";
 import {ERRORS, ItemUnitError} from './util/responses'
-import {Op, Sequelize} from "sequelize";
+import {Op} from "sequelize";
 
 export const Item = {
     get: async (cart: Array<ShoppingCartInput>) => {
@@ -37,8 +37,8 @@ export const ShoppingCart = {
             const carts = await ShoppingCartModel.destroy({
                 where: {
                     [Op.and]: [
-                        { userId: user.id},
-                        { itemId: { [Op.or]: cart.map(item => item.itemId)}}
+                        {userId: user.id},
+                        {itemId: {[Op.or]: cart.map(item => item.itemId)}}
                     ]
                 }
             }).then(async () => {

@@ -1,19 +1,21 @@
 import {Request, Response} from "express";
-import {ForeignKeyConstraintError, UniqueConstraintError, ValidationError} from "sequelize";
-import {ItemInput, MItem, MShoppingCart, ShoppingCartInput} from "./types";
+import {ForeignKeyConstraintError, ValidationError} from "sequelize";
+import {MItem, ShoppingCartInput} from "./types";
 
 interface IErrors {
     [index: number]: string;
 }
+
 interface IContraintErrors {
     [index: string]: number;
 }
+
 interface IErrorsBlock {
     [index: number]: string
 }
 
 export enum ERRORS {
-    STREET_NULL ,
+    STREET_NULL,
     PROVINCE_NULL,
     COUNTRY_NULL,
     ZIP_NULL,
@@ -62,6 +64,7 @@ interface InvalidItems {
     id: number,
     valid_count: number
 }
+
 export class ItemUnitError implements Error {
     message: string;
     name: string;
@@ -130,7 +133,37 @@ class Responses {
         "orderId": 29,
         "addressId": 30
     }
-    private buildError = (error: Error):IErrorsBlock => {
+
+    SendUnauthorized = (req: Request, res: Response, error?: Error) => {
+        if (error)
+            res.status(401).json(this.buildError(error))
+        else
+            res.status(401).json(this.buildError(new Error(ERRORS.UNAUTHORIZED.toString())))
+    }
+
+    SendBadRequest = (req: Request, res: Response, error?: Error) => {
+        if (error)
+            res.status(400).json(this.buildError(error))
+        else
+            res.sendStatus(400)
+    }
+
+    SendOK = (req: Request, res: Response, object?: object) => {
+        if (object)
+            res.status(200).json(object)
+        else
+            res.sendStatus(200)
+    }
+
+    SendError = (req: Request, res: Response) => {
+        res.status(500).json(this.buildError(new Error(ERRORS.INTERNAL_ERROR.toString())))
+    }
+
+    SendNotFound = (req: Request, res: Response) => {
+        res.status(404).json(this.buildError(new Error(ERRORS.NOT_FOUND.toString())))
+    }
+
+    private buildError = (error: Error): IErrorsBlock => {
         // Capture Error class, and handle
         if (error instanceof ValidationError) {
             // ValidationError, most common
@@ -172,34 +205,6 @@ class Responses {
             }
         }
 
-    }
-    SendUnauthorized = (req: Request, res: Response, error?: Error) => {
-        if (error)
-            res.status(401).json(this.buildError(error))
-        else
-            res.status(401).json(this.buildError(new Error(ERRORS.UNAUTHORIZED.toString())))
-    }
-
-    SendBadRequest = (req: Request, res: Response, error?: Error) => {
-        if (error)
-            res.status(400).json(this.buildError(error))
-        else
-            res.sendStatus(400)
-    }
-
-    SendOK = (req: Request, res: Response, object?: object) => {
-        if(object)
-            res.status(200).json(object)
-        else
-            res.sendStatus(200)
-    }
-
-    SendError = (req: Request, res: Response) => {
-        res.status(500).json(this.buildError(new Error(ERRORS.INTERNAL_ERROR.toString())))
-    }
-
-    SendNotFound = (req: Request, res: Response) => {
-        res.status(404).json(this.buildError(new Error(ERRORS.NOT_FOUND.toString())))
     }
 }
 

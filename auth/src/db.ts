@@ -54,7 +54,7 @@ export const User = {
 
 export const Password = {
     validate: async (user: UserInput, password: PasswordInput) => {
-        const p = await PasswordModel.findOne({where: { userId: user.id }}) as MPassword
+        const p = await PasswordModel.findOne({where: {userId: user.id}}) as MPassword
         return p.password === hash(password.password);
     }
 }
@@ -63,7 +63,7 @@ const validatePassword = (password: string) => {
     return new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})').test(password)
 }
 
-const hash = (password: string):string => {
+const hash = (password: string): string => {
     const salt = "094y7o9qno22=="
     return crypto.createHash('sha256', salt).update(password).digest('hex');
 }

@@ -18,7 +18,7 @@ const db = new Sequelize(
  * Call this function to connect to the util and create the tables
  */
 export const connectToDb = () => {
-    if (checkEnv){
+    if (checkEnv) {
         return db.authenticate()
     } else {
         throw new Error("Cannot connect to DB")

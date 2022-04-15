@@ -1,10 +1,10 @@
-import {Response, Request} from "express";
+import {Request, Response} from "express";
 import {Password, User} from "./db";
 import {MUser} from "./util"
 import {CustomRequest, ILogin, IRegister} from "./types.local";
 import jwt from 'jsonwebtoken'
 import {jwtOptions} from "./util/passport";
-import {RESPONSES, ERRORS} from "./util/responses";
+import {ERRORS, RESPONSES} from "./util/responses";
 import {PasswordInput, UserInput} from "./util/types";
 
 const EXPIRY_TIME: number = 60 * 60 * 24 * 1000

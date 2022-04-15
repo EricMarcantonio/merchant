@@ -1,6 +1,6 @@
-import {DataTypes, ValidationError} from "sequelize";
-import {db, MItem, MShoppingCart} from "./index";
-import { ERRORS } from './responses'
+import {DataTypes} from "sequelize";
+import {db} from "./index";
+import {ERRORS} from './responses'
 
 const AddressModel = db.define("Address", {
     street: {
@@ -108,7 +108,7 @@ const UserModel = db.define("User", {
             },
         }
     },
-    type:{
+    type: {
         type: DataTypes.TINYINT,
         defaultValue: 0
     }
@@ -208,9 +208,6 @@ const OrderModel = db.define("Order", {
     timestamps: true,
     paranoid: true
 })
-
-
-
 
 
 const ItemModel = db.define("Item", {
@@ -477,9 +474,6 @@ const ReviewsModel = db.define("Review", {
     timestamps: true,
     paranoid: true
 })
-
-
-
 
 
 export {

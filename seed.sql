@@ -161,12 +161,12 @@ create or replace table VisitEvents
 (
     id        int auto_increment
         primary key,
-    ipAddress varchar(255) not null,
-    itemId    int          not null,
+    ipAddress varchar(255)            not null,
+    itemId    int                     not null,
     eventType varchar(255) default '' not null,
-    createdAt datetime     not null,
-    updatedAt datetime     not null,
-    deletedAt datetime     null,
+    createdAt datetime                not null,
+    updatedAt datetime                not null,
+    deletedAt datetime                null,
     constraint VisitEvents_ibfk_1
         foreign key (itemId) references Items (id)
 );
@@ -279,13 +279,15 @@ BEGIN
 
         SET @LASTID = (SELECT LAST_INSERT_ID() FROM Orders limit 1);
         UPDATE Items JOIN ShoppingCarts ON Items.ID = ShoppingCarts.ITEMID
-        SET Items.UNITS = Items.UNITS - ShoppingCarts.UNITS where ShoppingCarts.deletedAt is null;
+        SET Items.UNITS = Items.UNITS - ShoppingCarts.UNITS
+        where ShoppingCarts.deletedAt is null;
 
 
         INSERT INTO OrderData (ORDERID, ITEMID, UNITS, CREATEDAT, UPDATEDAT)
         SELECT @LASTID, ITEMID, UNITS, UTC_TIMESTAMP(), UTC_TIMESTAMP()
         FROM ShoppingCarts
-        WHERE USER_ID = USERID and ShoppingCarts.deletedAt is null;
+        WHERE USER_ID = USERID
+          and ShoppingCarts.deletedAt is null;
 
         SELECT * FROM Orders WHERE USER_ID = USERID and id = @LASTID;
         UPDATE ShoppingCarts SET deletedAt = UTC_TIMESTAMP() where userId = USER_ID and deletedAt is null;

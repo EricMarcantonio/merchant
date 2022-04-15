@@ -1,8 +1,9 @@
 import express from 'express'
 import cookieParser from 'cookie-parser'
-import {passport, connectToDb} from "./util";
-import {GetCart, SetCart, RemoveCart} from "./handlers";
+import {connectToDb, passport} from "./util";
+import {GetCart, RemoveCart, SetCart} from "./handlers";
 import cors from 'cors'
+
 const app = express();
 
 app.use(cors({
@@ -21,9 +22,9 @@ app.use((req, res, next) => {
     next()
 })
 
-app.get("*", passport.authenticate('jwt', { session: false }),  GetCart)
-app.post("*", passport.authenticate('jwt', { session: false }),  SetCart)
-app.delete("*", passport.authenticate('jwt', { session: false }), RemoveCart)
+app.get("*", passport.authenticate('jwt', {session: false}), GetCart)
+app.post("*", passport.authenticate('jwt', {session: false}), SetCart)
+app.delete("*", passport.authenticate('jwt', {session: false}), RemoveCart)
 
 
 connectToDb().then(() => {

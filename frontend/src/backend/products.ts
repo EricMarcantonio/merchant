@@ -1,6 +1,5 @@
-import axios from "axios";
-import {IProduct, ICart, ICartUpdate, IOrderItem, IOrderData} from "../types";
-import {UserAttributes} from "./types";
+import {ICart, ICartUpdate, IOrderData, IProduct} from "../types";
+import {a, UserAttributes} from "./types";
 import {IReview} from "../components/ProductList";
 
 interface AxiosGetAllProductsInterface {
@@ -11,9 +10,9 @@ interface AxiosGetAllProductsInterface {
 
 export const GetAllProductsFromBackend = () => {
 
-    return axios.request<IProduct[]>({
+    return a.request<IProduct[]>({
         method: 'get',
-        url: 'http://127.0.0.1/catalog/',
+        url: '/catalog/',
     })
         .then((response) => {
             return response.data;
@@ -23,9 +22,9 @@ export const GetAllProductsFromBackend = () => {
 
 export const GetAProductByIdFromBackend = (id: number) => {
 
-    return axios.request<IProduct>({
+    return a.request<IProduct>({
         method: 'get',
-        url: `http://127.0.0.1/catalog/${id}/`,
+        url: `/catalog/${id}/`,
     })
         .then((response) => {
             return response.data;
@@ -43,31 +42,12 @@ interface ICartItem {
 
 export const tempCart: ICart = {};
 
-//tempCart.cart[0].item_id;
-export const GetShoppingCartByUserToken = async (user_token: string) => {
-    var data = JSON.stringify({
-        user_token: "edniejdid",
-    });
-
-    return axios
-        .request<IShoppingCart>({
-            method: "post",
-            url: "http://127.0.0.1:3020/",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            data: data,
-        })
-        .then(function (response) {
-            return response.data;
-        });
-};
 
 export const GetShoppingCart = () => {
-    return axios
+    return a
         .request<IOrderData[]>({
             method: "get",
-            url: "http://127.0.0.1/cart/",
+            url: "/cart/",
             withCredentials: true,
         })
         .then((result) => {
@@ -105,9 +85,9 @@ export const GetShoppingCart = () => {
 
 export const UpdateShoppingCart = (cart: ICartUpdate[]) => {
     var data = JSON.stringify(cart);
-    return axios({
+    return a.request({
         method: "post",
-        url: "http://127.0.0.1/cart/",
+        url: "/cart/",
         withCredentials: true,
         headers: {
             "Content-Type": "application/json",
@@ -128,9 +108,9 @@ export const AdminLogin = (email: string, password: string) => {
         password: password,
     });
 
-    return axios({
+    return a.request({
         method: "post",
-        url: "http://127.0.0.1/auth/login/",
+        url: "/auth/login/",
         withCredentials: true,
         headers: {
             "Content-Type": "application/json",
@@ -156,10 +136,10 @@ export const UserRegister = (firstname: string, lastname: string, email: string,
         }
     });
 
-    return axios
+    return a
         .request<UserAttributes>({
             method: "post",
-            url: "http://127.0.0.1/auth/register/",
+            url: "/auth/register/",
             withCredentials: true,
             headers: {
                 "Content-Type": "application/json",
@@ -177,9 +157,9 @@ export const DeleteItemFromCart = (id: number) => {
         id
     ]);
 
-    return axios({
+    return a.request({
         method: 'delete',
-        url: 'http://127.0.0.1/cart/',
+        url: '/cart/',
         withCredentials: true,
         headers: {
             'Content-Type': 'application/json',
@@ -199,9 +179,9 @@ export const DeleteItemFromCart = (id: number) => {
 
 export const verify = () => {
 
-    axios({
+    a.request({
         method: 'post',
-        url: 'http://127.0.0.1/auth/verify/',
+        url: '/auth/verify/',
         withCredentials: true,
     })
         .then(function (response) {
@@ -214,9 +194,9 @@ export const verify = () => {
 
 export const GetReviewsByItemId = (id: number) => {
 
-    return axios.request<IReview[]>({
+    return a.request<IReview[]>({
         method: 'get',
-        url: `http://127.0.0.1/reviews/${id}`,
+        url: `/reviews/${id}`,
     })
         .then((response) => {
             console.log(response.data)
