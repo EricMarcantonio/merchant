@@ -11,6 +11,7 @@ cd ../reviews && make docker-build
 cd ../shopping-cart && make docker-build
 cd ../visiting && make docker-build
 cd ../nginx && make docker-build
+cd ../auth && make docker-build
 
 docker tag merchant/catalog "${ID}.dkr.ecr.${REGION}.amazonaws.com/merchant/catalog:latest"
 docker push "${ID}.dkr.ecr.${REGION}.amazonaws.com/merchant/catalog:latest"
@@ -33,3 +34,5 @@ docker push "${ID}.dkr.ecr.${REGION}.amazonaws.com/merchant/visiting:latest"
 docker tag merchant/nginx "${ID}.dkr.ecr.${REGION}.amazonaws.com/merchant/nginx:latest"
 docker push "${ID}.dkr.ecr.${REGION}.amazonaws.com/merchant/nginx:latest"
 
+docker tag merchant/auth "${ID}.dkr.ecr.${REGION}.amazonaws.com/merchant/auth:latest"
+docker push "${ID}.dkr.ecr.${REGION}.amazonaws.com/merchant/auth:latest"
