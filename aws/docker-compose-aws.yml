@@ -12,8 +12,8 @@ services:
     expose:
       - 80
     environment:
-      HOST: '0.tcp.ngrok.io'
-      PORT: '17096'
+      HOST: 'database-1.copsfdbli8nn.us-east-1.rds.amazonaws.com'
+      PORT: '3306'
       USER: 'user'
       PASSWORD: 'password'
       DB: 'MERCHANT'

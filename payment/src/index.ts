@@ -13,7 +13,9 @@ app.use((req, res, next) => {
 	console.log(req.headers, req.method, req.cookies, req.url);
 	next();
 });
-
+app.get("/", (req, res) => {
+	res.sendStatus(200)
+});
 app.post("/", HandleProcessPayment);
 
 connectToDb().then(() => {
