@@ -4,10 +4,10 @@ CREATE DATABASE MERCHANT;
 
 USE MERCHANT;
 
-create or replace table Addresses
+
+create TABLE Addresses
 (
-    id        int auto_increment
-        primary key,
+    id        int auto_increment primary key,
     street    varchar(255) not null,
     province  varchar(255) not null,
     country   varchar(255) not null,
@@ -18,7 +18,7 @@ create or replace table Addresses
     deletedAt datetime     null
 );
 
-create or replace table Items
+create table Items
 (
     id          int auto_increment
         primary key,
@@ -35,7 +35,7 @@ create or replace table Items
     deletedAt   datetime          null
 );
 
-create or replace table Users
+create table Users
 (
     id        int auto_increment
         primary key,
@@ -51,7 +51,7 @@ create or replace table Users
         unique (email)
 );
 
-create or replace table CreditCards
+create table CreditCards
 (
     id        int auto_increment
         primary key,
@@ -66,10 +66,10 @@ create or replace table CreditCards
 
 
 
-create or replace index userId
+create index userId
     on CreditCards (userId);
 
-create or replace table Orders
+create  table Orders
 (
     id           int auto_increment
         primary key,
@@ -90,7 +90,7 @@ create or replace table Orders
         foreign key (creditCardId) references CreditCards (id)
 );
 
-create or replace table OrderData
+create  table OrderData
 (
     id        int auto_increment
         primary key,
@@ -106,22 +106,22 @@ create or replace table OrderData
         foreign key (itemId) references Items (id)
 );
 
-create or replace index itemId
+create  index itemId
     on OrderData (itemId);
 
-create or replace index orderId
+create  index orderId
     on OrderData (orderId);
 
-create or replace index addressId
+create  index addressId
     on Orders (addressId);
 
-create or replace index creditCardId
+create  index creditCardId
     on Orders (creditCardId);
 
-create or replace index userId
+create  index userId
     on Orders (userId);
 
-create or replace table Passwords
+create  table Passwords
 (
     password  varchar(64) not null,
     userId    int         not null
@@ -135,7 +135,7 @@ create or replace table Passwords
         foreign key (userId) references Users (id)
 );
 
-create or replace table ShoppingCarts
+create  table ShoppingCarts
 (
     id        int auto_increment
         primary key,
@@ -151,13 +151,13 @@ create or replace table ShoppingCarts
         foreign key (itemId) references Items (id)
 );
 
-create or replace index itemId
+create  index itemId
     on ShoppingCarts (itemId);
 
-create or replace index userId
+create  index userId
     on ShoppingCarts (userId);
 
-create or replace table VisitEvents
+create  table VisitEvents
 (
     id        int auto_increment
         primary key,
@@ -171,10 +171,10 @@ create or replace table VisitEvents
         foreign key (itemId) references Items (id)
 );
 
-create or replace index itemId
+create  index itemId
     on VisitEvents (itemId);
 
-create or replace table Reviews
+create  table Reviews
 (
     id        int auto_increment
         primary key,
@@ -191,10 +191,10 @@ create or replace table Reviews
         foreign key (userId) references Users (id)
 );
 
-create or replace index itemId
+create  index itemId
     on Reviews (itemId);
 
-create or replace index userId
+create  index userId
     on Reviews (userId);
 
 # INSERT INTO Addresses (STREET, PROVINCE, COUNTRY, ZIP, PHONE, CREATEDAT, UPDATEDAT)
@@ -253,7 +253,7 @@ VALUES ('Steam Deck', 499.99, 100,
 # VALUES (1, 3, 3, NOW(), NOW());
 
 DELIMITER $$;
-CREATE OR REPLACE PROCEDURE CREATE_ORDER(
+CREATE  PROCEDURE CREATE_ORDER(
     IN USER_ID INT,
     IN ADDRESS_ID INT,
     IN FNAME_ARG TEXT,

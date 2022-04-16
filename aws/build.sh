@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 ID=$(aws sts get-caller-identity --query "Account" | tr -d \")
-REGION='ca-central-1'
+REGION='us-east-1'
 
-aws ecr get-login-password --region 'ca-central-1' | docker login --username AWS --password-stdin "${ID}.dkr.ecr.${REGION}.amazonaws.com"
+aws ecr get-login-password --region 'us-east-1' | docker login --username AWS --password-stdin "${ID}.dkr.ecr.${REGION}.amazonaws.com"
 
 cd ../catalog && make docker-build
 cd ../orders && make docker-build

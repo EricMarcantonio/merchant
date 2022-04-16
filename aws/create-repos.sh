@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-aws ecr create-repository --repository-name merchant/auth
-aws ecr create-repository --repository-name merchant/catalog
-aws ecr create-repository --repository-name merchant/orders
-aws ecr create-repository --repository-name merchant/shopping-cart
-aws ecr create-repository --repository-name merchant/reviews
-aws ecr create-repository --repository-name merchant/visiting
-aws ecr create-repository --repository-name merchant/payment
-aws ecr create-repository --repository-name merchant/nginx
+aws ecr create-repository --repository-name merchant/auth --region us-east-1
+aws ecr create-repository --repository-name merchant/catalog --region us-east-1
+aws ecr create-repository --repository-name merchant/orders --region us-east-1
+aws ecr create-repository --repository-name merchant/shopping-cart --region us-east-1
+aws ecr create-repository --repository-name merchant/reviews --region us-east-1
+aws ecr create-repository --repository-name merchant/visiting --region us-east-1
+aws ecr create-repository --repository-name merchant/payment --region us-east-1
+aws ecr create-repository --repository-name merchant/nginx --region us-east-1

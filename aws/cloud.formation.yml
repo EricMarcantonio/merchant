@@ -2,12 +2,13 @@ AWSTemplateFormatVersion: 2010-09-09
 
 Resources:
   DB:
-    Type: AWS::RDS::DBCluster
+    Type: AWS::RDS::DBInstance
     Properties:
-      DatabaseName: MERCHANT
+      DBName: MERCHANT
+      DBInstanceClass: db.t2.small
       DBClusterIdentifier: test
       DeletionProtection: false
-      Engine: aurora-mysql
+      Engine: mysql
       MasterUsername: user
       MasterUserPassword: password
       Port: 3306
