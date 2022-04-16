@@ -9,3 +9,4 @@ deploy:
 
 convert:
 	AWS_SECRET_ACCESS_KEY='DSbuAAh9lfYmglZku/5LSglQgCbX7QMuwjcwdAaN' AWS_ACCESS_KEY_ID='AKIARRVFVRZBVAWSTMDY' docker --context myecscontext compose -f docker-compose-aws.yml convert > baseline.yml
+
