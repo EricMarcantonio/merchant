@@ -21,9 +21,6 @@ app.use((req, res, next) => {
 	next();
 });
 
-// Health Check
-app.get("/", (req, res)=>{res.sendStatus(200)});
-
 app.post("/v1/register", HandleCreateUser);
 app.post("/v1/login", HandleLogin);
 app.post("/v1/logout", HandleLogout);
