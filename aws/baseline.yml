@@ -1,28 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
-
-Parameters:
-  AccountId:
-    Default: 106647883331
-    Description: AccountID where the images are stored
-    Type: Number
-  Region:
-    Default: us-east-1
-    Description: Region for this template
-    Type: String
-
 Resources:
-  DB:
-    Type: AWS::RDS::DBCluster
-    Properties:
-      DatabaseName: MERCHANT
-      DBClusterIdentifier: test
-      DeletionProtection: false
-      Engine: aurora-mysql
-      MasterUsername: user
-      MasterUserPassword: password
-      Port: 3306
-      StorageEncrypted: true
-# Creation of the auth scaling role
   AuthAutoScalingRole:
     Properties:
       AssumeRolePolicyDocument:
@@ -172,10 +149,7 @@ Resources:
         - Name: EXPRESS_PORT
           Value: "80"
         - Name: HOST
-          Value:
-            Fn::GetAtt:
-              - DB
-              - Endpoint.Address
+          Value: database-1.copsfdbli8nn.us-east-1.rds.amazonaws.com
         - Name: PASSWORD
           Value: password
         - Name: PORT
@@ -183,7 +157,7 @@ Resources:
         - Name: USER
           Value: user
         Essential: true
-        Image: !Sub ${AccountId}.dkr.ecr.${Region}.amazonaws.com/merchant/auth
+        Image: 106647883331.dkr.ecr.ca-central-1.amazonaws.com/merchant/auth:latest@sha256:9a9e682b86eca21872b643d9b40e4b84159d7adf91e5783c784aa90d57ed60e9
         LinuxParameters: {}
         LogConfiguration:
           LogDriver: awslogs
@@ -372,10 +346,7 @@ Resources:
         - Name: EXPRESS_PORT
           Value: "80"
         - Name: HOST
-          Value:
-            Fn::GetAtt:
-              - DB
-              - Endpoint.Address
+          Value: database-1.copsfdbli8nn.us-east-1.rds.amazonaws.com
         - Name: PASSWORD
           Value: password
         - Name: PORT
@@ -383,7 +354,7 @@ Resources:
         - Name: USER
           Value: user
         Essential: true
-        Image: !Sub ${AccountId}.dkr.ecr.${Region}.amazonaws.com/merchant/catalog
+        Image: 106647883331.dkr.ecr.ca-central-1.amazonaws.com/merchant/catalog:latest@sha256:e5f46184db2cb8299bdc50fe4dcd85cb013ce51a7e911fd60fbbffb80517629c
         LinuxParameters: {}
         LogConfiguration:
           LogDriver: awslogs
@@ -658,7 +629,7 @@ Resources:
         - Condition: SUCCESS
           ContainerName: Nginx_ResolvConf_InitContainer
         Essential: true
-        Image: !Sub ${AccountId}.dkr.ecr.${Region}.amazonaws.com/merchant/nginx
+        Image: 106647883331.dkr.ecr.ca-central-1.amazonaws.com/merchant/nginx:latest@sha256:a5271d011505dfde07f2ba991d8424bbf3224bc83ffda49cd113606176a79ba9
         LinuxParameters: {}
         LogConfiguration:
           LogDriver: awslogs
@@ -851,10 +822,7 @@ Resources:
         - Name: EXPRESS_PORT
           Value: "80"
         - Name: HOST
-          Value:
-            Fn::GetAtt:
-              - DB
-              - Endpoint.Address
+          Value: database-1.copsfdbli8nn.us-east-1.rds.amazonaws.com
         - Name: PASSWORD
           Value: password
         - Name: PORT
@@ -862,7 +830,7 @@ Resources:
         - Name: USER
           Value: user
         Essential: true
-        Image: !Sub ${AccountId}.dkr.ecr.${Region}.amazonaws.com/merchant/orders
+        Image: 106647883331.dkr.ecr.ca-central-1.amazonaws.com/merchant/orders:latest@sha256:9b96a52b49026e2cf0bcce1d9b9a2873dd4751074211b4a3068ecae86a7c7833
         LinuxParameters: {}
         LogConfiguration:
           LogDriver: awslogs
@@ -1051,10 +1019,7 @@ Resources:
         - Name: EXPRESS_PORT
           Value: "80"
         - Name: HOST
-          Value:
-            Fn::GetAtt:
-              - DB
-              - Endpoint.Address
+          Value: database-1.copsfdbli8nn.us-east-1.rds.amazonaws.com
         - Name: PASSWORD
           Value: password
         - Name: PORT
@@ -1062,7 +1027,7 @@ Resources:
         - Name: USER
           Value: user
         Essential: true
-        Image: !Sub ${AccountId}.dkr.ecr.${Region}.amazonaws.com/merchant/payment
+        Image: 106647883331.dkr.ecr.ca-central-1.amazonaws.com/merchant/payment:latest@sha256:0e1ccfbdfb6d7ccdda778acca2a49a9761740a4ef582bbf091f20890108c1942
         LinuxParameters: {}
         LogConfiguration:
           LogDriver: awslogs
@@ -1251,10 +1216,7 @@ Resources:
         - Name: EXPRESS_PORT
           Value: "80"
         - Name: HOST
-          Value:
-            Fn::GetAtt:
-              - DB
-              - Endpoint.Address
+          Value: database-1.copsfdbli8nn.us-east-1.rds.amazonaws.com
         - Name: PASSWORD
           Value: password
         - Name: PORT
@@ -1262,7 +1224,7 @@ Resources:
         - Name: USER
           Value: user
         Essential: true
-        Image: !Sub ${AccountId}.dkr.ecr.${Region}.amazonaws.com/merchant/reviews
+        Image: 106647883331.dkr.ecr.ca-central-1.amazonaws.com/merchant/reviews:latest@sha256:b2b033f1c902a5e1bd02ebc9008dd941014d0a42095570ed78ac18295295572d
         LinuxParameters: {}
         LogConfiguration:
           LogDriver: awslogs
@@ -1451,10 +1413,7 @@ Resources:
         - Name: EXPRESS_PORT
           Value: "80"
         - Name: HOST
-          Value:
-            Fn::GetAtt:
-              - DB
-              - Endpoint.Address
+          Value: database-1.copsfdbli8nn.us-east-1.rds.amazonaws.com
         - Name: PASSWORD
           Value: password
         - Name: PORT
@@ -1462,7 +1421,7 @@ Resources:
         - Name: USER
           Value: user
         Essential: true
-        Image: !Sub ${AccountId}.dkr.ecr.${Region}.amazonaws.com/merchant/shopping-cart
+        Image: 106647883331.dkr.ecr.ca-central-1.amazonaws.com/merchant/shopping-cart:latest@sha256:d6fcab1d860072b1b1d0aeb83c4581ea133889492ef84f59a2b1c53a00df27b3
         LinuxParameters: {}
         LogConfiguration:
           LogDriver: awslogs
@@ -1651,10 +1610,7 @@ Resources:
         - Name: EXPRESS_PORT
           Value: "80"
         - Name: HOST
-          Value:
-            Fn::GetAtt:
-              - DB
-              - Endpoint.Address
+          Value: database-1.copsfdbli8nn.us-east-1.rds.amazonaws.com
         - Name: PASSWORD
           Value: password
         - Name: PORT
@@ -1662,7 +1618,7 @@ Resources:
         - Name: USER
           Value: user
         Essential: true
-        Image: !Sub ${AccountId}.dkr.ecr.${Region}.amazonaws.com/merchant/visiting
+        Image: 106647883331.dkr.ecr.ca-central-1.amazonaws.com/merchant/visiting:latest@sha256:4afe0452e3b364648d9a254d40ce1a883f8e3b24cf1549590a6044487beee65f
         LinuxParameters: {}
         LogConfiguration:
           LogDriver: awslogs
@@ -1702,8 +1658,3 @@ Resources:
       - Key: com.docker.compose.service
         Value: visiting
     Type: AWS::IAM::Role
-
-#Outputs:
-#  URL:
-#    Description: "Click on this URL to access our application"
-#    Value: !GetAtt L
