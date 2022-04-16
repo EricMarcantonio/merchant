@@ -7,7 +7,7 @@ export const GetAllProductsFromBackend = () => {
 
 	return a.request<IProduct[]>({
 		method: "get",
-		url: "/catalog/",
+		url: "/catalog/all",
 	})
 		.then((response) => {
 			return response.data;

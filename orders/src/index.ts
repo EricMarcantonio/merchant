@@ -26,12 +26,10 @@ app.use((req, res, next) => {
 	next();
 });
 
-app.get("/", (req, res) => {
-	res.sendStatus(200);
-});
-
 app.post("/create", [passport.authenticate("jwt", { session: false }), MiddleOrder, MiddleCheckPayment], HandleCreateOrder);
 app.get("/all", [passport.authenticate("jwt", { session: false })], HandleGetAllOrders);
+
+app.get("/", (req, res)=>{res.sendStatus(200)});
 
 
 connectToDb().then(() => {

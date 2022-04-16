@@ -98,7 +98,7 @@ const ProductList = () => {
 					<div
 						className="grid grid-cols-1 gap-y-10 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
 						{() => {
-							if (allItems) {
+							if (allItems.length > 0) {
 								let temp = allItems;
 								if (brands.length > 0) {
 									temp = temp.filter((i) => brands.includes(i.product.brand || ""));
@@ -106,7 +106,7 @@ const ProductList = () => {
 								if (type.length > 0) {
 									temp = temp.filter((i) => type.includes(i.product.type || ""));
 								}
-								console.log("temp", temp)
+								console.log("temp", temp);
 								return temp.map((item) => {
 									return <Product product={item.product} review={item.review}
 													key={item.product.id} />;

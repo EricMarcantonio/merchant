@@ -27,8 +27,10 @@ app.use((req, res, next) => {
 });
 
 
-app.get("/", HandleGetAllItems);
+app.get("/all", HandleGetAllItems);
 app.get("/:id", MiddleGetItemById, HandleGetItemById);
+
+app.get("/", (req, res)=>{res.sendStatus(200)});
 
 
 connectToDb().then(() => {
