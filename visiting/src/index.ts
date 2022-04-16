@@ -22,12 +22,11 @@ app.use((req, res, next) => {
 	next();
 });
 
-// Health Check
-app.get("/", (req, res)=>{res.sendStatus(200)});
-
 app.get("/v1", passport.authenticate("jwt", { session: false }), GetEvents);
 app.post("/v1", passport.authenticate("jwt", { session: false }), SetEvent);
 
+// Health Check
+app.get("/", (req, res)=>{res.sendStatus(200)});
 
 connectToDb().then(() => {
 	const port = parseInt(process.env.EXPRESS_PORT || "0");

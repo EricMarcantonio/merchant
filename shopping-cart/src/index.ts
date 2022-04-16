@@ -22,13 +22,12 @@ app.use((req, res, next) => {
 	next();
 });
 
-// Health Check
-app.get("/", (req, res)=>{res.sendStatus(200)});
-
 app.get("/v1", passport.authenticate("jwt", { session: false }), GetCart);
 app.post("/v1", passport.authenticate("jwt", { session: false }), SetCart);
 app.delete("/v1", passport.authenticate("jwt", { session: false }), RemoveCart);
 
+// Health Check
+app.get("/", (req, res)=>{res.sendStatus(200)});
 
 connectToDb().then(() => {
 	const port = parseInt(process.env.EXPRESS_PORT || "0");
