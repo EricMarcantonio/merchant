@@ -9,6 +9,24 @@ Parameters:
     Default: us-east-1
     Description: Region for this template
     Type: String
+  Vpc:
+    Default: "vpc-09c083dcd7ce2e32b"
+    Type: String
+  Mem:
+    Default: "1000"
+    Type: String
+  Cpu:
+    Default: "1000"
+    Type: String
+  DB_USER:
+    Default: "user"
+    Type: String
+  DB_PASS:
+    Default: "password"
+    Type: String
+  DB_PORT:
+    Default: "3306"
+    Type: String
 
 Resources:
   DB:
@@ -195,11 +213,11 @@ Resources:
               Ref: AWS::Region
             awslogs-stream-prefix: aws
         Name: auth
-      Cpu: "256"
+      Cpu: !Sub ${Cpu}
       ExecutionRoleArn:
         Ref: AuthTaskExecutionRole
       Family: aws-auth
-      Memory: "512"
+      Memory: !Sub ${Mem}
       NetworkMode: awsvpc
       RequiresCompatibilities:
       - FARGATE
@@ -395,11 +413,11 @@ Resources:
               Ref: AWS::Region
             awslogs-stream-prefix: aws
         Name: catalog
-      Cpu: "256"
+      Cpu: !Sub ${Cpu}
       ExecutionRoleArn:
         Ref: CatalogTaskExecutionRole
       Family: aws-catalog
-      Memory: "512"
+      Memory: !Sub ${Mem}
       NetworkMode: awsvpc
       RequiresCompatibilities:
       - FARGATE
@@ -428,7 +446,7 @@ Resources:
     Properties:
       Description: Service Map for Docker Compose project aws
       Name: aws.local
-      Vpc: vpc-f441ca89
+      Vpc: !Sub ${VPC}
     Type: AWS::ServiceDiscovery::PrivateDnsNamespace
   Cluster:
     Properties:
@@ -674,11 +692,11 @@ Resources:
         - ContainerPort: 80
           HostPort: 80
           Protocol: tcp
-      Cpu: "256"
+      Cpu: !Sub ${Cpu}
       ExecutionRoleArn:
         Ref: NginxTaskExecutionRole
       Family: aws-nginx
-      Memory: "512"
+      Memory: !Sub ${Mem}
       NetworkMode: awsvpc
       RequiresCompatibilities:
       - FARGATE
@@ -874,11 +892,11 @@ Resources:
               Ref: AWS::Region
             awslogs-stream-prefix: aws
         Name: orders
-      Cpu: "256"
+      Cpu: !Sub ${Cpu}
       ExecutionRoleArn:
         Ref: OrdersTaskExecutionRole
       Family: aws-orders
-      Memory: "512"
+      Memory: !Sub ${Mem}
       NetworkMode: awsvpc
       RequiresCompatibilities:
       - FARGATE
@@ -1074,11 +1092,11 @@ Resources:
               Ref: AWS::Region
             awslogs-stream-prefix: aws
         Name: payment
-      Cpu: "256"
+      Cpu: !Sub ${Cpu}
       ExecutionRoleArn:
         Ref: PaymentTaskExecutionRole
       Family: aws-payment
-      Memory: "512"
+      Memory: !Sub ${Mem}
       NetworkMode: awsvpc
       RequiresCompatibilities:
       - FARGATE
@@ -1274,11 +1292,11 @@ Resources:
               Ref: AWS::Region
             awslogs-stream-prefix: aws
         Name: reviews
-      Cpu: "256"
+      Cpu: !Sub ${Cpu}
       ExecutionRoleArn:
         Ref: ReviewsTaskExecutionRole
       Family: aws-reviews
-      Memory: "512"
+      Memory: !Sub ${Mem}
       NetworkMode: awsvpc
       RequiresCompatibilities:
       - FARGATE
@@ -1474,11 +1492,11 @@ Resources:
               Ref: AWS::Region
             awslogs-stream-prefix: aws
         Name: shopping-cart
-      Cpu: "256"
+      Cpu: !Sub ${Cpu}
       ExecutionRoleArn:
         Ref: ShoppingcartTaskExecutionRole
       Family: aws-shopping-cart
-      Memory: "512"
+      Memory: !Sub ${Mem}
       NetworkMode: awsvpc
       RequiresCompatibilities:
       - FARGATE
@@ -1674,11 +1692,11 @@ Resources:
               Ref: AWS::Region
             awslogs-stream-prefix: aws
         Name: visiting
-      Cpu: "256"
+      Cpu: !Sub ${Cpu}
       ExecutionRoleArn:
         Ref: VisitingTaskExecutionRole
       Family: aws-visiting
-      Memory: "512"
+      Memory: !Sub ${Mem}
       NetworkMode: awsvpc
       RequiresCompatibilities:
       - FARGATE
