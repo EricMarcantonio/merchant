@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "3aa19c64-824a-4065-a068-4856e4f8a22c",
 		"name": "merchant-api",
+		"description": "The full backend API of Merchant.\n\nThere are environments set up for different stages.\n\nThis is published, and is updated on save.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
