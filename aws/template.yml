@@ -48,7 +48,7 @@ Resources:
     Type: AWS::RDS::DBInstance
     Properties:
       DBName: MERCHANT
-      DBInstanceClass: db.t2.small
+      DBInstanceClass: db.t2.large
       DeletionProtection: false
       Engine: mysql
       MasterUsername: user

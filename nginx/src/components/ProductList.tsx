@@ -98,20 +98,32 @@ const ProductList = () => {
 		<div className="bg-white flex">
 			<aside className="w-64 h-screen sticky top-0" aria-label="Sidebar">
 
-				<div className={"h-5/6 w-full bg-black text-white m-3 p-3 rounded-2xl"}>
+				<div className={"w-full flex flex-col bg-black text-white m-3 p-3 rounded-2xl space-y-4"}>
 					<div className={"mx-auto text-3xl"}>Filter</div>
 					<div className={"mx-auto text-xl"}>Brand</div>
 
-					<Select className={"w-48 mx-auto"}
+					<Select className={"mx-auto"}
 							mode="multiple"
 							placeholder="Brand"
 							onChange={handleBrandChange}
 					>
-						{allItems && allItems.map((i) => {
-							return <Select.Option value={i.product.brand}>{i.product.brand}</Select.Option>;
-						})}
+						{(function() {
+							if (allItems) {
+								let temp = new Set<string>();
+								allItems.forEach((i) => {
+									if (i.product.brand != null) {
+										temp.add(i.product.brand);
+									}
+								});
+								return Array.from<string>(temp).map((i) => <Select.Option
+									value={i}>{i}</Select.Option>);
+							}
+						})()
+						}
 					</Select>
-					<Select className={"w-48 mx-auto"}
+
+					<div className={"mx-auto text-xl"}>Type</div>
+					<Select className={"mx-auto"}
 							mode="multiple"
 							placeholder="Type"
 							onChange={handleTypeChange}

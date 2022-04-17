@@ -14,7 +14,6 @@ const ShoppingCart = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-
 		GetShoppingCart()
 			.then((result) => {
 				if (result) {

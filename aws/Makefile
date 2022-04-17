@@ -1,2 +1,3 @@
-deploy:
-	./deploy.sh
+build-deploy:
+	./build
+	./deploy

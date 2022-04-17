@@ -3,6 +3,8 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 import { GetAProductByIdFromBackend } from "../backend";
 import { GetAllOrders } from "../backend/orders";
+import { useNavigate } from "react-router-dom";
+import Loading from "./Loading";
 
 interface IOrderItemProps {
 	order: IOrderData;
@@ -22,6 +24,10 @@ export const OrderItem = (props: IOrderItemProps) => {
 			setItem(product);
 		});
 	}, []);
+
+	if (item == null){
+
+	}
 
 	return (
 		<li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
@@ -134,12 +140,24 @@ export const OrderComponent = (props: IOrderComponentProps) => {
 
 const OrderList = () => {
 	const [orders, setOrders] = useState([] as IOrderItem[]);
+	const [render, setRender] = useState(true);
+
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		GetAllOrders().then((orders) => {
 			setOrders(orders);
-		});
+		}).catch(() => {
+			setRender(false)
+		})
 	}, []);
+
+	if (!render){
+		navigate("/cart");
+		return <Loading/>
+	}
+
+
 	return (
 		<div className="bg-black">
 			<div className="w-screen mx-auto container">

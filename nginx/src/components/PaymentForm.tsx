@@ -63,7 +63,7 @@ const PaymentForm = () => {
 								expiration: expiration,
 								cvv: cvv,
 							});
-							navigate(`/#`);
+							navigate(`/confirm`);
 						}}
 					>
 						<input type="hidden" name="remember" defaultValue="true" />
