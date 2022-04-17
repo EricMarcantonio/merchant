@@ -50,6 +50,13 @@ export const User = {
 			},
 		});
 	},
+	getFNameById: async (id: number) => {
+		return await UserModel.findOne({
+			where: {
+				id: id
+			}
+		}) as MUser
+	}
 };
 
 export const Password = {

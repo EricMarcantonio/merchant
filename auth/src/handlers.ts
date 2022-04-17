@@ -73,3 +73,16 @@ const LoginHelper = async (req: CustomRequest<ILogin>, res: Response, user?: MUs
 		RESPONSES.SendBadRequest(req, res, new Error(ERRORS.NO_USER.toString()));
 	}
 };
+
+
+export const GetUserFNmae = (req: CustomRequest<ILogin>, res: Response) => {
+	if (req.params.id){
+		User.getFNameById(parseInt(req.params.id)).then((user) => {
+			res.json({
+				name: user.username
+			})
+		})
+	} else {
+		RESPONSES.SendNotFound(req, res);
+	}
+};

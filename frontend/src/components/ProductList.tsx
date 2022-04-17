@@ -97,7 +97,7 @@ const ProductList = () => {
 					<h2 className="sr-only">Products</h2>
 					<div
 						className="grid grid-cols-1 gap-y-10 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-						{() => {
+						{(function() {
 							if (allItems.length > 0) {
 								let temp = allItems;
 								if (brands.length > 0) {
@@ -114,7 +114,7 @@ const ProductList = () => {
 							} else {
 								return <Loading/>
 							}
-						}
+						})()
 						}
 					</div>
 				</div>

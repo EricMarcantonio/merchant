@@ -1,7 +1,7 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import { connectToDb, passport } from "./util";
-import { HandleCreateUser, HandleLogin, HandleLogout, HandleVerify } from "./handlers";
+import { GetUserFNmae, HandleCreateUser, HandleLogin, HandleLogout, HandleVerify } from "./handlers";
 import cors, { CorsOptions } from "cors";
 
 const app = express();
@@ -25,6 +25,7 @@ app.post("/v1/register", HandleCreateUser);
 app.post("/v1/login", HandleLogin);
 app.post("/v1/logout", HandleLogout);
 app.post("/v1/verify", passport.authenticate("jwt", { session: false }), HandleVerify);
+app.get("/v1/user/:id", GetUserFNmae);
 
 // Health Check
 app.get("/", (req, res)=>{res.sendStatus(200)});

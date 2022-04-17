@@ -34,7 +34,7 @@ export const GetShoppingCart = () => {
 	return a
 		.request<IOrderData[]>({
 			method: "get",
-			url: "/cart/",
+			url: "/cart/v1/",
 			withCredentials: true,
 		})
 		.then((result) => {
@@ -74,7 +74,7 @@ export const UpdateShoppingCart = (cart: ICartUpdate[]) => {
 	var data = JSON.stringify(cart);
 	return a.request({
 		method: "post",
-		url: "/cart/",
+		url: "/cart/v1",
 		withCredentials: true,
 		headers: {
 			"Content-Type": "application/json",
