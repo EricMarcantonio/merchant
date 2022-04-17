@@ -80,9 +80,9 @@ const ItemInfo = () => {
 	}, []);
 	return (
 		<div className="bg-white">
-			<div className="pt-6 grid grid-cols-2 h-full">
+			<div className="pt-6 grid grid-cols-2">
 				<div>
-					<div className="mt-6 w-72 h-72 rounded-lg aspect-4 mx-auto">
+					<div className="mt-6 w-48 h-48 rounded-lg aspect-4 mx-auto">
 						<img
 							src={product?.pictureUrl}
 							className="w-full h-full object-center object-cover rounded-lg my-auto"
@@ -110,15 +110,16 @@ const ItemInfo = () => {
 										handleAddToCart(product?.id, 1);
 									}
 								}}
+								disabled={!con.user.id}
 								className="mt-10 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
 							>
-								Add to bag
+								{!con.user.id ? "You must be logged in": "Add to bag"}
 							</button>
 						</div>
 					</div>
 
 					<div
-						className="py-10 lg:pt-6 lg:pb-16 lg:col-start-1 lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
+						className="py-5 lg:pt-6 lg:pb-16 lg:col-start-1 lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
 						<div>
 							<h3 className="sr-only">Description</h3>
 
@@ -133,7 +134,7 @@ const ItemInfo = () => {
 			</div>
 
 
-			<div className="pt-6 grid grid-cols-2 h-full justify-center items-center">
+			<div className="grid grid-cols-2 justify-center items-center">
 				<div className="text-2xl font-extrabold mx-20 px-5 text-center">
 					Recent Reviews
 				</div>
@@ -147,6 +148,7 @@ const ItemInfo = () => {
 							e.preventDefault();
 							if (product && product.id) {
 								handleAddReview(product.id.toString(), reviewData, "3");
+								setReviewData("")
 							}
 						}}
 					>
@@ -165,9 +167,11 @@ const ItemInfo = () => {
 			/>
 						<button
 							type="submit"
+							disabled={!con.user.id}
 							className="mt-10 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
 						>
-							Send Review
+							{!con.user.id ? "You must be logged in to make a review": "Send Review"}
+
 						</button>
 					</form>
 				</div>

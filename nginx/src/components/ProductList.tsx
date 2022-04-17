@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { IProduct } from "../types";
 import { GetAllProductsFromBackend } from "../backend";
 import { GetReviewsByItemId } from "../backend/products";
+import { Select } from "antd";
 import Loading from "./Loading";
 
 export interface IReview {
@@ -32,7 +33,7 @@ const Product = (item: IProductWithReview) => {
 	>
 		<a key={item.product.id} className="group">
 			<div
-				className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
+				className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden">
 				<img
 					src={item.product.pictureUrl}
 					className="w-full h-full object-center object-cover group-hover:opacity-75"
@@ -54,6 +55,8 @@ const ProductList = () => {
 	const [allItems, setAllItems] = useState([] as IProductWithReview[]);
 	const [brands, setBrands] = useState<string[]>([]);
 	const [type, setTypes] = useState<string[]>([]);
+	const [brandChange, setBrandChange] = useState<string[]>([]);
+	const [typeChange, setTypeChange] = useState<string[]>([]);
 
 	useEffect(() => {
 		GetAllProductsFromBackend().then((result) => {
@@ -84,13 +87,64 @@ const ProductList = () => {
 		});
 	}, []);
 
+	const handleBrandChange = (value: string[]) => {
+		setBrandChange(value);
+	};
+	const handleTypeChange = (value: string[]) => {
+		setTypeChange(value);
+	};
 
 	return (
 		<div className="bg-white flex">
-			<aside className="w-64 h-screen sticky" aria-label="Sidebar">
-				<div className="my-auto">
-					I am the sidebar
+			<aside className="w-64 h-screen sticky top-0" aria-label="Sidebar">
+
+				<div className={"w-full flex flex-col bg-black text-white m-3 p-3 rounded-2xl space-y-4"}>
+					<div className={"mx-auto text-3xl"}>Filter</div>
+					<div className={"mx-auto text-xl"}>Brand</div>
+
+					<Select className={"mx-auto"}
+							mode="multiple"
+							placeholder="Brand"
+							onChange={handleBrandChange}
+					>
+						{(function() {
+							if (allItems) {
+								let temp = new Set<string>();
+								allItems.forEach((i) => {
+									if (i.product.brand != null) {
+										temp.add(i.product.brand);
+									}
+								});
+								return Array.from<string>(temp).map((i) => <Select.Option
+									value={i}>{i}</Select.Option>);
+							}
+						})()
+						}
+					</Select>
+
+					<div className={"mx-auto text-xl"}>Type</div>
+					<Select className={"mx-auto"}
+							mode="multiple"
+							placeholder="Type"
+							onChange={handleTypeChange}
+					>
+						{(function() {
+							if (allItems) {
+								let temp = new Set<string>();
+								allItems.forEach((i) => {
+									if (i.product.type != null) {
+										temp.add(i.product.type);
+									}
+								});
+								return Array.from<string>(temp).map((i) => <Select.Option
+									value={i}>{i}</Select.Option>);
+							}
+						})()
+						}
+					</Select>
 				</div>
+
+
 			</aside>
 			<main>
 				<div className=" py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
@@ -98,24 +152,28 @@ const ProductList = () => {
 					<div
 						className="grid grid-cols-1 gap-y-10 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
 						{(function() {
-							if (allItems.length > 0) {
-								let temp = allItems;
-								if (brands.length > 0) {
-									temp = temp.filter((i) => brands.includes(i.product.brand || ""));
+								if (allItems.length > 0) {
+									let temp = allItems;
+									if (brandChange.length > 0) {
+										temp = temp.filter((i) => {
+											return !!(i.product.brand && brandChange.includes(i.product.brand));
+										});
+									}
+									if (typeChange.length > 0) {
+										temp = temp.filter((i) => {
+											return !!(i.product.type && typeChange.includes(i.product.type));
+										});
+									}
+									return temp.map((item) => {
+										console.log(temp);
+										return <Product product={item.product} review={item.review}
+														key={item.product.id} />;
+									});
 								}
-								if (type.length > 0) {
-									temp = temp.filter((i) => type.includes(i.product.type || ""));
-								}
-								console.log("temp", temp);
-								return temp.map((item) => {
-									return <Product product={item.product} review={item.review}
-													key={item.product.id} />;
-								});
-							} else {
-								return <Loading/>
+								return <Loading />;
 							}
-						})()
-						}
+						)()}
+
 					</div>
 				</div>
 			</main>

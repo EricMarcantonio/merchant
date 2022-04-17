@@ -1,100 +1,10 @@
 {
 	"info": {
-		"_postman_id": "77faced2-49cb-4a88-9ce1-74dad54637ac",
+		"_postman_id": "3aa19c64-824a-4065-a068-4856e4f8a22c",
 		"name": "merchant-api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
-		{
-			"name": "reviews",
-			"item": [
-				{
-					"name": "GET_BY_ID",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer"
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Cookie",
-								"value": "auth-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjQ5NDU4ODEyLCJleHAiOjE3MzU4NTg4MTJ9.Q59qRMg1aKbxs8TlqxHuz_u2fBGc4a1hyktn_ddoZh0; Path=/; HttpOnly;",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1/reviews/v1/1",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"path": [
-								"reviews",
-								"v1",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "CREATE",
-					"request": {
-						"auth": {
-							"type": "bearer"
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Cookie",
-								"value": "auth-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQ5Njg1MzE4LCJleHAiOjE3MzYwODUzMTh9.i5tCc-BNDUma9eI7o6MdlGK9G7LxWEfea0OXnZyCbyY; Path=/; HttpOnly;",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"itemId\": 4,\n    \"data\": \"fuck this product in particular\",\n    \"rating\": 1\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1/reviews/v1",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"path": [
-								"reviews",
-								"v1"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
 		{
 			"name": "orders",
 			"item": [
@@ -123,17 +33,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1/orders/v1/create/",
-							"protocol": "http",
+							"raw": "{{host}}/api/orders/create/",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{host}}"
 							],
 							"path": [
+								"api",
 								"orders",
-								"v1",
 								"create",
 								""
 							]
@@ -168,18 +74,99 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1/orders/v1/all",
-							"protocol": "http",
+							"raw": "{{host}}/api/orders/all/",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{host}}"
 							],
 							"path": [
+								"api",
 								"orders",
-								"v1",
-								"all"
+								"all",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "reviews",
+			"item": [
+				{
+					"name": "GET_BY_ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "auth-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjQ5NDU4ODEyLCJleHAiOjE3MzU4NTg4MTJ9.Q59qRMg1aKbxs8TlqxHuz_u2fBGc4a1hyktn_ddoZh0; Path=/; HttpOnly;",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/reviews/4/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"reviews",
+								"4",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "auth-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjQ5Njg1MzE4LCJleHAiOjE3MzYwODUzMTh9.i5tCc-BNDUma9eI7o6MdlGK9G7LxWEfea0OXnZyCbyY; Path=/; HttpOnly;",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"itemId\": {{reviewItemId}},\n    \"data\": \"{{reviewData}}\",\n    \"rating\": {{reviewRating}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/reviews/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"reviews",
+								""
 							]
 						}
 					},
@@ -196,17 +183,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1/cart/v1",
-							"protocol": "http",
+							"raw": "{{host}}/api/cart/v1/",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{host}}"
 							],
 							"path": [
+								"api",
 								"cart",
-								"v1"
+								"v1",
+								""
 							]
 						}
 					},
@@ -219,7 +204,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "[{\n    \"itemId\": 1,\n    \"units\": 2\n},\n{\n    \"itemId\": 2,\n    \"units\": 12\n}]\n",
+							"raw": "[{\n    \"itemId\": 1,\n    \"units\": 1\n}]\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -227,30 +212,28 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1/cart/v1",
-							"protocol": "http",
+							"raw": "{{host}}/api/cart/v1/",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{host}}"
 							],
 							"path": [
+								"api",
 								"cart",
-								"v1"
+								"v1",
+								""
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "DELETE - Specific",
+					"name": "DELETE",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "[\n    \"3\"\n]",
+							"raw": "[\n    \"1\"\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -258,48 +241,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1/cart/v1",
-							"protocol": "http",
+							"raw": "{{host}}/api/cart/v1/",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{host}}"
 							],
 							"path": [
+								"api",
 								"cart",
-								"v1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DELETE - All",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1/cart/v1",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"path": [
-								"cart",
-								"v1"
+								"v1",
+								""
 							]
 						}
 					},
@@ -338,18 +288,16 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1/auth/v1/register",
-							"protocol": "http",
+							"raw": "{{host}}/api/auth/v1/register/",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{host}}"
 							],
 							"path": [
+								"api",
 								"auth",
 								"v1",
-								"register"
+								"register",
+								""
 							]
 						}
 					},
@@ -372,18 +320,16 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://127.0.0.1/auth/v1/verify",
-							"protocol": "http",
+							"raw": "{{host}}/api/auth/v1/verify/",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{host}}"
 							],
 							"path": [
+								"api",
 								"auth",
 								"v1",
-								"verify"
+								"verify",
+								""
 							]
 						}
 					},
@@ -404,18 +350,44 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1/auth/v1/login",
-							"protocol": "http",
+							"raw": "{{host}}/api/auth/v1/login/",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{host}}"
 							],
 							"path": [
+								"api",
 								"auth",
 								"v1",
-								"login"
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET_USERNAME_BY_ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/auth/v1/user/:id/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"v1",
+								"user",
+								":id",
+								""
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -432,17 +404,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1/catalog/v1",
-							"protocol": "http",
+							"raw": "{{host}}/api/catalog/all/",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{host}}"
 							],
 							"path": [
+								"api",
 								"catalog",
-								"v1"
+								"all",
+								""
 							]
 						}
 					},
@@ -454,189 +424,21 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1/catalog/v1/3",
-							"protocol": "http",
+							"raw": "{{host}}/api/catalog/3/",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{host}}"
 							],
 							"path": [
+								"api",
 								"catalog",
-								"v1",
-								"3"
+								"3",
+								""
 							]
 						}
 					},
 					"response": []
 				}
 			]
-		},
-		{
-			"name": "visiting",
-			"item": [
-				{
-					"name": "GET",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "http://127.0.0.1/visiting/v1",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"path": [
-								"visiting",
-								"v1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "SET - (Default) Event Type 0",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "x-forwarded-for",
-								"value": "192.168.119.240",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"itemId\": \"{{item_id}}\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1/visiting/v1",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"path": [
-								"visiting",
-								"v1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "SET - Event Type 1",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"eventType\": \"1\",\n    \"ipAddress\": \"{{ip}}\",\n    \"itemId\": \"{{item_id}}\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1/visiting/v1",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"path": [
-								"visiting",
-								"v1"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		}
-	],
-	"variable": [
-		{
-			"key": "username",
-			"value": "axel1",
-			"type": "string"
-		},
-		{
-			"key": "email",
-			"value": "axel@gmail.com",
-			"type": "string"
-		},
-		{
-			"key": "fname",
-			"value": "axel",
-			"type": "string"
-		},
-		{
-			"key": "lname",
-			"value": "axel",
-			"type": "string"
-		},
-		{
-			"key": "password",
-			"value": "1234@Axel1234asdfvdsfvd",
-			"type": "string"
-		},
-		{
-			"key": "ip",
-			"value": "192.168.119.240",
-			"type": "string"
-		},
-		{
-			"key": "event_type",
-			"value": "1",
-			"type": "string"
-		},
-		{
-			"key": "item_id",
-			"value": "1",
-			"type": "string"
 		}
 	]
 }

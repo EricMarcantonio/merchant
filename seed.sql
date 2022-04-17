@@ -204,25 +204,55 @@ INSERT INTO Items (NAME, PRICE, UNITS, DESCRIPTION, TYPE, BRAND, PICTUREURL, CRE
 VALUES ('Nintendo Switch OLED', 379.99, 100,
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
         'Console', 'Nintendo',
-        'https://assets.nintendo.com/image/upload/ncom/en_US/switch/site-design-update/oled-model-promo-mobile', NOW(),
-        NOW());
+        'https://assets.nintendo.com/image/upload/ncom/en_US/switch/site-design-update/oled-model-promo-mobile', UTC_TIMESTAMP(),
+        UTC_TIMESTAMP());
+INSERT INTO Items (NAME, PRICE, UNITS, DESCRIPTION, TYPE, BRAND, PICTUREURL, CREATEDAT, UPDATEDAT)
+VALUES ('Marshall Stockwell II', 219.99, 100,
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        'Speaker', 'Marshall',
+        'https://media.wired.com/photos/5d977850a351410008cb5a75/125:94/w_2375,h_1786,c_limit/Gear-Marshall-Stockwell-2-SOURCE-Marshall.jpg', UTC_TIMESTAMP(),
+        UTC_TIMESTAMP());
+
+INSERT INTO Items (NAME, PRICE, UNITS, DESCRIPTION, TYPE, BRAND, PICTUREURL, CREATEDAT, UPDATEDAT)
+VALUES ('Xbox Series X', 599.99, 100,
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        'Console', 'Microsoft', 'https://assets1.ignimgs.com/2019/12/13/xbox-series-x---button-01a-1576278376804.jpg',
+        UTC_TIMESTAMP(), UTC_TIMESTAMP());
+INSERT INTO Items (NAME, PRICE, UNITS, DESCRIPTION, TYPE, BRAND, PICTUREURL, CREATEDAT, UPDATEDAT)
+VALUES ('Steam Deck', 499.99, 100,
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        'Console', 'Steam',
+        'https://media.wired.com/photos/6217e2ebe15f63f9560fa168/master/pass/Gear-Steam-Deck-Rendering-1.jpg', UTC_TIMESTAMP(),
+        UTC_TIMESTAMP());
+INSERT INTO Items (NAME, PRICE, UNITS, DESCRIPTION, TYPE, BRAND, PICTUREURL, CREATEDAT, UPDATEDAT)
+VALUES ('Master & Dynamic MW65', 449.99, 100,
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        'Headphones', 'Sony',
+        'https://media.wired.com/photos/5dba2298dc63930009ef007f/master/w_1600%2Cc_limit/Gear-MW65G1_Angle.jpg', UTC_TIMESTAMP(),
+        UTC_TIMESTAMP());
+
+INSERT INTO Items (NAME, PRICE, UNITS, DESCRIPTION, TYPE, BRAND, PICTUREURL, CREATEDAT, UPDATEDAT)
+VALUES ('Logitech G Pro X Wireless', 199.99, 100,
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        'Headphones', 'Logitech',
+        'https://media.wired.com/photos/6173412778896a292fcad822/16:9/w_2233,h_1256,c_limit/Gear-Logitech-G-Pro-X.jpg', UTC_TIMESTAMP(),
+        UTC_TIMESTAMP());
+
+
+INSERT INTO Items (NAME, PRICE, UNITS, DESCRIPTION, TYPE, BRAND, PICTUREURL, CREATEDAT, UPDATEDAT)
+VALUES ('Sonos Move', 399.99, 100,
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        'Speaker', 'Sonos',
+        'https://media.wired.com/photos/5d81694416adef000889c9eb/master/w_2580%2Cc_limit/Gear-Sonos_Move_Green-FA.jpg', UTC_TIMESTAMP(),
+        UTC_TIMESTAMP());
+
 INSERT INTO Items (NAME, PRICE, UNITS, DESCRIPTION, TYPE, BRAND, PICTUREURL, CREATEDAT, UPDATEDAT)
 VALUES ('PlayStation 5', 629.99, 100,
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
         'Console', 'Sony',
         'https://media.wired.com/photos/601dde27f1bf194f33695d95/3:4/w_1347,h_1796,c_limit/Gear-PS5-2-src-Sony-teal.jpg',
-        NOW(), NOW());
-INSERT INTO Items (NAME, PRICE, UNITS, DESCRIPTION, TYPE, BRAND, PICTUREURL, CREATEDAT, UPDATEDAT)
-VALUES ('Xbox Series X', 599.99, 100,
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        'Console', 'Microsoft', 'https://assets1.ignimgs.com/2019/12/13/xbox-series-x---button-01a-1576278376804.jpg',
-        NOW(), NOW());
-INSERT INTO Items (NAME, PRICE, UNITS, DESCRIPTION, TYPE, BRAND, PICTUREURL, CREATEDAT, UPDATEDAT)
-VALUES ('Steam Deck', 499.99, 100,
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        'Console', 'Steam',
-        'https://media.wired.com/photos/6217e2ebe15f63f9560fa168/master/pass/Gear-Steam-Deck-Rendering-1.jpg', NOW(),
-        NOW());
+        UTC_TIMESTAMP(), UTC_TIMESTAMP());
+
 
 # INSERT INTO Users (USERNAME, EMAIL, TYPE, CREATEDAT, UPDATEDAT, FNAME, LNAME)
 # VALUES ('admin', 'admin', 1, NOW(), NOW(), 'eric', 'marcantonio');

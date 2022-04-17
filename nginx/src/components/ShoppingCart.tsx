@@ -14,7 +14,6 @@ const ShoppingCart = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-
 		GetShoppingCart()
 			.then((result) => {
 				if (result) {
@@ -28,7 +27,6 @@ const ShoppingCart = () => {
 					setTotal(itemTotal);
 				}
 			}).catch(() => {
-			console.log("LOL");
 		}).finally(() => {
 			setRender(true);
 		});

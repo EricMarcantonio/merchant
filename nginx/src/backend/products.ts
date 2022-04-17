@@ -186,7 +186,6 @@ export const GetReviewsByItemId = (id: number) => {
 		url: `/reviews/${id}/`,
 	})
 		.then((response) => {
-			console.log(response.data);
 			return response.data;
 		});
 };
