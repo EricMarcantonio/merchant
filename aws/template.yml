@@ -18,15 +18,30 @@ Parameters:
   Cpu:
     Default: "1024"
     Type: String
-#  DB_USER:
-#    Default: "user"
-#    Type: String
-#  DB_PASS:
-#    Default: "password"
-#    Type: String
-#  DB_PORT:
-#    Default: "3306"
-#    Type: String
+  AuthSHA:
+    Default: ""
+    Type: String
+  CatalogSHA:
+    Default: ""
+    Type: String
+  NginxSHA:
+    Default: ""
+    Type: String
+  OrderSHA:
+    Default: ""
+    Type: String
+  PaymentSHA:
+    Default: ""
+    Type: String
+  ReviewsSHA:
+    Default: ""
+    Type: String
+  ShopSHA:
+    Default: ""
+    Type: String
+  VisitSHA:
+    Default: ""
+    Type: String
 
 Resources:
   DB:
@@ -78,8 +93,8 @@ Resources:
     DependsOn:
     - AuthService
     Properties:
-      MaxCapacity: 10
-      MinCapacity: 1
+      MaxCapacity: 10000
+      MinCapacity: 2
       ResourceId:
         Fn::Join:
         - /
@@ -202,7 +217,7 @@ Resources:
         - Name: USER
           Value: user
         Essential: true
-        Image: !Sub ${AccountId}.dkr.ecr.${Region}.amazonaws.com/merchant/auth
+        Image: !Sub ${AuthSHA}
         LinuxParameters: {}
         LogConfiguration:
           LogDriver: awslogs
@@ -278,8 +293,8 @@ Resources:
     DependsOn:
     - CatalogService
     Properties:
-      MaxCapacity: 10
-      MinCapacity: 1
+      MaxCapacity: 10000
+      MinCapacity: 2
       ResourceId:
         Fn::Join:
         - /
@@ -402,7 +417,7 @@ Resources:
         - Name: USER
           Value: user
         Essential: true
-        Image: !Sub ${AccountId}.dkr.ecr.${Region}.amazonaws.com/merchant/catalog
+        Image: !Sub ${CatalogSHA}
         LinuxParameters: {}
         LogConfiguration:
           LogDriver: awslogs
@@ -541,8 +556,8 @@ Resources:
     DependsOn:
     - NginxService
     Properties:
-      MaxCapacity: 10
-      MinCapacity: 1
+      MaxCapacity: 10000
+      MinCapacity: 2
       ResourceId:
         Fn::Join:
         - /
@@ -677,7 +692,7 @@ Resources:
         - Condition: SUCCESS
           ContainerName: Nginx_ResolvConf_InitContainer
         Essential: true
-        Image: !Sub ${AccountId}.dkr.ecr.${Region}.amazonaws.com/merchant/nginx
+        Image: !Sub ${NginxSHA}
         LinuxParameters: {}
         LogConfiguration:
           LogDriver: awslogs
@@ -757,8 +772,8 @@ Resources:
     DependsOn:
     - OrdersService
     Properties:
-      MaxCapacity: 10
-      MinCapacity: 1
+      MaxCapacity: 10000
+      MinCapacity: 2
       ResourceId:
         Fn::Join:
         - /
@@ -881,7 +896,7 @@ Resources:
         - Name: USER
           Value: user
         Essential: true
-        Image: !Sub ${AccountId}.dkr.ecr.${Region}.amazonaws.com/merchant/orders
+        Image: !Sub ${OrderSHA}
         LinuxParameters: {}
         LogConfiguration:
           LogDriver: awslogs
@@ -957,8 +972,8 @@ Resources:
     DependsOn:
     - PaymentService
     Properties:
-      MaxCapacity: 10
-      MinCapacity: 1
+      MaxCapacity: 10000
+      MinCapacity: 2
       ResourceId:
         Fn::Join:
         - /
@@ -1081,7 +1096,7 @@ Resources:
         - Name: USER
           Value: user
         Essential: true
-        Image: !Sub ${AccountId}.dkr.ecr.${Region}.amazonaws.com/merchant/payment
+        Image: !Sub ${PaymentSHA}
         LinuxParameters: {}
         LogConfiguration:
           LogDriver: awslogs
@@ -1157,8 +1172,8 @@ Resources:
     DependsOn:
     - ReviewsService
     Properties:
-      MaxCapacity: 10
-      MinCapacity: 1
+      MaxCapacity: 10000
+      MinCapacity: 2
       ResourceId:
         Fn::Join:
         - /
@@ -1281,7 +1296,7 @@ Resources:
         - Name: USER
           Value: user
         Essential: true
-        Image: !Sub ${AccountId}.dkr.ecr.${Region}.amazonaws.com/merchant/reviews
+        Image: !Sub ${ReviewsSHA}
         LinuxParameters: {}
         LogConfiguration:
           LogDriver: awslogs
@@ -1357,8 +1372,8 @@ Resources:
     DependsOn:
     - ShoppingcartService
     Properties:
-      MaxCapacity: 10
-      MinCapacity: 1
+      MaxCapacity: 10000
+      MinCapacity: 2
       ResourceId:
         Fn::Join:
         - /
@@ -1481,7 +1496,7 @@ Resources:
         - Name: USER
           Value: user
         Essential: true
-        Image: !Sub ${AccountId}.dkr.ecr.${Region}.amazonaws.com/merchant/shopping-cart
+        Image: !Sub ${ShopSHA}
         LinuxParameters: {}
         LogConfiguration:
           LogDriver: awslogs
@@ -1557,8 +1572,8 @@ Resources:
     DependsOn:
     - VisitingService
     Properties:
-      MaxCapacity: 10
-      MinCapacity: 1
+      MaxCapacity: 10000
+      MinCapacity: 2
       ResourceId:
         Fn::Join:
         - /
@@ -1681,7 +1696,7 @@ Resources:
         - Name: USER
           Value: user
         Essential: true
-        Image: !Sub ${AccountId}.dkr.ecr.${Region}.amazonaws.com/merchant/visiting
+        Image: !Sub ${VisitSHA}
         LinuxParameters: {}
         LogConfiguration:
           LogDriver: awslogs

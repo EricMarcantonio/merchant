@@ -116,9 +116,19 @@ const ProductList = () => {
 							placeholder="Type"
 							onChange={handleTypeChange}
 					>
-						{allItems && allItems.map((i) => {
-							return <Select.Option value={i.product.type}>{i.product.type}</Select.Option>;
-						})}
+						{(function() {
+							if (allItems) {
+								let temp = new Set<string>();
+								allItems.forEach((i) => {
+									if (i.product.type != null) {
+										temp.add(i.product.type);
+									}
+								});
+								return Array.from<string>(temp).map((i) => <Select.Option
+									value={i}>{i}</Select.Option>);
+							}
+						})()
+						}
 					</Select>
 				</div>
 
@@ -137,7 +147,7 @@ const ProductList = () => {
 											return !!(i.product.brand && brandChange.includes(i.product.brand));
 										});
 									}
-									if (typeChange.length > 0){
+									if (typeChange.length > 0) {
 										temp = temp.filter((i) => {
 											return !!(i.product.type && typeChange.includes(i.product.type));
 										});
@@ -146,7 +156,8 @@ const ProductList = () => {
 										return <Product product={item.product} review={item.review}
 														key={item.product.id} />;
 									});
-								} return <Loading/>
+								}
+								return <Loading />;
 							}
 						)()}
 
