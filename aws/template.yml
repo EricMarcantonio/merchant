@@ -1721,3 +1721,16 @@ Resources:
       - Key: com.docker.compose.service
         Value: visiting
     Type: AWS::IAM::Role
+Outputs:
+  DB:
+    Description: "The db connection host"
+    Value:
+      Fn::GetAtt:
+        - DB
+        - Endpoint.Address
+  URL:
+    Description: "The ELB URL"
+    Value:
+      Fn::GetAtt:
+        - LoadBalancer
+        - DNSName
