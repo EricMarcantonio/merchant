@@ -5,6 +5,8 @@ import Counter from "./Counter";
 import Loading from "./Loading";
 import EmptyCart from "./EmptyCart";
 import { useNavigate } from "react-router-dom";
+import { ToastFactory } from "../types/toasts";
+import { Simulate } from "react-dom/test-utils";
 
 const ShoppingCart = () => {
 	const con = container.useContainer();
@@ -12,6 +14,7 @@ const ShoppingCart = () => {
 	const [total, setTotal] = useState(0);
 	var itemTotal = 0;
 	const navigate = useNavigate();
+
 
 	useEffect(() => {
 		GetShoppingCart()
@@ -25,11 +28,14 @@ const ShoppingCart = () => {
 						}
 					}
 					setTotal(itemTotal);
+					setRender(true);
+				} else {
+					navigate("/products");
 				}
 			}).catch(() => {
-		}).finally(() => {
+			navigate("/login");
 			setRender(true);
-		});
+		})
 
 	}, []);
 
@@ -50,6 +56,10 @@ const ShoppingCart = () => {
 				<Loading />
 			) : (
 				<div>
+					<div className=" text-3xl font-extrabold text-gray-900">
+						Your Cart to greatness. Let's take a look.
+					</div>
+
 					{Object.keys(con.cart).length == 0 ? (
 						<EmptyCart />
 					) : (
