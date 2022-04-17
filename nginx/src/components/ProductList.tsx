@@ -4,6 +4,7 @@ import { IProduct } from "../types";
 import { GetAllProductsFromBackend } from "../backend";
 import { GetReviewsByItemId } from "../backend/products";
 import Loading from "./Loading";
+import { Select } from "antd";
 
 export interface IReview {
 	id?: number
@@ -84,13 +85,30 @@ const ProductList = () => {
 		});
 	}, []);
 
+	const handleChange = (value: string[]) => {
+		setBrands(value);
+	};
 
 	return (
 		<div className="bg-white flex">
-			<aside className="w-64 h-screen sticky" aria-label="Sidebar">
-				<div className="my-auto">
-					I am the sidebar
+			<aside className="w-64 h-screen sticky top-0" aria-label="Sidebar">
+
+				<div className={"h-5/6 bg-black text-white m-3 p-3 rounded-2xl"}>
+					<div className={'w-full mx-auto text-3xl'}>Filter</div>
+					<div className={'w-full mx-auto text-xl'}>Brand</div>
+
+					<Select className={"w-48 mx-auto"}
+							mode="multiple"
+							placeholder="Brand"
+							onChange={handleChange}
+					>
+						{allItems && allItems.map((i) => {
+							return <Select.Option value={i.product.brand}>{i.product.brand}</Select.Option>;
+						})}
+					</Select>
 				</div>
+
+
 			</aside>
 			<main>
 				<div className=" py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
@@ -106,13 +124,48 @@ const ProductList = () => {
 								if (type.length > 0) {
 									temp = temp.filter((i) => type.includes(i.product.type || ""));
 								}
-								console.log("temp", temp);
 								return temp.map((item) => {
 									return <Product product={item.product} review={item.review}
 													key={item.product.id} />;
 								});
 							} else {
-								return <Loading/>
+								return <Loading />;
+							}
+						})()
+						}
+						{(function() {
+							if (allItems.length > 0) {
+								let temp = allItems;
+								if (brands.length > 0) {
+									temp = temp.filter((i) => brands.includes(i.product.brand || ""));
+								}
+								if (type.length > 0) {
+									temp = temp.filter((i) => type.includes(i.product.type || ""));
+								}
+								return temp.map((item) => {
+									return <Product product={item.product} review={item.review}
+													key={item.product.id} />;
+								});
+							} else {
+								return <Loading />;
+							}
+						})()
+						}
+						{(function() {
+							if (allItems.length > 0) {
+								let temp = allItems;
+								if (brands.length > 0) {
+									temp = temp.filter((i) => brands.includes(i.product.brand || ""));
+								}
+								if (type.length > 0) {
+									temp = temp.filter((i) => type.includes(i.product.type || ""));
+								}
+								return temp.map((item) => {
+									return <Product product={item.product} review={item.review}
+													key={item.product.id} />;
+								});
+							} else {
+								return <Loading />;
 							}
 						})()
 						}
