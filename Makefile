@@ -4,7 +4,7 @@ docker-compose:
 	docker compose up -d
 
 docker-build:
-	docker compose build --no-cache
+	docker compose build
 
 clean:
 	docker system prune -a -f

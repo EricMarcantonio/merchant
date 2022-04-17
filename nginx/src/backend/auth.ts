@@ -4,7 +4,7 @@ export const VerifyUser = () => {
 	let data = "";
 	return a.request<UserAttributes>({
 		method: "post",
-		url: "/auth/verify/",
+		url: "/auth/v1/verify/",
 		headers: {},
 		data: data,
 		withCredentials: true,

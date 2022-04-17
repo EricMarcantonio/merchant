@@ -13,5 +13,5 @@ export interface UserAttributes {
 
 
 export const a = axios.create({
-	baseURL: process.env.REACT_APP_BACKEND,
+	baseURL: process.env.REACT_APP_DEV ? process.env.REACT_APP_BACKEND : "http://" + window.location.host + "/api",
 });

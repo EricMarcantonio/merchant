@@ -7,7 +7,7 @@ export const GetAllProductsFromBackend = () => {
 
 	return a.request<IProduct[]>({
 		method: "get",
-		url: "/catalog/all",
+		url: "/catalog/all/",
 	})
 		.then((response) => {
 			return response.data;
@@ -74,7 +74,7 @@ export const UpdateShoppingCart = (cart: ICartUpdate[]) => {
 	var data = JSON.stringify(cart);
 	return a.request({
 		method: "post",
-		url: "/cart/v1",
+		url: "/cart/v1/",
 		withCredentials: true,
 		headers: {
 			"Content-Type": "application/json",
@@ -97,7 +97,7 @@ export const AdminLogin = (email: string, password: string) => {
 
 	return a.request({
 		method: "post",
-		url: "/auth/login/",
+		url: "/auth/v1/login/",
 		withCredentials: true,
 		headers: {
 			"Content-Type": "application/json",
@@ -126,7 +126,7 @@ export const UserRegister = (firstname: string, lastname: string, email: string,
 	return a
 		.request<UserAttributes>({
 			method: "post",
-			url: "/auth/register/",
+			url: "/auth/v1/register/",
 			withCredentials: true,
 			headers: {
 				"Content-Type": "application/json",
@@ -146,7 +146,7 @@ export const DeleteItemFromCart = (id: number) => {
 
 	return a.request({
 		method: "delete",
-		url: "/cart/",
+		url: "/cart/v1/",
 		withCredentials: true,
 		headers: {
 			"Content-Type": "application/json",
@@ -168,7 +168,7 @@ export const verify = () => {
 
 	a.request({
 		method: "post",
-		url: "/auth/verify/",
+		url: "/auth/v1/verify/",
 		withCredentials: true,
 	})
 		.then(function(response) {

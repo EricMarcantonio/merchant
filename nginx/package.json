@@ -30,7 +30,7 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "REACT_APP_BACKEND='http://127.0.0.1/api' PORT=3000 HOST=127.0.0.1 react-scripts start",
+    "start": "REACT_APP_BACKEND='http://127.0.0.1/api' REACT_APP_DEV=true PORT=3000 HOST=127.0.0.1 react-scripts start",
     "start:win": "set PORT=3000 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
