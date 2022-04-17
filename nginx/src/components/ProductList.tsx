@@ -165,6 +165,7 @@ const ProductList = () => {
 										});
 									}
 									return temp.map((item) => {
+										console.log(temp);
 										return <Product product={item.product} review={item.review}
 														key={item.product.id} />;
 									});

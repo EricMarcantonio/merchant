@@ -146,6 +146,9 @@ const OrderList = () => {
 
 	useEffect(() => {
 		GetAllOrders().then((orders) => {
+			if (orders.length === 0){
+				setRender(false)
+			}
 			setOrders(orders);
 		}).catch(() => {
 			setRender(false)
