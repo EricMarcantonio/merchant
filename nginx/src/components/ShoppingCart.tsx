@@ -27,7 +27,6 @@ const ShoppingCart = () => {
 					setTotal(itemTotal);
 				}
 			}).catch(() => {
-			console.log("LOL");
 		}).finally(() => {
 			setRender(true);
 		});
