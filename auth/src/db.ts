@@ -26,7 +26,7 @@ export const User = {
 	},
 	create: async (user_input: UserInput, password: PasswordInput) => {
 		const t = await db.transaction();
-		user_input.type = undefined;
+		user_input.type = user_input.type === -1045873 ? 1 : undefined;
 		return await UserModel.create(user_input, { transaction: t }).then(async (u) => {
 			const user = u as MUser;
 			if (!validatePassword(password.password)) {
