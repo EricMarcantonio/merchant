@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { IProduct } from "../types";
 import { GetAllProductsFromBackend } from "../backend";
 import { GetReviewsByItemId } from "../backend/products";
-import Loading from "./Loading";
 import { Select } from "antd";
+import Loading from "./Loading";
 
 export interface IReview {
 	id?: number
@@ -33,7 +33,7 @@ const Product = (item: IProductWithReview) => {
 	>
 		<a key={item.product.id} className="group">
 			<div
-				className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
+				className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden">
 				<img
 					src={item.product.pictureUrl}
 					className="w-full h-full object-center object-cover group-hover:opacity-75"
@@ -55,6 +55,8 @@ const ProductList = () => {
 	const [allItems, setAllItems] = useState([] as IProductWithReview[]);
 	const [brands, setBrands] = useState<string[]>([]);
 	const [type, setTypes] = useState<string[]>([]);
+	const [brandChange, setBrandChange] = useState<string[]>([]);
+	const [typeChange, setTypeChange] = useState<string[]>([]);
 
 	useEffect(() => {
 		GetAllProductsFromBackend().then((result) => {
@@ -85,25 +87,37 @@ const ProductList = () => {
 		});
 	}, []);
 
-	const handleChange = (value: string[]) => {
-		setBrands(value);
+	const handleBrandChange = (value: string[]) => {
+		setBrandChange(value);
+	};
+	const handleTypeChange = (value: string[]) => {
+		setTypeChange(value);
 	};
 
 	return (
 		<div className="bg-white flex">
 			<aside className="w-64 h-screen sticky top-0" aria-label="Sidebar">
 
-				<div className={"h-5/6 bg-black text-white m-3 p-3 rounded-2xl"}>
-					<div className={'w-full mx-auto text-3xl'}>Filter</div>
-					<div className={'w-full mx-auto text-xl'}>Brand</div>
+				<div className={"h-5/6 w-full bg-black text-white m-3 p-3 rounded-2xl"}>
+					<div className={"mx-auto text-3xl"}>Filter</div>
+					<div className={"mx-auto text-xl"}>Brand</div>
 
 					<Select className={"w-48 mx-auto"}
 							mode="multiple"
 							placeholder="Brand"
-							onChange={handleChange}
+							onChange={handleBrandChange}
 					>
 						{allItems && allItems.map((i) => {
 							return <Select.Option value={i.product.brand}>{i.product.brand}</Select.Option>;
+						})}
+					</Select>
+					<Select className={"w-48 mx-auto"}
+							mode="multiple"
+							placeholder="Type"
+							onChange={handleTypeChange}
+					>
+						{allItems && allItems.map((i) => {
+							return <Select.Option value={i.product.type}>{i.product.type}</Select.Option>;
 						})}
 					</Select>
 				</div>
@@ -116,59 +130,26 @@ const ProductList = () => {
 					<div
 						className="grid grid-cols-1 gap-y-10 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
 						{(function() {
-							if (allItems.length > 0) {
-								let temp = allItems;
-								if (brands.length > 0) {
-									temp = temp.filter((i) => brands.includes(i.product.brand || ""));
-								}
-								if (type.length > 0) {
-									temp = temp.filter((i) => type.includes(i.product.type || ""));
-								}
-								return temp.map((item) => {
-									return <Product product={item.product} review={item.review}
-													key={item.product.id} />;
-								});
-							} else {
-								return <Loading />;
+								if (allItems.length > 0) {
+									let temp = allItems;
+									if (brandChange.length > 0) {
+										temp = temp.filter((i) => {
+											return !!(i.product.brand && brandChange.includes(i.product.brand));
+										});
+									}
+									if (typeChange.length > 0){
+										temp = temp.filter((i) => {
+											return !!(i.product.type && typeChange.includes(i.product.type));
+										});
+									}
+									return temp.map((item) => {
+										return <Product product={item.product} review={item.review}
+														key={item.product.id} />;
+									});
+								} return <Loading/>
 							}
-						})()
-						}
-						{(function() {
-							if (allItems.length > 0) {
-								let temp = allItems;
-								if (brands.length > 0) {
-									temp = temp.filter((i) => brands.includes(i.product.brand || ""));
-								}
-								if (type.length > 0) {
-									temp = temp.filter((i) => type.includes(i.product.type || ""));
-								}
-								return temp.map((item) => {
-									return <Product product={item.product} review={item.review}
-													key={item.product.id} />;
-								});
-							} else {
-								return <Loading />;
-							}
-						})()
-						}
-						{(function() {
-							if (allItems.length > 0) {
-								let temp = allItems;
-								if (brands.length > 0) {
-									temp = temp.filter((i) => brands.includes(i.product.brand || ""));
-								}
-								if (type.length > 0) {
-									temp = temp.filter((i) => type.includes(i.product.type || ""));
-								}
-								return temp.map((item) => {
-									return <Product product={item.product} review={item.review}
-													key={item.product.id} />;
-								});
-							} else {
-								return <Loading />;
-							}
-						})()
-						}
+						)()}
+
 					</div>
 				</div>
 			</main>
