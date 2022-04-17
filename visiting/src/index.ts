@@ -1,7 +1,7 @@
 import express from "express";
 import cookieParser from "cookie-parser";
-import { connectToDb, passport } from "./util";
-import { GetEvents, SetEvent } from "./handlers";
+import {connectToDb, db, passport} from "./util";
+import {GetEvents, GetOrders, SetEvent} from "./handlers";
 import cors from "cors";
 
 const app = express();
@@ -22,13 +22,14 @@ app.use((req, res, next) => {
 	next();
 });
 
-app.get("/v1", passport.authenticate("jwt", { session: false }), GetEvents);
-app.post("/v1", passport.authenticate("jwt", { session: false }), SetEvent);
+app.get("/v1/event", passport.authenticate("jwt", { session: false }), GetEvents);
+app.get("/v1/orders", passport.authenticate("jwt", { session: false }), GetOrders);
+app.post("/v1/event", passport.authenticate("jwt", { session: false }), SetEvent);
 
 // Health Check
 app.get("/", (req, res)=>{res.sendStatus(200)});
 
-connectToDb().then(() => {
+connectToDb().then(async () => {
 	const port = parseInt(process.env.EXPRESS_PORT || "0");
 	app.listen(port, () => {
 		console.log(`Visiting is on ${port}`);

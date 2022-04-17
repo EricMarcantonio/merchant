@@ -64,7 +64,7 @@ const UserModel = db.define("User", {
 				msg: ERRORS.USERNAME_NULL.toString(),
 			},
 			isAlphanumeric: {
-				msg: "Please enter letters and numbers only for your username.",
+				msg: ERRORS.INVALID_USERNAME.toString(),
 			},
 		},
 	},
@@ -80,7 +80,7 @@ const UserModel = db.define("User", {
 				msg: ERRORS.EMAIL_NULL.toString(),
 			},
 			isEmail: {
-				msg: "Please enter a valid email.",
+				msg: ERRORS.INVALID_EMAIL.toString(),
 			},
 		},
 	},
@@ -92,7 +92,7 @@ const UserModel = db.define("User", {
 				msg: ERRORS.FIRST_NAME_NULL.toString(),
 			},
 			isAlpha: {
-				msg: "Please enter letters only for your first name.",
+				msg: ERRORS.INVALID_FNAME.toString(),
 			},
 		},
 	},
@@ -104,7 +104,7 @@ const UserModel = db.define("User", {
 				msg: ERRORS.LAST_NAME_NULL.toString(),
 			},
 			isAlpha: {
-				msg: "Please enter letters only for your last name.",
+				msg: ERRORS.INVALID_LNAME.toString(),
 			},
 		},
 	},
