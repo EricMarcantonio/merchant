@@ -9,24 +9,24 @@ Parameters:
     Default: us-east-1
     Description: Region for this template
     Type: String
-  Vpc:
+  VPC:
     Default: "vpc-09c083dcd7ce2e32b"
     Type: String
   Mem:
-    Default: "1000"
+    Default: "2048"
     Type: String
   Cpu:
-    Default: "1000"
+    Default: "1024"
     Type: String
-  DB_USER:
-    Default: "user"
-    Type: String
-  DB_PASS:
-    Default: "password"
-    Type: String
-  DB_PORT:
-    Default: "3306"
-    Type: String
+#  DB_USER:
+#    Default: "user"
+#    Type: String
+#  DB_PASS:
+#    Default: "password"
+#    Type: String
+#  DB_PORT:
+#    Default: "3306"
+#    Type: String
 
 Resources:
   DB:
@@ -473,7 +473,7 @@ Resources:
         Value: aws
       - Key: com.docker.compose.network
         Value: aws_default
-      VpcId: vpc-f441ca89
+      VpcId: !Sub ${VPC}
     Type: AWS::EC2::SecurityGroup
   DefaultNetworkIngress:
     Properties:
@@ -654,7 +654,7 @@ Resources:
       - Key: com.docker.compose.project
         Value: aws
       TargetType: ip
-      VpcId: vpc-f441ca89
+      VpcId: !Sub ${VPC}
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
   NginxTaskDefinition:
     Properties:

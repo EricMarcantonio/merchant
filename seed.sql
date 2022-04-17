@@ -203,26 +203,26 @@ create  index userId
 INSERT INTO Items (NAME, PRICE, UNITS, DESCRIPTION, TYPE, BRAND, PICTUREURL, CREATEDAT, UPDATEDAT)
 VALUES ('Nintendo Switch OLED', 379.99, 100,
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        'Console', 'Nintendo',
-        'https://assets.nintendo.com/image/upload/ncom/en_US/switch/site-design-update/oled-model-promo-mobile', NOW(),
-        NOW());
+        'Hybrid Console', 'Nintendo',
+        'https://assets.nintendo.com/image/upload/ncom/en_US/switch/site-design-update/oled-model-promo-mobile', UTC_TIMESTAMP(),
+        UTC_TIMESTAMP());
 INSERT INTO Items (NAME, PRICE, UNITS, DESCRIPTION, TYPE, BRAND, PICTUREURL, CREATEDAT, UPDATEDAT)
 VALUES ('PlayStation 5', 629.99, 100,
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
         'Console', 'Sony',
         'https://media.wired.com/photos/601dde27f1bf194f33695d95/3:4/w_1347,h_1796,c_limit/Gear-PS5-2-src-Sony-teal.jpg',
-        NOW(), NOW());
+        UTC_TIMESTAMP(), UTC_TIMESTAMP());
 INSERT INTO Items (NAME, PRICE, UNITS, DESCRIPTION, TYPE, BRAND, PICTUREURL, CREATEDAT, UPDATEDAT)
 VALUES ('Xbox Series X', 599.99, 100,
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
         'Console', 'Microsoft', 'https://assets1.ignimgs.com/2019/12/13/xbox-series-x---button-01a-1576278376804.jpg',
-        NOW(), NOW());
+        UTC_TIMESTAMP(), UTC_TIMESTAMP());
 INSERT INTO Items (NAME, PRICE, UNITS, DESCRIPTION, TYPE, BRAND, PICTUREURL, CREATEDAT, UPDATEDAT)
 VALUES ('Steam Deck', 499.99, 100,
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        'Console', 'Steam',
-        'https://media.wired.com/photos/6217e2ebe15f63f9560fa168/master/pass/Gear-Steam-Deck-Rendering-1.jpg', NOW(),
-        NOW());
+        'Hand Held', 'Steam',
+        'https://media.wired.com/photos/6217e2ebe15f63f9560fa168/master/pass/Gear-Steam-Deck-Rendering-1.jpg', UTC_TIMESTAMP(),
+        UTC_TIMESTAMP());
 
 # INSERT INTO Users (USERNAME, EMAIL, TYPE, CREATEDAT, UPDATEDAT, FNAME, LNAME)
 # VALUES ('admin', 'admin', 1, NOW(), NOW(), 'eric', 'marcantonio');
