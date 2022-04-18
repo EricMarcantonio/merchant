@@ -154,7 +154,6 @@ export const DeleteItemFromCart = (id: number) => {
 		data: data,
 	})
 		.then(function(response) {
-			console.log(JSON.stringify(response.data));
 			return true;
 		})
 		.catch(function(error) {
@@ -188,4 +187,20 @@ export const GetReviewsByItemId = (id: number) => {
 		.then((response) => {
 			return response.data;
 		});
+};
+
+export const SendVisitEvent = (id: string | undefined) => {
+	let data = JSON.stringify({
+		"itemId": id,
+		"eventType": "VISIT"
+	});
+	return a.request({
+			method: 'post',
+			url: '/visiting/v1/event/',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			data : data,
+		withCredentials: true
+	})
 };

@@ -2,15 +2,13 @@ import { LockClosedIcon } from "@heroicons/react/solid";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AdminLogin } from "../backend";
-import { verify } from "../backend/products";
+// import { verify } from "../backend/products";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loading from "./Loading";
 import { ErrorToast, SuccessToast, ToastFactory } from "../types/toasts";
+import { VerifyUser } from "../backend/auth";
 
-const toastError = (text: string) => {
-	toast.error(text);
-};
 
 const LogInForm = () => {
 	const [render, setRender] = useState(true);
@@ -19,25 +17,19 @@ const LogInForm = () => {
 	const [password, setPassword] = useState("");
 	const [buttonText, setButtonText] = useState("Log in");
 	const factory = new ToastFactory();
-	useEffect(() => {
-		verify();
-	}, []);
+	const toast = factory.createToast(
+		"SUCCESS",
+		"Successful log in",
+	);
 	const handleAdminLogin = (email: string, password: string) => {
 		setButtonText("Loading");
 		AdminLogin(email, password)
 			.then(async (result) => {
-				if (!result) {
-					console.log("There was an error logging in");
-				} else {
+
 					setButtonText("Log in");
-					console.log(result);
-					const toast = factory.createToast(
-						"SUCCESS",
-						"Successful log in",
-					) as SuccessToast;
 					await toast.run();
 					navigate(`/products`);
-				}
+
 			})
 			.catch(async (err) => {
 				setButtonText("Log in");

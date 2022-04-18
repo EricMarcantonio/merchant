@@ -1,6 +1,11 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { GetAProductByIdFromBackend, GetReviewsByItemId, UpdateShoppingCart } from "../backend/products";
+import {
+	GetAProductByIdFromBackend,
+	GetReviewsByItemId,
+	SendVisitEvent,
+	UpdateShoppingCart,
+} from "../backend/products";
 import { IProduct } from "../types";
 import { IReview } from "./ProductList";
 import moment from "moment";
@@ -58,6 +63,7 @@ const ItemInfo = () => {
 	};
 
 	useEffect(() => {
+		SendVisitEvent(id);
 		if (id) {
 			Promise.all([
 				GetAProductByIdFromBackend(parseInt(id)),
