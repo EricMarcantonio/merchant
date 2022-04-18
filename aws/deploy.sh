@@ -13,8 +13,11 @@ ReviewsSHA=$(docker inspect --format='{{index .RepoDigests 0}}' "${ID}".dkr.ecr.
 ShopSHA=$(docker inspect --format='{{index .RepoDigests 0}}' "${ID}".dkr.ecr.${REGION}.amazonaws.com/merchant/shopping-cart)
 VisitSHA=$(docker inspect --format='{{index .RepoDigests 0}}' "${ID}".dkr.ecr.${REGION}.amazonaws.com/merchant/visiting)
 
+SUBNETS=$(aws ec2 --region ${REGION} describe-subnets | jq ".Subnets" | jq -r ".[].SubnetId" | paste -s -d, -)
+
+echo "${SUBNETS}"
 
 echo 'Deploying'
-aws cloudformation deploy --region "${REGION}" --template-file "template.yml" --stack-name merchant --capabilities CAPABILITY_NAMED_IAM --parameter-overrides AccountId="${ID}" --parameter-overrides Region="${REGION}" --parameter-overrides VPC="${VPC}" AuthSHA="${AuthSHA}" CatalogSHA="${CatalogSHA}" NginxSHA="${NginxSHA}" OrderSHA="${OrderSHA}" PaymentSHA="${PaymentSHA}" ReviewsSHA="${ReviewsSHA}" ShopSHA=${ShopSHA} VisitSHA=${VisitSHA}
+aws cloudformation deploy --region "${REGION}" --template-file "template.yml" --stack-name merchant --capabilities CAPABILITY_NAMED_IAM --parameter-overrides AccountId="${ID}" --parameter-overrides Region="${REGION}" --parameter-overrides VPC="${VPC}" AuthSHA="${AuthSHA}" CatalogSHA="${CatalogSHA}" NginxSHA="${NginxSHA}" OrderSHA="${OrderSHA}" PaymentSHA="${PaymentSHA}" ReviewsSHA="${ReviewsSHA}" ShopSHA=${ShopSHA} VisitSHA=${VisitSHA} Subnets=${SUBNETS}
 
 
