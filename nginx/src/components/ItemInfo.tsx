@@ -23,6 +23,7 @@ const ItemInfo = () => {
 	const [review, setReview] = useState<IReview[]>();
 	const [reviewData, setReviewData] = useState("");
 	const [star, setStar] = useState(0);
+	const [rat, setRat] = useState(0);
 	const factory = new ToastFactory();
 
 	const handleAddToCart = (item: number, val: number) => {
@@ -44,6 +45,8 @@ const ItemInfo = () => {
 			}
 		});
 	};
+
+
 
 	const handleAddReview = (
 		itemId: string,
@@ -67,6 +70,7 @@ const ItemInfo = () => {
 
 	useEffect(() => {
 		SendVisitEvent(id);
+
 		if (id) {
 			Promise.all([
 				GetAProductByIdFromBackend(parseInt(id)),
@@ -80,16 +84,22 @@ const ItemInfo = () => {
 				});
 
 				data[1] = data[1].slice(0, 5);
-				let ids = data[1].map((rev) => GetUsername(rev.userId));
-				Promise.all(ids).then((res) => {
-
-				});
+				// let id =  data[1].map((rev) => rev.userId);
+				// let ids = data[1].map((rev) => GetUsername(rev.userId));
+				// Promise.all(ids).then((res) => {
+				// 	for (let x of id) {
+				// 		data[1][x.toString()].userId = ids[x]
+				// 	}
+				// });
 				setReview(data[1]);
+				// setRat(data[1].map((i) => i.rating).reduce((a, b) => (a + b)) / data[1].length);
+
 			});
 		} else {
 			console.log("No Id was passed, probably 404");
 		}
 	}, []);
+
 	return (
 		<div className="bg-white">
 			<div className="pt-6 grid grid-cols-2">
@@ -100,6 +110,8 @@ const ItemInfo = () => {
 							className="w-full h-full object-center object-cover rounded-lg my-auto"
 						/>
 					</div>
+					{/*<Rate disabled defaultValue={rat} allowHalf  />*/}
+
 					<div className="text-2xl font-extrabold mx-20 px-5 pt-10 text-center">
 						Recent Reviews
 					</div>
@@ -107,6 +119,7 @@ const ItemInfo = () => {
 
 					{review &&
 						review.map((rev) => {
+
 							return (
 								<div
 									className="relative mx-20 p-5 lg:col-start-1 lg:col-span-1 flex flex-col bg-white rounded-md shadow-xl bg-black text-white"
@@ -114,7 +127,7 @@ const ItemInfo = () => {
 								>
 									<p>
 										<b>
-											User{rev.userId} Rating:{rev.rating}/5
+											User{rev.userId} 			<Rate disabled defaultValue={rev.rating}  />
 										</b>
 									</p>
 									<p>{rev.data}</p>

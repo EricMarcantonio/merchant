@@ -1,11 +1,12 @@
-import { IOrderData, IOrderItem, IProduct } from "../types";
+import { ICart, IOrderData, IOrderItem, IProduct } from "../types";
 import moment from "moment";
 import { useEffect, useState } from "react";
-import { GetAProductByIdFromBackend } from "../backend";
+import { GetAProductByIdFromBackend, GetShoppingCart } from "../backend";
 import { GetAllOrders } from "../backend/orders";
 import { useNavigate } from "react-router-dom";
 import Loading from "./Loading";
 import { ToastFactory } from "../types/toasts";
+import { container } from "../GlobalContainer";
 
 interface IOrderItemProps {
 	order: IOrderData;
@@ -148,7 +149,7 @@ const OrderList = () => {
 	const factory = new ToastFactory();
 	const err = factory.createToast("ERROR", "You don't have any orders!");
 	const getOrderErr = factory.createToast("ERROR", "There are no orders");
-
+	const con = container.useContainer();
 	useEffect(() => {
 		GetAllOrders().then(async (orders) => {
 			if (orders.length === 0){
@@ -159,6 +160,9 @@ const OrderList = () => {
 		}).catch(async () => {
 			await getOrderErr.run(2000);
 			setRender(false)
+		});
+		GetShoppingCart().then((cart) => {
+			con.setCart(cart || {} as ICart);
 		})
 	}, []);
 

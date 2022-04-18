@@ -45,10 +45,10 @@ export const Confirm = () => {
 						cardNumber: "", cvv: "", expiration: ""
 					});
 					navigate("/orders")
-				}).catch(async () => {
-					await errOrder.run(1500)
 				})
-			})
+			}).catch(async () => {
+			await errOrder.run(1500)
+		})
 	};
 
 	const factory = new ToastFactory();

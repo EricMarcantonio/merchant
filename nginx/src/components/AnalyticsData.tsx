@@ -22,6 +22,10 @@ const AnalyticsData = () => {
 		});
 
 		GetOrder().then((data) => {
+			data = data.map((d: any) => {
+				d.createdAt = moment(d.createdAt).utc().local().format("MMMM Do YYYY");
+				return d;
+			});
 			setOrders(data);
 		}).catch(() => {
 			navigate("/products")
@@ -48,10 +52,6 @@ const AnalyticsData = () => {
 			title: "Event",
 			dataIndex: "eventType",
 			key: "eventType",
-		}, {
-			title: "Address",
-			dataIndex: "address",
-			key: "address",
 		}, {
 			title: "Created",
 			dataIndex: "createdAt",

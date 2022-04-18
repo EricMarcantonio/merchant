@@ -46,7 +46,7 @@ const Product = (item: IProductWithReview) => {
 		</a>
 		<div>
 
-			<Rate disabled defaultValue={rating} allowHalf {...console.log(rating)}  />
+			<Rate disabled defaultValue={rating} allowHalf  />
 		</div>
 	</div>;
 };

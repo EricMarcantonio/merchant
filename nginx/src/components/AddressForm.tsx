@@ -9,6 +9,7 @@ import { VerifyUser } from "../backend/auth";
 import Loading from "./Loading";
 import { ToastFactory } from "../types/toasts";
 import { GetShoppingCart } from "../backend";
+import { ICart } from "../types";
 
 const { Step } = Steps;
 
@@ -33,7 +34,8 @@ const AddressForm = () => {
 				con.setUser(user);
 				if (Object.keys(con.cart).length === 0) {
 					GetShoppingCart().then((cart) => {
-						if (Object.keys(con.cart).length === 0) {
+						con.setCart(cart || {} as ICart);
+						if (Object.keys(cart || {} as ICart).length === 0) {
 							errNoCart.run().then(() => {
 								navigate("/products");
 							});
@@ -48,7 +50,8 @@ const AddressForm = () => {
 		} else {
 			if (Object.keys(con.cart).length === 0) {
 				GetShoppingCart().then((cart) => {
-					if (Object.keys(con.cart).length === 0) {
+					con.setCart(cart || {} as ICart);
+					if (Object.keys(cart || {}).length === 0) {
 						errNoCart.run().then(() => {
 							navigate("/products");
 						});
