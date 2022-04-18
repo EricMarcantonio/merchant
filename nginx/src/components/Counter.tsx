@@ -4,6 +4,7 @@ import { DeleteItemFromCart, UpdateShoppingCart } from "../backend";
 import { useState } from "react";
 import { LoadingOutlined } from "@ant-design/icons";
 import { TrashIcon } from "@heroicons/react/solid";
+import { ToastFactory } from "../types/toasts";
 
 interface ICounterProps {
 	item_num: number;
@@ -19,7 +20,11 @@ const Counter = ({ item_num, getTotal }: ICounterProps) => {
 	const [disableButton, setDisableButton] = useState(false);
 	var total = 0;
 
-	const handleDecrease = () => {
+	const toast = new ToastFactory();
+	const errCant = toast.createToast("ERROR", "Please delete the item!");
+	const err = toast.createToast("ERROR", "There was an error, try again!");
+	const success = toast.createToast("SUCCESS", "Success!");
+	const handleDecrease = async () => {
 		if (con.cart[item_num].units_requested >= 2) {
 			setDisableButton(true);
 			setDec(
@@ -35,18 +40,17 @@ const Counter = ({ item_num, getTotal }: ICounterProps) => {
 				},
 			];
 			UpdateShoppingCart(sendToBackend)
-				.then((result) => {
+				.then(async (result) => {
 
 					temp[item_num].units_requested = temp[item_num].units_requested - 1;
 					setDisableButton(false);
 					con.setCart(temp);
 					setDec(<div>-</div>);
 					getTotal();
+					await success.run(1000);
 
-				}).catch((err) => {
-				alert(
-					"There was an error with removing the item. Please try again." + err,
-				);
+				}).catch(async (e) => {
+				await err.run(1300);
 				setDisableButton(false);
 				setDec(<div>-</div>);
 			})
@@ -54,7 +58,7 @@ const Counter = ({ item_num, getTotal }: ICounterProps) => {
 					setDec(<div>-</div>);
 				});
 		} else {
-			alert("Please delete the item");
+			await errCant.run(1400);
 		}
 	};
 
@@ -79,11 +83,12 @@ const Counter = ({ item_num, getTotal }: ICounterProps) => {
 				con.setCart(temp);
 				setInc(<div>+</div>);
 				getTotal();
+				success.run()
 				// } else {
 
 				// }
-			}).catch((err) => {
-			alert("There was an error with adding the item. Please try again." + err);
+			}).catch((eerr) => {
+				err.run();
 			setDisableButton(false);
 			setInc(<div>+</div>);
 		})

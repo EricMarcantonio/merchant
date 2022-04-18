@@ -16,6 +16,7 @@ const SignUpForm = () => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [buttonText, setButtonText] = useState("Sign up");
+	const [isAdmin, setIsAdmin] = useState(false);
 	const factory = new ToastFactory();
 
 	const con = container.useContainer();
@@ -178,7 +179,20 @@ const SignUpForm = () => {
 									/>
 								</div>
 							</div>
-
+							<div>
+								<label htmlFor="isAdmin" className="sr-only">
+									Are you an admin?
+								</label>
+								<input
+									id="isAdmin"
+									name="isAdmin"
+									type="checkbox"
+									required
+									onChange={(e) => {
+										setIsAdmin(!isAdmin);
+									}}
+								/>
+							</div>
 							<div>
 								<button
 									type="submit"

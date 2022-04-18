@@ -14,11 +14,12 @@ const ShoppingCart = () => {
 	const [total, setTotal] = useState(0);
 	var itemTotal = 0;
 	const navigate = useNavigate();
-
+	const factory = new ToastFactory();
+	const noCart = factory.createToast("ERROR", "You have nothing in your cart!");
 
 	useEffect(() => {
 		GetShoppingCart()
-			.then((result) => {
+			.then(async (result) => {
 				if (result) {
 					con.setCart(result);
 					for (let x in result) {
@@ -30,9 +31,11 @@ const ShoppingCart = () => {
 					setTotal(itemTotal);
 					setRender(true);
 				} else {
+					await noCart.run(1200);
 					navigate("/products");
 				}
-			}).catch(() => {
+			}).catch(async () => {
+			await noCart.run(1200);
 			navigate("/login");
 			setRender(true);
 		})
@@ -56,8 +59,8 @@ const ShoppingCart = () => {
 				<Loading />
 			) : (
 				<div>
-					<div className=" text-3xl font-extrabold text-gray-900">
-						Your Cart to greatness. Let's take a look.
+					<div className=" text-center py-4 text-3xl font-extrabold text-gray-900">
+						Your Cart.
 					</div>
 
 					{Object.keys(con.cart).length == 0 ? (
@@ -118,7 +121,7 @@ const ShoppingCart = () => {
 									className="lg:max-w-7xl lg:pt-10 lg:pb-10 lg:px-8 lg:grid lg:grid-cols-2 lg:grid-rows-[auto,auto,1fr] p-5 lg:col-start-4 lg:col-span-2 flex flex-col bg-white rounded-md shadow-xl bg-gray-200">
 									<div className="lg:col-start-1 lg:col-span-1">Total:</div>
 									<div className="relative lg:col-start-2 lg:col-span-1">
-										<div className="absolute inset-y-0 right-0">{total}</div>
+										<div className="absolute inset-y-0 right-0">{total.toFixed(2)}</div>
 									</div>
 								</div>
 							</div>

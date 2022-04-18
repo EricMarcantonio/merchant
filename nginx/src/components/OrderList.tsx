@@ -147,7 +147,7 @@ const OrderList = () => {
 
 	const factory = new ToastFactory();
 	const err = factory.createToast("ERROR", "You don't have any orders!");
-	const getOrderErr = factory.createToast("ERROR", "There are no errors");
+	const getOrderErr = factory.createToast("ERROR", "There are no orders");
 
 	useEffect(() => {
 		GetAllOrders().then(async (orders) => {
@@ -169,7 +169,7 @@ const OrderList = () => {
 
 
 	return (
-		<div className="bg-black">
+		<div className="bg-black h-screen">
 			<div className="w-screen mx-auto container">
 				<div className="w-2/3 mx-auto space-y-4">
 					{

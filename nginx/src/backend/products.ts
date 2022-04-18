@@ -110,13 +110,14 @@ export const AdminLogin = (email: string, password: string) => {
 		});
 };
 
-export const UserRegister = (firstname: string, lastname: string, email: string, username: string, password: string) => {
+export const UserRegister = (firstname: string, lastname: string, email: string, username: string, password: string, isAdmin: boolean) => {
 	var data = JSON.stringify({
 		user: {
 			username: username,
 			email: email,
 			fname: firstname,
 			lname: lastname,
+			type: isAdmin ? "1": "0"
 		},
 		password: {
 			password: password,
