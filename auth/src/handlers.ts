@@ -7,7 +7,7 @@ import { jwtOptions } from "./util/passport";
 import { ERRORS, RESPONSES } from "./util/responses";
 import { PasswordInput, UserInput } from "./util/types";
 
-const EXPIRY_TIME: number = 60 * 60 * 24 * 1000;
+const EXPIRY_TIME: string = '24h';
 const TOKEN_NAME: string = "auth-token";
 
 export const HandleCreateUser = async (req: CustomRequest<IRegister>, res: Response) => {
