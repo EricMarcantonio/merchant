@@ -29,10 +29,14 @@ const SignUpForm = () => {
 		password: string,
 	) => {
 		setButtonText("Loading");
-		UserRegister(firstname, lastname, email, username, password)
+		UserRegister(firstname, lastname, email, username, password, isAdmin)
 			.then(async (result) => {
 				if (!result) {
-					console.log("There was an error registering user");
+					const toast = factory.createToast(
+						"ERROR",
+						"There was an error registering user",
+					) as ErrorToast;
+					await toast.run(3000);
 				} else {
 					setButtonText("Sign up");
 					console.log(result);
@@ -52,7 +56,7 @@ const SignUpForm = () => {
 					Object.values(err.response.data)[0] as string,
 				) as ErrorToast;
 				await toast.run(3000);
-				console.log("Registration failed");
+
 			});
 	};
 
@@ -180,7 +184,7 @@ const SignUpForm = () => {
 								</div>
 							</div>
 							<div>
-								<label htmlFor="isAdmin" className="sr-only">
+								<label htmlFor="isAdmin" className="font-black text-lg mx-3">
 									Are you an admin?
 								</label>
 								<input

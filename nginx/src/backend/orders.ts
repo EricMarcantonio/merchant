@@ -48,3 +48,23 @@ export const CreateOrder = (address: IAddress, fname: string, lname: string, cre
 		return data.data;
 	})
 };
+
+export const GetAnalytics = () => {
+	return a.request({
+		method: "GET",
+		url: "/visiting/v1/event/",
+		withCredentials: true
+	}).then((data) => {
+		return data.data;
+	})
+};
+
+export const GetOrder = () => {
+		return a.request({
+			method: "GET",
+			url: "/visiting/v1/orders/",
+			withCredentials: true
+		}).then((data) => {
+			return data.data;
+		})
+};

@@ -5,6 +5,7 @@ import { container } from "../GlobalContainer";
 import { LogoutUser, VerifyUser } from "../backend/auth";
 import { GetShoppingCart } from "../backend";
 import { ToastFactory } from "../types/toasts";
+import { useNavigate } from "react-router-dom";
 
 const navigation = {
 	pages: [
@@ -17,7 +18,7 @@ export default function Navbar() {
 
 	const con = container.useContainer();
 	const [cartNum, setCartNum] = useState(0);
-
+	const navigate = useNavigate();
 	const factory = new ToastFactory();
 	const loggedOutToast = factory.createToast("SUCCESS", "Logged out!");
 
@@ -247,7 +248,8 @@ export default function Navbar() {
 													lname: "",
 													username: "",
 												});
-												await loggedOutToast.run()
+												await loggedOutToast.run();
+												navigate('/login')
 											});
 										}
 										}>

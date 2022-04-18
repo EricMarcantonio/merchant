@@ -1,25 +1,92 @@
-import { CurrencyDollarIcon, EyeIcon } from "@heroicons/react/outline";
+import { useEffect, useState } from "react";
+import { GetAnalytics, GetOrder } from "../backend/orders";
+import { Table } from "antd";
+import moment from "moment";
+import { useNavigate } from "react-router-dom";
 
 const AnalyticsData = () => {
-	const events = [
+
+
+	const [data, setData] = useState([{}]);
+	const [orders, setOrders] = useState([{}]);
+	const navigate = useNavigate();
+	useEffect(() => {
+		GetAnalytics().then((data) => {
+			data = data.map((d: any) => {
+				d.createdAt = moment(d.createdAt).utc().local().format("MMMM Do YYYY");
+				return d;
+			});
+			setData(data);
+		}).catch(() => {
+			navigate("/products")
+		});
+
+		GetOrder().then((data) => {
+			setOrders(data);
+		}).catch(() => {
+			navigate("/products")
+		});
+	}, []);
+
+
+	const columns = [
 		{
-			name: "Number of visits",
-			description:
-				"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.",
-			icon: EyeIcon,
+			title: "ID",
+			dataIndex: "id",
+			key: "id",
 		},
 		{
-			name: "Items sold each month",
-			description:
-				"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.",
-			icon: CurrencyDollarIcon,
+			title: "IP",
+			dataIndex: "ipAddress",
+			key: "ipAddress",
+		},
+		{
+			title: "Item ID",
+			dataIndex: "itemId",
+			key: "itemId",
+		}, {
+			title: "Event",
+			dataIndex: "eventType",
+			key: "eventType",
+		}, {
+			title: "Address",
+			dataIndex: "address",
+			key: "address",
+		}, {
+			title: "Created",
+			dataIndex: "createdAt",
+			key: "createdAt",
 		},
 	];
+	const cols = [
+		{
+			title: "Item ID",
+			dataIndex: "itemId",
+			key: "itemId",
+		}, {
+			title: "Time",
+			dataIndex: "createdAt",
+			key: "createdAt",
+		}, {
+			title: "Units",
+			dataIndex: "OrderUnits",
+			key: "OrderUnits",
+		}, {
+			title: "Name",
+			dataIndex: "name",
+			key: "name",
+		}, {
+			title: "Price per Item",
+			dataIndex: "price",
+			key: "price",
+		},
+	];
+
 
 	return (
 		<div className="py-12 bg-white">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-				<div className="lg:text-center">
+				<div className="text-center">
 					<h2 className="text-base text-indigo-600 font-semibold tracking-wide uppercase">
 						MERCHANT
 					</h2>
@@ -27,31 +94,14 @@ const AnalyticsData = () => {
 						ANALYTICS
 					</p>
 				</div>
-				<div className="flex justify-center">
-					<img className="w-2/5 h-2/5 object-center object-cover"
-						 src="https://42f2671d685f51e10fc6-b9fcecea3e50b3b59bdc28dead054ebc.ssl.cf5.rackcdn.com/illustrations/Data_trends_re_2cdy.svg" />
-				</div>
-
-				<div className="mt-10">
-					<dl className="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
-						{events.map((event) => (
-							<div key={event.name} className="relative">
-								<dt>
-									<div
-										className="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
-										<event.icon className="h-6 w-6" aria-hidden="true" />
-									</div>
-									<p className="ml-16 text-lg leading-6 font-medium text-gray-900">
-										{event.name}
-									</p>
-								</dt>
-								<dd className="mt-2 ml-16 text-base text-gray-500">
-									{event.description}
-								</dd>
-							</div>
-						))}
-					</dl>
-				</div>
+				<p className="text-center mt-2 text-xl leading-8 font-extrabold tracking-tight text-gray-500 sm:text-4xl">
+					Visits
+				</p>
+				<Table dataSource={data} columns={columns} />
+				<p className="text-center mt-2 text-xl leading-8 font-extrabold tracking-tight text-gray-500 sm:text-4xl">
+					Orders
+				</p>
+				<Table dataSource={orders} columns={cols} />
 			</div>
 		</div>
 	);
