@@ -1,13 +1,19 @@
 # MERCHANT
 
-Welcome to the new dev env; without lambda.
+Welcome to Merchant: the scaling ecommerce store.
 
-Orders: 3001
+http://merch-loadb-1r4urevhxv5t-366647718.us-east-1.elb.amazonaws.com
 
-Auth: 3002
+What you need to run:
 
-ShoppingCart: 3003
+- Active AWS profile
+- Docker
+- AWS CLI
+- A default VPC
 
-Catalog: 3004
+We have included a link to postman tests in the PDF. In case you don't have
+it: https://documenter.getpostman.com/view/10967445/Uyr5oKcs
 
-Reviews: 3005
+Almost everything is a "one-click" deployment. There is one caveat: you need to manually add the subnet-ids of your VPC in the cloudformation template. I was in the process of automating this as well, but ran out of time.
+
+You also need to seed the DB manually. The DB endpoint is an `output` from the cloudformation deployment. Use MySQL drivers to login with `user`, `password` and the DBName is `MERCHANT`

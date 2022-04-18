@@ -367,6 +367,36 @@
 					"response": []
 				},
 				{
+					"name": "LOGOUT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/auth/v1/logout/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"v1",
+								"logout",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "GET_USERNAME_BY_ID",
 					"request": {
 						"method": "GET",
@@ -433,6 +463,116 @@
 								"api",
 								"catalog",
 								"3",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "visiting",
+			"item": [
+				{
+					"name": "GET",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/visiting/v1/event/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"visiting",
+								"v1",
+								"event",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SET",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-forwarded-for",
+								"value": "192.168.119.240",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"itemId\": \"1\",\n    \"eventType\": \"VISIT\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/visiting/v1/event/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"visiting",
+								"v1",
+								"event",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET-ORDERS",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-forwarded-for",
+								"value": "192.168.119.240",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"itemId\": \"1\",\n    \"eventType\": \"VISIT\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/visiting/v1/orders/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"visiting",
+								"v1",
+								"orders",
 								""
 							]
 						}
