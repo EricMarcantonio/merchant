@@ -95,11 +95,11 @@ const ProductList = () => {
 	};
 
 	return (
-		<div className="bg-white flex">
-			<aside className="w-64 h-screen sticky top-0" aria-label="Sidebar">
+		<div className="bg-white grid grid-cols-6">
+			<aside className="w-48 h-screen sticky top-0" aria-label="Sidebar">
 
-				<div className={"w-full flex flex-col bg-black text-white m-3 p-3 rounded-2xl space-y-4"}>
-					<div className={"mx-auto text-3xl"}>Filter</div>
+				<div className={"w-full flex flex-col bg-black text-white m-3 py-5 px-3 rounded-2xl space-y-4"}>
+
 					<div className={"mx-auto text-xl"}>Brand</div>
 
 					<Select className={"mx-auto"}
@@ -146,11 +146,12 @@ const ProductList = () => {
 
 
 			</aside>
-			<main>
-				<div className=" py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+			<main className={'col-span-5 px-8'}>
+				<div className={'text-2xl font-bold text-center py-4'}>Something on the list for everyone.</div>
+				<div className="pt-5">
 					<h2 className="sr-only">Products</h2>
 					<div
-						className="grid grid-cols-1 gap-y-10 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+						className="grid grid-cols-4 gap-y-10 gap-x-6">
 						{(function() {
 								if (allItems.length > 0) {
 									let temp = allItems;
