@@ -191,7 +191,6 @@ const SignUpForm = () => {
 									id="isAdmin"
 									name="isAdmin"
 									type="checkbox"
-									required
 									onChange={(e) => {
 										setIsAdmin(!isAdmin);
 									}}

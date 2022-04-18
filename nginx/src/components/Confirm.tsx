@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { container } from "../GlobalContainer";
 import { useNavigate } from "react-router-dom";
 import { CreateOrder } from "../backend/orders";
@@ -8,11 +8,24 @@ import { ToastFactory } from "../types/toasts";
 export const Confirm = () => {
 	const con = container.useContainer();
 	const navigate = useNavigate();
+	const [total, setTotal] = useState(0);
+	let itemTotal = 0;
+	const handleGetTotal = () => {
+		for (let x in con.cart) {
+			const price = con.cart[x].product.price;
+			if (price) {
+				itemTotal = itemTotal + price * con.cart[x].units_requested;
+			}
+		}
+		setTotal(itemTotal);
+	};
+
 
 	useEffect(() => {
 		if (!con.user.id || !con.address.firstname || !con.payment.cardNumber) {
 			navigate("/products");
 		}
+		handleGetTotal()
 	}, []);
 
 	const handleSubmit = () => {
@@ -128,6 +141,9 @@ export const Confirm = () => {
 					Expiry: {con.payment.expiration}
 				</div>
 			</div>
+			<div className="text-xl font-extrabold text-gray-900">
+				Total: {total.toFixed(2)}
+			</div><div></div>
 			<div>
 				<button onClick={handleSubmit} className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
 				>
