@@ -42,6 +42,9 @@ Parameters:
   VisitSHA:
     Default: ""
     Type: String
+  ID:
+    Default: ""
+    Type: String
 
 Resources:
   DB:
@@ -93,7 +96,7 @@ Resources:
     DependsOn:
     - AuthService
     Properties:
-      MaxCapacity: 10000
+      MaxCapacity: 100000
       MinCapacity: 2
       ResourceId:
         Fn::Join:
@@ -131,7 +134,7 @@ Resources:
         - Arn
       DeploymentConfiguration:
         MaximumPercent: 200
-        MinimumHealthyPercent: 50
+        MinimumHealthyPercent: 100
       DeploymentController:
         Type: ECS
       DesiredCount: 1
@@ -293,7 +296,7 @@ Resources:
     DependsOn:
     - CatalogService
     Properties:
-      MaxCapacity: 10000
+      MaxCapacity: 100000
       MinCapacity: 2
       ResourceId:
         Fn::Join:
@@ -556,7 +559,7 @@ Resources:
     DependsOn:
     - NginxService
     Properties:
-      MaxCapacity: 10000
+      MaxCapacity: 100000
       MinCapacity: 2
       ResourceId:
         Fn::Join:
@@ -772,7 +775,7 @@ Resources:
     DependsOn:
     - OrdersService
     Properties:
-      MaxCapacity: 10000
+      MaxCapacity: 100000
       MinCapacity: 2
       ResourceId:
         Fn::Join:
@@ -972,7 +975,7 @@ Resources:
     DependsOn:
     - PaymentService
     Properties:
-      MaxCapacity: 10000
+      MaxCapacity: 100000
       MinCapacity: 2
       ResourceId:
         Fn::Join:
@@ -1172,7 +1175,7 @@ Resources:
     DependsOn:
     - ReviewsService
     Properties:
-      MaxCapacity: 10000
+      MaxCapacity: 100000
       MinCapacity: 2
       ResourceId:
         Fn::Join:
@@ -1372,7 +1375,7 @@ Resources:
     DependsOn:
     - ShoppingcartService
     Properties:
-      MaxCapacity: 10000
+      MaxCapacity: 100000
       MinCapacity: 2
       ResourceId:
         Fn::Join:
@@ -1572,7 +1575,7 @@ Resources:
     DependsOn:
     - VisitingService
     Properties:
-      MaxCapacity: 10000
+      MaxCapacity: 100000
       MinCapacity: 2
       ResourceId:
         Fn::Join:

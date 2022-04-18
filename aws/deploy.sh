@@ -15,6 +15,6 @@ VisitSHA=$(docker inspect --format='{{index .RepoDigests 0}}' "${ID}".dkr.ecr.${
 
 
 echo 'Deploying'
-aws cloudformation deploy --region "${REGION}" --template-file "template.yml" --stack-name merchant4 --capabilities CAPABILITY_NAMED_IAM --parameter-overrides AccountId="${ID}" --parameter-overrides Region="${REGION}" --parameter-overrides VPC="${VPC}" AuthSHA="${AuthSHA}" CatalogSHA="${CatalogSHA}" NginxSHA="${NginxSHA}" OrderSHA="${OrderSHA}" PaymentSHA="${PaymentSHA}" ReviewsSHA="${ReviewsSHA}" ShopSHA=${ShopSHA} VisitSHA=${VisitSHA}
+aws cloudformation deploy --region "${REGION}" --template-file "template.yml" --stack-name merchant --capabilities CAPABILITY_NAMED_IAM --parameter-overrides AccountId="${ID}" --parameter-overrides Region="${REGION}" --parameter-overrides VPC="${VPC}" AuthSHA="${AuthSHA}" CatalogSHA="${CatalogSHA}" NginxSHA="${NginxSHA}" OrderSHA="${OrderSHA}" PaymentSHA="${PaymentSHA}" ReviewsSHA="${ReviewsSHA}" ShopSHA=${ShopSHA} VisitSHA=${VisitSHA}
 
 
