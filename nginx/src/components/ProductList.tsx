@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { IProduct } from "../types";
 import { GetAllProductsFromBackend } from "../backend";
 import { GetReviewsByItemId } from "../backend/products";
-import { Select } from "antd";
+import { Rate, Select } from "antd";
 import Loading from "./Loading";
 
 export interface IReview {
@@ -45,7 +45,8 @@ const Product = (item: IProductWithReview) => {
 			</p>
 		</a>
 		<div>
-			Rating: {rating}
+
+			<Rate disabled defaultValue={rating} allowHalf {...console.log(rating)}  />
 		</div>
 	</div>;
 };
@@ -166,7 +167,6 @@ const ProductList = () => {
 										});
 									}
 									return temp.map((item) => {
-										console.log(temp);
 										return <Product product={item.product} review={item.review}
 														key={item.product.id} />;
 									});

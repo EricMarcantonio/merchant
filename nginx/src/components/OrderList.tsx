@@ -5,6 +5,7 @@ import { GetAProductByIdFromBackend } from "../backend";
 import { GetAllOrders } from "../backend/orders";
 import { useNavigate } from "react-router-dom";
 import Loading from "./Loading";
+import { ToastFactory } from "../types/toasts";
 
 interface IOrderItemProps {
 	order: IOrderData;
@@ -144,13 +145,19 @@ const OrderList = () => {
 
 	const navigate = useNavigate();
 
+	const factory = new ToastFactory();
+	const err = factory.createToast("ERROR", "You don't have any orders!");
+	const getOrderErr = factory.createToast("ERROR", "There are no errors");
+
 	useEffect(() => {
-		GetAllOrders().then((orders) => {
+		GetAllOrders().then(async (orders) => {
 			if (orders.length === 0){
+				await err.run(2000);
 				setRender(false)
 			}
 			setOrders(orders);
-		}).catch(() => {
+		}).catch(async () => {
+			await getOrderErr.run(2000);
 			setRender(false)
 		})
 	}, []);

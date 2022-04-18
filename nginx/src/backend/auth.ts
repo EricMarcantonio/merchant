@@ -13,3 +13,11 @@ export const VerifyUser = () => {
 			return response.data;
 		});
 };
+
+export const LogoutUser = () => {
+	return a.request({
+		method: "post",
+		url: '/auth/v1/logout/',
+		withCredentials: true
+	})
+};

@@ -2,8 +2,9 @@ import { Fragment, useEffect, useState } from "react";
 import { Dialog, Popover, Transition } from "@headlessui/react";
 import { LoginIcon, LogoutIcon, MenuIcon, ShoppingBagIcon, XIcon } from "@heroicons/react/outline";
 import { container } from "../GlobalContainer";
-import { VerifyUser } from "../backend/auth";
+import { LogoutUser, VerifyUser } from "../backend/auth";
 import { GetShoppingCart } from "../backend";
+import { ToastFactory } from "../types/toasts";
 
 const navigation = {
 	pages: [
@@ -16,6 +17,9 @@ export default function Navbar() {
 
 	const con = container.useContainer();
 	const [cartNum, setCartNum] = useState(0);
+
+	const factory = new ToastFactory();
+	const loggedOutToast = factory.createToast("SUCCESS", "Logged out!");
 
 	useEffect(() => {
 
@@ -231,13 +235,29 @@ export default function Navbar() {
 									</a>
 								</div>
 								{
-									con.user.id ? <div className="ml-4 flow-root lg:ml-6">
-											<a href="/products" className="group -m-2 p-2 flex items-center">
+									con.user.id ? <div className="ml-4 flow-root lg:ml-6" onClick={() => {
+											LogoutUser().then(async () => {
+												con.setUser({
+													createdAt: new Date(),
+													deletedAt: new Date(),
+													updatedAt: new Date(),
+													email: "",
+													fname: "",
+													id: 0,
+													lname: "",
+													username: "",
+												});
+												await loggedOutToast.run()
+											});
+										}
+										}>
+											<div className="group -m-2 p-2 flex items-center">
 												<LogoutIcon
 													className="flex-shrink-0 h-6 w-6 text-white group-hover:text-white"
 													aria-hidden="true"
+
 												/>
-											</a>
+											</div>
 										</div>
 										:
 										<div className="ml-4 flow-root lg:ml-6">

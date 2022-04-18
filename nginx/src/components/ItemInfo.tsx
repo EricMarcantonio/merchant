@@ -14,6 +14,7 @@ import { SuccessToast, ToastFactory } from "../types/toasts";
 import { AddReview } from "../backend";
 import { container } from "../GlobalContainer";
 import { GetUsername } from "../backend/review";
+import { Rate } from "antd";
 
 const ItemInfo = () => {
 	const { id } = useParams();
@@ -21,6 +22,7 @@ const ItemInfo = () => {
 	const [product, setProduct] = useState<IProduct>();
 	const [review, setReview] = useState<IReview[]>();
 	const [reviewData, setReviewData] = useState("");
+	const [star, setStar] = useState(0);
 	const factory = new ToastFactory();
 
 	const handleAddToCart = (item: number, val: number) => {
@@ -183,11 +185,14 @@ const ItemInfo = () => {
 						onSubmit={(e) => {
 							e.preventDefault();
 							if (product && product.id) {
-								handleAddReview(product.id.toString(), reviewData, "3");
-								setReviewData("")
+								handleAddReview(product.id.toString(), reviewData, star.toString());
+								setReviewData("");
+								setStar(0);
 							}
 						}}
 					>
+						<Rate allowClear={true} defaultValue={0} onChange={(e) => setStar(e)} value={star} />
+
             <textarea
 				style={{ resize: "none" }}
 				id="reviewData"
