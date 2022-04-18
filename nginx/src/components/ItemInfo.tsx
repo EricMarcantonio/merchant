@@ -13,6 +13,7 @@ import moment from "moment";
 import { SuccessToast, ToastFactory } from "../types/toasts";
 import { AddReview } from "../backend";
 import { container } from "../GlobalContainer";
+import { GetUsername } from "../backend/review";
 
 const ItemInfo = () => {
 	const { id } = useParams();
@@ -77,7 +78,10 @@ const ItemInfo = () => {
 				});
 
 				data[1] = data[1].slice(0, 5);
+				let ids = data[1].map((rev) => GetUsername(rev.userId));
+				Promise.all(ids).then((res) => {
 
+				});
 				setReview(data[1]);
 			});
 		} else {
@@ -87,16 +91,45 @@ const ItemInfo = () => {
 	return (
 		<div className="bg-white">
 			<div className="pt-6 grid grid-cols-2">
-				<div>
+				<div className={"space-y-4"}>
 					<div className="mt-6 w-48 h-48 rounded-lg aspect-4 mx-auto">
 						<img
 							src={product?.pictureUrl}
 							className="w-full h-full object-center object-cover rounded-lg my-auto"
 						/>
 					</div>
+					<div className="text-2xl font-extrabold mx-20 px-5 pt-10 text-center">
+						Recent Reviews
+					</div>
+					<div className={"space-y-4"}>
+
+					{review &&
+						review.map((rev) => {
+							return (
+								<div
+									className="relative mx-20 p-5 lg:col-start-1 lg:col-span-1 flex flex-col bg-white rounded-md shadow-xl bg-black text-white"
+									key={rev.id}
+								>
+									<p>
+										<b>
+											User{rev.userId} Rating:{rev.rating}/5
+										</b>
+									</p>
+									<p>{rev.data}</p>
+									<p className="absolute bottom-0 right-0 m-5 mb-3">
+										{moment(rev.createdAt)
+											.utc()
+											.local()
+											.format("MMMM Do YYYY, h:mm:ss a")}
+									</p>
+								</div>
+							);
+						})}
+					</div>
+
 				</div>
 				<div
-					className="max-w-2xl mx-auto pt-10 pb-16 px-4 sm:px-6 lg:max-w-7xl lg:pt-16 lg:pb-24 lg:px-8 lg:grid lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8">
+					className="max-w-2xl mx-auto pt-10 px-4 sm:px-6 lg:max-w-7xl lg:pt-16 lg:px-8 lg:grid lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8">
 					<div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
 						<h1 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">
 							{product?.name}
@@ -141,9 +174,6 @@ const ItemInfo = () => {
 
 
 			<div className="grid grid-cols-2 justify-center items-center">
-				<div className="text-2xl font-extrabold mx-20 px-5 text-center">
-					Recent Reviews
-				</div>
 				<div className="row-span-auto my-5 mx-20 p-5 lg:col-start-2">
 
 					<form
@@ -181,28 +211,7 @@ const ItemInfo = () => {
 						</button>
 					</form>
 				</div>
-				{review &&
-					review.map((rev) => {
-						return (
-							<div
-								className="relative my-5 mx-20 p-5 lg:col-start-1 lg:col-span-1 flex flex-col bg-white rounded-md shadow-xl bg-gray-100"
-								key={rev.id}
-							>
-								<p>
-									<b>
-										User{rev.userId} Rating:{rev.rating}/5
-									</b>
-								</p>
-								<p>{rev.data}</p>
-								<p className="absolute bottom-0 right-0 m-5 mb-3 text-gray-400">
-									{moment(rev.createdAt)
-										.utc()
-										.local()
-										.format("MMMM Do YYYY, h:mm:ss a")}
-								</p>
-							</div>
-						);
-					})}
+
 			</div>
 		</div>
 	);

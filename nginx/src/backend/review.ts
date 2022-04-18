@@ -39,3 +39,15 @@ export const AddReview = (itemId: string, reviewData: string, rating: string) =>
 			});
 		});
 };
+
+export const GetUsername = (id: number) => {
+	return a.request({
+		method: 'get',
+		url: `/auth/v1/user/${id}/`,
+		headers: {
+			'Cookie': 'auth-token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjUwMjkyNTMwLCJleHAiOjE3MzY2OTI1MzB9.CuyJil_t-gun2IcjmNOxQJ-7GZDQeeYx4iulJtvnHbY'
+		}
+	}).then((data) =>{
+		return data.data;
+	})
+};
